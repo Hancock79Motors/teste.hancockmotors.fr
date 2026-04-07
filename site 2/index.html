@@ -1,0 +1,1922 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Hancock Motors — Concessionnaire Véhicules de Prestige | France</title>
+  <meta name="description" content="Hancock Motors — concessionnaire spécialisé en véhicules de prestige occasion. Porsche, BMW, Mercedes, Audi. Financement, detailing, reprise. Contactez-nous." />
+  <link rel="canonical" href="https://hancockmotors.fr/" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="Hancock Motors — Concessionnaire Véhicules de Prestige" />
+  <meta property="og:description" content="Concessionnaire spécialisé en véhicules de prestige occasion : Porsche, BMW, Mercedes, Audi. Financement, detailing, reprise." />
+  <meta property="og:url"         content="https://hancockmotors.fr/" />
+  <meta property="og:image"       content="https://hancockmotors.fr/wp-content/uploads/2024/12/sq5-scaled.jpg" />
+  <meta property="og:locale"      content="fr_FR" />
+  <meta property="og:site_name"   content="Hancock Motors" />
+
+  <!-- Twitter Card -->
+  <meta name="twitter:card"        content="summary_large_image" />
+  <meta name="twitter:title"       content="Hancock Motors — Concessionnaire Véhicules de Prestige" />
+  <meta name="twitter:description" content="Concessionnaire spécialisé en véhicules de prestige occasion : Porsche, BMW, Mercedes, Audi." />
+  <meta name="twitter:image"       content="https://hancockmotors.fr/wp-content/uploads/2024/12/sq5-scaled.jpg" />
+
+  <!-- Schema JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AutoDealer",
+    "name": "Hancock Motors",
+    "url": "https://hancockmotors.fr",
+    "description": "Concessionnaire spécialisé en véhicules de prestige occasion — Porsche, BMW, Mercedes, Audi.",
+    "inLanguage": "fr",
+    "telephone": "+33629324299",
+    "email": "contact@hancockmotors.fr",
+    "address": {
+      "@type": "PostalAddress",
+      "addressCountry": "FR"
+    },
+    "priceRange": "€€€",
+    "aggregateRating": {
+      "@type": "AggregateRating",
+      "ratingValue": "5",
+      "reviewCount": "15",
+      "bestRating": "5",
+      "worstRating": "1"
+    },
+    "sameAs": ["https://hancockmotors.fr", "https://www.facebook.com/hancockmotors", "https://www.instagram.com/hancockmotors"]
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/gsap.min.js" defer></script>
+  <script src="https://cdnjs.cloudflare.com/ajax/libs/gsap/3.12.5/ScrollTrigger.min.js" defer></script>
+  <link rel="preconnect" href="https://hancockmotors.fr" />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['DM Sans', 'sans-serif'] },
+          colors: {
+            primary: '#405FF2',
+            'primary-hover': '#4E6CFB',
+            dark: '#050B20',
+            surface: '#0D1530',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { font-family: 'DM Sans', sans-serif; }
+    html { scroll-behavior: smooth; }
+
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -2px;
+      width: 0; height: 1px;
+      background: rgba(255,255,255,0.6);
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    .dropdown-menu {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(6px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .dropdown-menu.open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    .car-card:hover .car-img { transform: scale(1.04); }
+    .car-img { transition: transform 0.45s ease; }
+
+    .service-card { transition: transform 0.3s ease, box-shadow 0.3s ease; }
+    .service-card:hover { transform: translateY(-4px); }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.8s ease both; }
+
+    /* ── Step form ─────────────────────────────────── */
+    .step-form-panel { display: none; }
+    .step-form-panel.active { display: block; }
+
+    /* ── Modal ──────────────────────────────────────── */
+    #interest-modal {
+      display: none;
+      position: fixed; inset: 0; z-index: 999;
+      background: rgba(5,11,32,0.65);
+      backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      align-items: center; justify-content: center;
+      padding: 1rem;
+    }
+    #interest-modal.open { display: flex; }
+    #modal-box {
+      background: #0D1530; border-radius: 20px;
+      width: 100%; max-width: 460px;
+      padding: 2rem; position: relative;
+      animation: fadeUp 0.25s ease both;
+    }
+
+    /* ── Inline validation ──────────────────────────── */
+    input:invalid:not(:placeholder-shown),
+    textarea:invalid:not(:placeholder-shown) { border-color: #f87171; }
+    input:valid:not(:placeholder-shown) { border-color: #4ade80; }
+
+    /* ── Success state ──────────────────────────────── */
+    .form-success { display: none; }
+    .form-success.show { display: flex; }
+
+    /* ── Background paths hero ──────────────────────── */
+    @keyframes bpDash {
+      0%   { stroke-dashoffset: var(--len); opacity: 0.3; }
+      50%  { opacity: 0.6; }
+      100% { stroke-dashoffset: 0; opacity: 0.3; }
+    }
+    .bp-path {
+      stroke-dasharray: var(--len);
+      stroke-dashoffset: var(--len);
+      animation: bpDash var(--dur) linear infinite;
+    }
+    @keyframes heroLetterIn {
+      from { opacity: 0; transform: translateY(60px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .bp-letter {
+      display: inline-block;
+      animation: heroLetterIn 0.6s cubic-bezier(0.34,1.56,0.64,1) both;
+    }
+    @keyframes heroFadeIn {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .hero-fade-in {
+      opacity: 0;
+      animation: heroFadeIn 0.9s ease both;
+    }
+
+    /* ── 3-step recherche form ───────────────────────── */
+    .form-step { display: none; }
+    .form-step.active { display: block; }
+    .pack-card.selected { border-color: #405FF2; background: #405FF20D; }
+    .pack-card.selected .font-bold.text-dark { color: #405FF2; }
+  </style>
+</head>
+<body class="bg-dark text-white">
+
+  <!-- ======================================================
+       HEADER
+  ====================================================== -->
+  <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+          style="background: rgba(5,11,32,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);">
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-20">
+
+      <!-- Logo -->
+      <a href="#" class="flex-shrink-0">
+        <img src="https://hancockmotors.fr/wp-content/uploads/2023/10/logo-blanc.png"
+             alt="Hancock Motors" class="h-10 w-auto" />
+      </a>
+
+      <!-- Desktop nav -->
+      <nav class="hidden lg:flex items-center gap-8">
+
+        <!-- Véhicules disponibles + dropdown -->
+        <div class="nav-group relative">
+          <a href="#vehicules" class="nav-link text-white text-sm font-medium tracking-wide flex items-center gap-1.5">
+            Véhicules Disponibles
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </a>
+          <div class="dropdown-menu absolute top-full left-0 mt-3 bg-surface text-white rounded-xl shadow-2xl min-w-[210px] overflow-hidden border border-white/10">
+            <a href="vehicules.html"
+               class="flex items-center gap-3 px-5 py-3.5 text-sm hover:bg-white/5 hover:text-primary transition-colors border-b border-white/10">
+              <svg class="w-4 h-4 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+              Tous les véhicules
+            </a>
+            <a href="vehicules-vendus.html"
+               class="flex items-center gap-3 px-5 py-3.5 text-sm hover:bg-white/5 hover:text-primary transition-colors">
+              <svg class="w-4 h-4 text-white/40 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              Véhicules Vendus
+            </a>
+          </div>
+        </div>
+
+        <a href="recherche-personnalisee.html" class="nav-link text-white text-sm font-medium tracking-wide">Recherche Personnalisée</a>
+
+        <!-- Services + dropdown -->
+        <div class="nav-group relative">
+          <a href="#services" class="nav-link text-white text-sm font-medium tracking-wide flex items-center gap-1.5">
+            Services
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </a>
+          <div class="dropdown-menu absolute top-full left-0 mt-3 bg-surface text-white rounded-xl shadow-2xl min-w-[220px] overflow-hidden border border-white/10">
+            <a href="nettoyage.html"
+               class="flex items-center gap-3 px-5 py-3.5 text-sm hover:bg-white/5 hover:text-primary transition-colors border-b border-white/10">
+              <svg class="w-4 h-4 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>
+              </svg>
+              Nettoyage
+            </a>
+            <a href="#polissage"
+               class="flex items-center gap-3 px-5 py-3.5 text-sm hover:bg-white/5 hover:text-primary transition-colors border-b border-white/10">
+              <svg class="w-4 h-4 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <circle cx="12" cy="12" r="10" stroke-width="2"/>
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12l2.5 2.5L16 9"/>
+              </svg>
+              Polissage / Lustrage
+            </a>
+            <a href="#ceramique"
+               class="flex items-center gap-3 px-5 py-3.5 text-sm hover:bg-white/5 hover:text-primary transition-colors">
+              <svg class="w-4 h-4 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+              Protection Céramique
+            </a>
+          </div>
+        </div>
+
+        <a href="vendez-votre-voiture.html" class="nav-link text-white text-sm font-medium tracking-wide">Vendez Votre Voiture</a>
+        <a href="#contact" class="nav-link text-white text-sm font-medium tracking-wide">Contact</a>
+      </nav>
+
+      <!-- CTA -->
+      <a href="https://hancockmotors.fr/listing-v1/"
+         class="hidden lg:inline-flex items-center bg-primary hover:bg-primary-hover text-white text-sm font-semibold px-6 py-3 rounded-lg transition-colors duration-200">
+        Voir les Véhicules
+      </a>
+
+      <!-- Mobile hamburger -->
+      <button id="menu-btn" class="lg:hidden text-white" aria-label="Menu">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-dark border-t border-white/10">
+      <nav class="flex flex-col px-6 py-4 gap-1">
+        <a href="#vehicules"   class="text-white text-sm font-medium py-3 border-b border-white/10">Véhicules Disponibles</a>
+        <a href="vehicules-vendus.html" class="text-white/55 text-sm py-2.5 pl-5 border-b border-white/5">↳ Véhicules Vendus</a>
+        <a href="recherche-personnalisee.html" class="text-white text-sm font-medium py-3 border-b border-white/10">Recherche Personnalisée</a>
+        <a href="#services"    class="text-white text-sm font-medium py-3 border-b border-white/10">Services</a>
+        <a href="nettoyage.html" class="text-white/55 text-sm py-2.5 pl-5 border-b border-white/5">↳ Nettoyage</a>
+        <a href="#polissage"   class="text-white/55 text-sm py-2.5 pl-5 border-b border-white/5">↳ Polissage / Lustrage</a>
+        <a href="#ceramique"   class="text-white/55 text-sm py-2.5 pl-5 border-b border-white/10">↳ Protection Céramique</a>
+        <a href="vendez-votre-voiture.html" class="text-white text-sm font-medium py-3 border-b border-white/10">Vendez Votre Voiture</a>
+        <a href="#contact"     class="text-white text-sm font-medium py-3 border-b border-white/10">Contact</a>
+        <a href="https://hancockmotors.fr/listing-v1/"
+           class="mt-3 bg-primary text-white text-sm font-semibold px-6 py-3 rounded-lg text-center">
+          Voir les Véhicules
+        </a>
+      </nav>
+    </div>
+    <div id="progress-bar" style="position:absolute;bottom:0;left:0;height:2px;width:0%;background:#405FF2;transition:width 0.15s linear;pointer-events:none;"></div>
+  </header>
+
+
+  <!-- ======================================================
+       HERO — BACKGROUND PATHS
+  ====================================================== -->
+  <section id="hero" class="relative min-h-screen w-full flex items-center justify-center overflow-hidden" style="background:#050B20;">
+
+    <!-- Animated SVG paths layer (×2 mirrored) -->
+    <div class="absolute inset-0 pointer-events-none" id="bp-layer-1"></div>
+    <div class="absolute inset-0 pointer-events-none" id="bp-layer-2" style="transform:scaleX(-1);"></div>
+
+    <!-- Content -->
+    <div class="relative z-10 w-full text-center px-4 md:px-6">
+      <h1 class="sr-only">Hancock Motors — Concessionnaire Véhicules de Prestige en France</h1>
+
+      <!-- Logo (white version) -->
+      <div class="flex justify-center mb-12 hero-fade-in" style="animation-delay:0.2s">
+        <img src="Screenshots/logo blanc.png" alt="Hancock Motors" class="h-16 md:h-24 w-auto" fetchpriority="high" />
+      </div>
+
+      <!-- Tagline -->
+      <div class="mb-10 hero-fade-in" style="animation-delay:0.4s">
+        <p class="text-white font-bold text-2xl md:text-4xl tracking-wide mb-3">Véhicules de Prestige · Import Allemagne</p>
+        <p class="text-white/50 text-sm md:text-base max-w-lg mx-auto leading-relaxed">Votre spécialiste en sourcing de véhicules d'occasion haut de gamme en France.</p>
+      </div>
+
+      <!-- CTA buttons -->
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 hero-fade-in" style="animation-delay:0.6s">
+        <a href="#vehicules"
+           class="group inline-flex items-center gap-3 bg-primary hover:bg-primary-hover text-white font-semibold px-8 py-4 rounded-2xl text-sm tracking-wide transition-all duration-300 shadow-lg hover:shadow-xl hover:-translate-y-0.5">
+          <span>Explorer les Véhicules</span>
+          <span class="opacity-70 group-hover:opacity-100 group-hover:translate-x-1.5 transition-all duration-300">→</span>
+        </a>
+        <a href="#recherche"
+           class="group inline-flex items-center gap-3 border border-white/30 hover:border-white/60 text-white font-semibold px-8 py-4 rounded-2xl text-sm tracking-wide transition-all duration-300 hover:-translate-y-0.5">
+          <span>Recherche Personnalisée</span>
+          <span class="opacity-50 group-hover:opacity-100 group-hover:translate-x-1.5 transition-all duration-300">→</span>
+        </a>
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ======================================================
+       STATS BAND
+  ====================================================== -->
+  <section class="bg-dark text-white py-14">
+    <div class="max-w-7xl mx-auto px-6">
+      <div class="grid grid-cols-2 lg:grid-cols-4 gap-8">
+        <div class="text-center">
+          <p class="text-4xl md:text-5xl font-bold mb-1"><span class="stat-count" data-target="200" data-prefix="+">0</span></p>
+          <p class="text-white/45 text-sm">Véhicules vendus</p>
+        </div>
+        <div class="text-center">
+          <p class="text-4xl md:text-5xl font-bold mb-1"><span class="stat-count" data-target="100" data-suffix="%">0</span></p>
+          <p class="text-white/45 text-sm">Clients satisfaits</p>
+        </div>
+        <div class="text-center">
+          <p class="text-4xl md:text-5xl font-bold mb-1">+5 ans</p>
+          <p class="text-white/45 text-sm">D'expérience</p>
+        </div>
+        <div class="text-center">
+          <p class="text-4xl md:text-5xl font-bold mb-1">Import</p>
+          <p class="text-white/45 text-sm">Véhicules sur commande</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+
+
+  <!-- ======================================================
+       VÉHICULES DISPONIBLES
+  ====================================================== -->
+  <section id="vehicules" class="py-24 px-6 bg-dark">
+    <div class="max-w-7xl mx-auto">
+
+      <div class="flex flex-col md:flex-row md:items-end md:justify-between mb-14 gap-6">
+        <div>
+          <p class="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-3">Notre Sélection</p>
+          <h2 class="text-3xl md:text-5xl font-bold text-white leading-tight">Véhicules Disponibles</h2>
+        </div>
+        <a href="https://hancockmotors.fr/listing-v1/"
+           class="inline-flex items-center gap-2 text-sm font-semibold text-white border-b border-white/40 pb-0.5 hover:text-primary hover:border-primary transition-colors self-start md:self-auto">
+          Voir tous les véhicules
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </a>
+      </div>
+
+      <div class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+
+        <!-- Porsche 928 S4 -->
+        <div class="car-card bg-surface border border-white/10 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300">
+          <div class="overflow-hidden h-56 bg-white/5 relative">
+            <img src="https://hancockmotors.fr/wp-content/uploads/2025/07/Porshce-928-S4-8-640x640.jpg"
+                 alt="Porsche 928 S4 320ch V8 5.0 — vue extérieure" class="car-img w-full h-full object-cover"
+                 loading="lazy" decoding="async" width="640" height="640" />
+            <span class="absolute top-3 left-3 bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full">Disponible</span>
+          </div>
+          <div class="p-6">
+            <h3 class="font-bold text-base text-white mb-2">Porsche 928 S4 320ch V8 5.0</h3>
+            <div class="flex gap-4 text-xs text-white/50 mb-5">
+              <span>Essence</span><span>·</span><span>Automatique</span>
+            </div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-2xl font-bold text-primary">32 750 €</span>
+              <a href="https://hancockmotors.fr/listing-v1/"
+                 class="text-xs font-semibold text-white/70 border border-white/20 px-4 py-2 rounded-lg hover:bg-white hover:text-dark hover:border-white transition-colors">
+                Voir détails
+              </a>
+            </div>
+            <button type="button" class="interest-btn w-full bg-white/10 hover:bg-white text-white hover:text-dark border border-white/20 hover:border-white font-semibold py-2.5 rounded-lg text-xs tracking-wide transition-all duration-200"
+                    data-car="Porsche 928 S4 320ch V8 5.0">
+              Je suis intéressé(e)
+            </button>
+          </div>
+        </div>
+
+        <!-- BMW M4 -->
+        <div class="car-card bg-surface border border-white/10 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300">
+          <div class="h-56 bg-white/5 relative" id="m4-carousel">
+            <img id="m4-img" src="Photos voiture/BMW M4 Cab/bmw-m4-cabriolet-gris-mat-1.jpg"
+                 alt="BMW M4 Cabriolet gris mat — vue extérieure" class="car-img w-full h-full object-cover"
+                 loading="lazy" decoding="async" width="640" height="427" />
+            <span class="absolute top-3 left-3 bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full z-10">Disponible</span>
+            <span id="m4-counter" class="absolute top-3 right-3 bg-dark/60 text-white text-xs font-semibold px-2.5 py-1 rounded-full z-10">1 / 30</span>
+            <button onclick="m4Slide(-1)" class="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-7 h-7 rounded-full bg-dark/50 hover:bg-dark/80 flex items-center justify-center transition-colors">
+              <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/>
+              </svg>
+            </button>
+            <button onclick="m4Slide(1)" class="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-7 h-7 rounded-full bg-dark/50 hover:bg-dark/80 flex items-center justify-center transition-colors">
+              <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+              </svg>
+            </button>
+          </div>
+          <div class="p-6">
+            <h3 class="font-bold text-base text-white mb-2">BMW M4 Cabriolet F83 3.0 431ch</h3>
+            <div class="flex gap-4 text-xs text-white/50 mb-5">
+              <span>Essence</span><span>·</span><span>Automatique</span>
+            </div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-2xl font-bold text-primary">42 990 €</span>
+              <a href="https://hancockmotors.fr/listing-v1/"
+                 class="text-xs font-semibold text-white/70 border border-white/20 px-4 py-2 rounded-lg hover:bg-white hover:text-dark hover:border-white transition-colors">
+                Voir détails
+              </a>
+            </div>
+            <button type="button" class="interest-btn w-full bg-white/10 hover:bg-white text-white hover:text-dark border border-white/20 hover:border-white font-semibold py-2.5 rounded-lg text-xs tracking-wide transition-all duration-200"
+                    data-car="BMW M4 Cabriolet F83 3.0 431ch">
+              Je suis intéressé(e)
+            </button>
+          </div>
+        </div>
+
+        <!-- Mercedes-Benz CLA 220d -->
+        <div class="car-card bg-surface border border-white/10 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300">
+          <div class="h-56 bg-white/5 relative" id="cla-carousel">
+            <img id="cla-img" src="photos voiture/Mercedes-Benz CLA 220d/mercedes-cla-220d-amg-line-noir-cosmos-1.jpg"
+                 alt="Mercedes-Benz CLA 220d AMG Line noir cosmos — vue extérieure" class="car-img w-full h-full object-cover"
+                 loading="lazy" decoding="async" width="640" height="427" />
+            <span class="absolute top-3 left-3 bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full z-10">Disponible</span>
+            <span id="cla-counter" class="absolute top-3 right-3 bg-dark/60 text-white text-xs font-semibold px-2.5 py-1 rounded-full z-10">1 / 21</span>
+            <button onclick="claSlide(-1)" class="absolute left-2 top-1/2 -translate-y-1/2 z-10 w-7 h-7 rounded-full bg-dark/50 hover:bg-dark/80 flex items-center justify-center transition-colors">
+              <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M15 19l-7-7 7-7"/>
+              </svg>
+            </button>
+            <button onclick="claSlide(1)" class="absolute right-2 top-1/2 -translate-y-1/2 z-10 w-7 h-7 rounded-full bg-dark/50 hover:bg-dark/80 flex items-center justify-center transition-colors">
+              <svg class="w-3.5 h-3.5 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M9 5l7 7-7 7"/>
+              </svg>
+            </button>
+          </div>
+          <div class="p-6">
+            <h3 class="font-bold text-base text-white mb-2">Mercedes-Benz CLA 220d AMG Line</h3>
+            <div class="flex gap-4 text-xs text-white/50 mb-5">
+              <span>Diesel</span><span>·</span><span>Automatique</span>
+            </div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-2xl font-bold text-primary">Sur demande</span>
+              <a href="https://hancockmotors.fr/listing-v1/"
+                 class="text-xs font-semibold text-white/70 border border-white/20 px-4 py-2 rounded-lg hover:bg-white hover:text-dark hover:border-white transition-colors">
+                Voir détails
+              </a>
+            </div>
+            <button type="button" class="interest-btn w-full bg-white/10 hover:bg-white text-white hover:text-dark border border-white/20 hover:border-white font-semibold py-2.5 rounded-lg text-xs tracking-wide transition-all duration-200"
+                    data-car="Mercedes-Benz CLA 220d AMG Line">
+              Je suis intéressé(e)
+            </button>
+          </div>
+        </div>
+
+        <!-- Audi Q3 -->
+        <div class="car-card bg-surface border border-white/10 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300">
+          <div class="overflow-hidden h-56 bg-white/5 relative">
+            <img src="https://hancockmotors.fr/wp-content/uploads/2024/12/Audi-Q3-177-Quattro-2.0-TDI-1-640x640.jpg"
+                 alt="Audi Q3 2.0 TDI 177ch Quattro — vue extérieure" class="car-img w-full h-full object-cover"
+                 loading="lazy" decoding="async" width="640" height="640" />
+            <span class="absolute top-3 left-3 bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full">Disponible</span>
+          </div>
+          <div class="p-6">
+            <h3 class="font-bold text-base text-white mb-2">Audi Q3 2.0 TDI 177ch Quattro</h3>
+            <div class="flex gap-4 text-xs text-white/50 mb-5">
+              <span>Diesel</span><span>·</span><span>Automatique</span>
+            </div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-2xl font-bold text-primary">15 490 €</span>
+              <a href="https://hancockmotors.fr/listing-v1/"
+                 class="text-xs font-semibold text-white/70 border border-white/20 px-4 py-2 rounded-lg hover:bg-white hover:text-dark hover:border-white transition-colors">
+                Voir détails
+              </a>
+            </div>
+            <button type="button" class="interest-btn w-full bg-white/10 hover:bg-white text-white hover:text-dark border border-white/20 hover:border-white font-semibold py-2.5 rounded-lg text-xs tracking-wide transition-all duration-200"
+                    data-car="Audi Q3 2.0 TDI 177ch Quattro">
+              Je suis intéressé(e)
+            </button>
+          </div>
+        </div>
+
+        <!-- Porsche Boxster -->
+        <div class="car-card bg-surface border border-white/10 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300">
+          <div class="overflow-hidden h-56 bg-white/5 relative">
+            <img src="https://hancockmotors.fr/wp-content/uploads/2025/06/Porsche-Boxster-S-981-2-scaled.jpg"
+                 alt="Porsche Boxster S 981 315ch — vue extérieure" class="car-img w-full h-full object-cover"
+                 loading="lazy" decoding="async" width="640" height="427" />
+            <span class="absolute top-3 left-3 bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full">Disponible</span>
+          </div>
+          <div class="p-6">
+            <h3 class="font-bold text-base text-white mb-2">Porsche Boxster S 981 315ch</h3>
+            <div class="flex gap-4 text-xs text-white/50 mb-5">
+              <span>Essence</span><span>·</span><span>Automatique PDK</span>
+            </div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-2xl font-bold text-primary">Sur demande</span>
+              <a href="https://hancockmotors.fr/listing-v1/"
+                 class="text-xs font-semibold text-white/70 border border-white/20 px-4 py-2 rounded-lg hover:bg-white hover:text-dark hover:border-white transition-colors">
+                Voir détails
+              </a>
+            </div>
+            <button type="button" class="interest-btn w-full bg-white/10 hover:bg-white text-white hover:text-dark border border-white/20 hover:border-white font-semibold py-2.5 rounded-lg text-xs tracking-wide transition-all duration-200"
+                    data-car="Porsche Boxster S 981 315ch">
+              Je suis intéressé(e)
+            </button>
+          </div>
+        </div>
+
+        <!-- Peugeot 208 -->
+        <div class="car-card bg-surface border border-white/10 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300">
+          <div class="overflow-hidden h-56 bg-white/5 relative">
+            <img src="https://hancockmotors.fr/wp-content/uploads/2024/12/Peugeot-208-640x640.jpg"
+                 alt="Peugeot 208 1.5 BlueHDI 100cv Active — vue avant" class="car-img w-full h-full object-cover"
+                 loading="lazy" decoding="async" width="640" height="640" />
+            <span class="absolute top-3 left-3 bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full">Disponible</span>
+          </div>
+          <div class="p-6">
+            <h3 class="font-bold text-base text-white mb-2">Peugeot 208 1.5 BlueHDI 100cv Active</h3>
+            <div class="flex gap-4 text-xs text-white/50 mb-5">
+              <span>Diesel</span><span>·</span><span>Manuelle</span>
+            </div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-2xl font-bold text-primary">14 990 €</span>
+              <a href="https://hancockmotors.fr/listing-v1/"
+                 class="text-xs font-semibold text-white/70 border border-white/20 px-4 py-2 rounded-lg hover:bg-white hover:text-dark hover:border-white transition-colors">
+                Voir détails
+              </a>
+            </div>
+            <button type="button" class="interest-btn w-full bg-white/10 hover:bg-white text-white hover:text-dark border border-white/20 hover:border-white font-semibold py-2.5 rounded-lg text-xs tracking-wide transition-all duration-200"
+                    data-car="Peugeot 208 1.5 BlueHDI 100cv Active">
+              Je suis intéressé(e)
+            </button>
+          </div>
+        </div>
+
+        <!-- Volkswagen Polo -->
+        <div class="car-card bg-surface border border-white/10 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300">
+          <div class="overflow-hidden h-56 bg-white/5 relative">
+            <img src="https://hancockmotors.fr/wp-content/uploads/2024/12/Volkswagen-Polo-1.4-TSI-2014-2-640x640.jpg"
+                 alt="Volkswagen Polo 1.4i 85ch Trendline — vue extérieure" class="car-img w-full h-full object-cover"
+                 loading="lazy" decoding="async" width="640" height="640" />
+            <span class="absolute top-3 left-3 bg-primary text-white text-xs font-semibold px-3 py-1 rounded-full">Disponible</span>
+          </div>
+          <div class="p-6">
+            <h3 class="font-bold text-base text-white mb-2">Volkswagen Polo 1.4i 85ch Trendline</h3>
+            <div class="flex gap-4 text-xs text-white/50 mb-5">
+              <span>Essence</span><span>·</span><span>Manuelle</span>
+            </div>
+            <div class="flex items-center justify-between mb-3">
+              <span class="text-2xl font-bold text-primary">9 990 €</span>
+              <a href="https://hancockmotors.fr/listing-v1/"
+                 class="text-xs font-semibold text-white/70 border border-white/20 px-4 py-2 rounded-lg hover:bg-white hover:text-dark hover:border-white transition-colors">
+                Voir détails
+              </a>
+            </div>
+            <button type="button" class="interest-btn w-full bg-white/10 hover:bg-white text-white hover:text-dark border border-white/20 hover:border-white font-semibold py-2.5 rounded-lg text-xs tracking-wide transition-all duration-200"
+                    data-car="Volkswagen Polo 1.4i 85ch Trendline">
+              Je suis intéressé(e)
+            </button>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="flex flex-col sm:flex-row items-center justify-center gap-4 mt-12">
+        <a href="https://hancockmotors.fr/listing-v1/"
+           class="inline-flex items-center gap-2 bg-dark hover:bg-dark/80 text-white font-semibold px-10 py-4 rounded-xl text-sm tracking-wide transition-colors duration-200">
+          Voir tous les véhicules disponibles
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </a>
+        <a href="vehicules-vendus.html"
+           class="inline-flex items-center gap-2 border border-white/20 hover:border-white/50 text-white/60 hover:text-white font-semibold px-10 py-4 rounded-xl text-sm tracking-wide transition-colors duration-200">
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+          </svg>
+          Véhicules vendus
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ======================================================
+       GOOGLE REVIEWS MARQUEE
+  ====================================================== -->
+  <style>
+    @keyframes gr-scroll { from { transform: translateX(0) } to { transform: translateX(-50%) } }
+    #gr-marquee { animation: gr-scroll 60s linear infinite; }
+    #gr-marquee:hover { animation-play-state: paused; }
+  </style>
+  <section class="py-14 bg-surface overflow-hidden">
+
+    <!-- Header -->
+    <div class="text-center mb-10 px-6">
+      <div class="inline-flex items-center gap-2.5 mb-4">
+        <svg class="w-5 h-5 flex-shrink-0" viewBox="0 0 24 24">
+          <path fill="#4285F4" d="M22.56 12.25c0-.78-.07-1.53-.2-2.25H12v4.26h5.92c-.26 1.37-1.04 2.53-2.21 3.31v2.77h3.57c2.08-1.92 3.28-4.74 3.28-8.09z"/>
+          <path fill="#34A853" d="M12 23c2.97 0 5.46-.98 7.28-2.66l-3.57-2.77c-.98.66-2.23 1.06-3.71 1.06-2.86 0-5.29-1.93-6.16-4.53H2.18v2.84C3.99 20.53 7.7 23 12 23z"/>
+          <path fill="#FBBC05" d="M5.84 14.09c-.22-.66-.35-1.36-.35-2.09s.13-1.43.35-2.09V7.07H2.18C1.43 8.55 1 10.22 1 12s.43 3.45 1.18 4.93l3.66-2.84z"/>
+          <path fill="#EA4335" d="M12 5.38c1.62 0 3.06.56 4.21 1.64l3.15-3.15C17.45 2.09 14.97 1 12 1 7.7 1 3.99 3.47 2.18 7.07l3.66 2.84c.87-2.6 3.3-4.53 6.16-4.53z"/>
+        </svg>
+        <span class="text-white font-semibold text-sm tracking-wide">Avis Google</span>
+      </div>
+      <div class="flex items-center justify-center gap-1 mb-2">
+        <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+        <svg class="w-4 h-4 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>
+      </div>
+      <p class="text-white/50 text-sm">Ils nous ont fait confiance — lisez leurs expériences</p>
+    </div>
+
+    <!-- Marquee track -->
+    <div style="mask-image: linear-gradient(to right, transparent, black 8%, black 92%, transparent);">
+      <div id="gr-marquee" class="flex gap-4" style="width: max-content;">
+        <!-- Cards injected twice by JS for seamless loop -->
+        <div id="gr-set-1" class="flex gap-4"></div>
+        <div id="gr-set-2" class="flex gap-4" aria-hidden="true"></div>
+      </div>
+    </div>
+
+  </section>
+
+  <script>
+  // ── GOOGLE REVIEWS DATA ──────────────────────────────────────
+  const googleReviews = [
+    {
+      name: "Enzo Vorger",
+      photo: "",
+      date: "il y a 4 mois",
+      text: "Hancock Motors m'a permis d'acquérir une voiture prestigieuse, mes exigences étaient donc élevées. Toby a su me trouver le véhicule avec les options voulues. Il s'est rendu très disponible lors de mes interrogations et sur mes demandes concernant le véhicule. Je ne peux que le recommander, le service est vraiment impeccable, la voiture est livrée dans un état irréprochable. Je te remercie et je n'hésiterais pas à refaire appel à tes services pour une future importation.",
+      photos: [
+        "reviews/enzo-1.jpg",
+        "reviews/enzo-2.jpg",
+        "reviews/enzo-3.jpg"
+      ]
+    },
+    {
+      name: "Corentin Codina",
+      photo: "",
+      date: "il y a un an",
+      text: "Excellente expérience avec Mr Hancock. J'avais une recherche plutôt particulière il a su me trouver le véhicule très rapidement avec toutes les options que je voulais livré en un délais record avec un nettoyage aux petits oignons ! Que demander de mieux.. n'hésitez pas si une seule seconde c'est rare aujourd'hui d'avoir des garages très sérieux et Hancock Motors fait partie de cette minorité.",
+      photos: [
+        "reviews/corentin-1.jpg",
+        "reviews/corentin-2.jpg",
+        "reviews/corentin-3.jpg"
+      ]
+    },
+    {
+      name: "Erwan Armand",
+      photo: "",
+      date: "il y a 2 ans",
+      text: "Hancock Motors a su être à l'écoute et attentif de la recherche de la voiture jusqu'à la transaction. J'ai pu acquérir le véhicule qui se trouvait dans un parfait état grâce à la préparation du véhicule qui était au top du top. Encore merci à Hancock Motors pour son professionnalisme, son sérieux et pour m'avoir trouvé cette pépite !",
+      photos: [
+        "reviews/erwan-1.jpg",
+        "reviews/erwan-2.jpg",
+        "reviews/erwan-3.jpg"
+      ]
+    },
+    {
+      name: "Samuel Bodet",
+      photo: "",
+      date: "il y a un an",
+      text: "J'ai acheté chez monsieur Hancock une Mercedes Classe A45 AMG, que dire… que le professionnalisme n'attend pas le nombre des années. Personne accueillante car on commence par ça, professionnel et méticuleux. Mon achat me convient à 100% je recommande les yeux fermés ce petit garage qui peut en apprendre aux gros. Et si il n'a pas ce que vous voulez il peut vous trouver la perle rare.",
+      photos: [
+        "reviews/samuel-1.jpg",
+        "reviews/samuel-2.jpg"
+      ]
+    },
+    {
+      name: "Mickael Goutailler",
+      photo: "",
+      date: "il y a 2 ans",
+      text: "Un Très Grand Merci à Hancock Motors. J'ai acheté une Golf 6 GTI édition Adidas… Parfait ! Voiture très bien préparée, très bonne communication avec Toby. C'est une personne compétente et qui connaît son travail. Je recommande +++ les yeux fermés. Merci à vous. Cordialement.",
+      photos: [
+        "reviews/mickael-1.jpg",
+        "reviews/mickael-2.jpg"
+      ]
+    },
+    {
+      name: "Corentin B.",
+      photo: "",
+      date: "il y a 4 ans",
+      text: "Très professionnel, merci pour l'écoute et le temps passé à rechercher une voiture selon mes critères donnés malgré le peu de véhicules comprenant les options demandées, ce fut une réussite. De plus, le véhicule est vendu avec un nettoyage complet. Je suis très satisfait, merci encore !",
+      photos: [
+        "reviews/corentin-bdy-1.jpg"
+      ]
+    },
+    {
+      name: "L. T.",
+      photo: "",
+      date: "il y a un an",
+      text: "Très satisfait de l'expérience d'achat. Toby est professionnel, à l'écoute et réactif. Véhicule impeccable, annonce détaillée, envoi de photos et vidéos complémentaires, au top !",
+      photos: [
+        "reviews/lt-1.jpg",
+        "reviews/lt-2.jpg"
+      ]
+    },
+    {
+      name: "Thomas Bonnet",
+      photo: "",
+      date: "il y a 3 ans",
+      text: "Très sérieux, j'ai acheté un véhicule avec toutes les options que j'avais demandées. Tous les papiers ont été faits en temps et en heure. Petit polissage + pose de cire très bien réalisée.",
+      photos: [
+        "reviews/thomas-1.jpg",
+        "reviews/thomas-2.jpg",
+        "reviews/thomas-3.jpg",
+        "reviews/thomas-4.jpg"
+      ]
+    },
+    {
+      name: "MiKL Youx",
+      photo: "",
+      date: "il y a un an",
+      text: "Encore merci pour avoir répondu à nos critères pour le plus grand bonheur de madame. Hancock Motors pour moi et ma femme sont réactifs, sérieux, professionnels et répondent à vos attentes.",
+      photos: [
+        "reviews/mikl-1.jpg"
+      ]
+    },
+    {
+      name: "Karim Adel",
+      photo: "",
+      date: "il y a un an",
+      text: "Très satisfait de mon expérience d'achat. Toby est très professionnel, à l'écoute et très réactif. Arrangeant quand il le faut. Véhicule impeccable, en excellent état. Nettoyage complet intérieur, extérieur ! Annonce détaillée, envoi de photos à la demande. Vous pouvez lui faire confiance sans problèmes.",
+      photos: [
+        "reviews/karim-1.jpg"
+      ]
+    },
+    {
+      name: "Iheb Chaouch",
+      photo: "",
+      date: "il y a 2 ans",
+      text: "Je recommande. Après l'achat d'une A250 Sport, la voiture est bien propre comme les photos… Toby toujours à l'écoute, c'est un vrai passionné. Merci beaucoup pour votre accueil et bonne continuation."
+    },
+    {
+      name: "Maxime Guillemot",
+      photo: "",
+      date: "il y a 2 ans",
+      text: "Achat d'un X3 M40i avec reprise de mon ancien véhicule. Garage sérieux, réactif avec livraison de mon véhicule parfaitement préparé. Je recommande Hancock Motors."
+    },
+    {
+      name: "S. V.",
+      photo: "",
+      date: "il y a 4 ans",
+      text: "Accueil et service de qualité. J'ai demandé une céramique intégrale il y a maintenant 2 mois et le résultat est top, la qualité de la protection n'a pas bougé, facilité de nettoyage et surtout les rayures (micro et épaisses) ont disparu, une vraie remise à neuf. Je recommande totalement."
+    },
+    {
+      name: "Jean Patrick Guinet",
+      photo: "",
+      date: "il y a 2 jours",
+      text: "Très bonne expérience. Un vrai professionnel comme on n'en voit plus beaucoup, il connaît ses véhicules sur le bout des doigts et fait un travail d'enquête sur l'historique de ces derniers. Il a été un très bon complice pour permettre une surprise totale à madame pour son anniversaire. Alors si vous cherchez une personne compétente et à l'écoute de vos besoins, n'hésitez pas c'est l'homme de la situation."
+    },
+    {
+      name: "Bekir Demir",
+      photo: "",
+      date: "il y a un an",
+      text: "L'affaire du BMW X4 était excellente. Le directeur était très sympathique et les employés étaient formidables. Merci beaucoup. Nous sommes toujours ravis de faire affaire avec Hancock Motors."
+    },
+    // Ajoutez vos autres avis 5★ ici
+  ];
+  // ────────────────────────────────────────────────────────────
+
+  (function () {
+    const set1 = document.getElementById('gr-set-1');
+    const set2 = document.getElementById('gr-set-2');
+    const STAR_SVG = `<svg class="w-3.5 h-3.5 text-yellow-400" fill="currentColor" viewBox="0 0 20 20"><path d="M9.049 2.927c.3-.921 1.603-.921 1.902 0l1.07 3.292a1 1 0 00.95.69h3.462c.969 0 1.371 1.24.588 1.81l-2.8 2.034a1 1 0 00-.364 1.118l1.07 3.292c.3.921-.755 1.688-1.54 1.118l-2.8-2.034a1 1 0 00-1.175 0l-2.8 2.034c-.784.57-1.838-.197-1.539-1.118l1.07-3.292a1 1 0 00-.364-1.118L2.98 8.72c-.783-.57-.38-1.81.588-1.81h3.461a1 1 0 00.951-.69l1.07-3.292z"/></svg>`;
+
+    // Fisher-Yates shuffle helper
+    function shuffle(arr) {
+      const a = [...arr];
+      for (let i = a.length - 1; i > 0; i--) {
+        const j = Math.floor(Math.random() * (i + 1));
+        [a[i], a[j]] = [a[j], a[i]];
+      }
+      return a;
+    }
+
+    // Interleave: spread no-photo reviews evenly among photo ones
+    const withPhotos    = shuffle(googleReviews.filter(r => r.photos && r.photos.length));
+    const withoutPhotos = shuffle(googleReviews.filter(r => !r.photos || !r.photos.length));
+    const reviews = [];
+    const step = Math.ceil(withPhotos.length / (withoutPhotos.length + 1));
+    let wi = 0, ni = 0;
+    for (let i = 0; i < withPhotos.length + withoutPhotos.length; i++) {
+      if (ni < withoutPhotos.length && wi > 0 && wi % step === 0) {
+        reviews.push(withoutPhotos[ni++]);
+      } else {
+        reviews.push(withPhotos[wi++]);
+      }
+    }
+    while (ni < withoutPhotos.length) reviews.push(withoutPhotos[ni++]);
+
+    function initials(name) {
+      return name.split(' ').map(w => w[0]).join('').slice(0, 2).toUpperCase();
+    }
+
+    function formatName(name) {
+      const parts = name.trim().split(/\s+/);
+      if (parts.length < 2) return name.toUpperCase();
+      return parts[0][0].toUpperCase() + '. ' + parts.slice(1).join(' ').toUpperCase();
+    }
+
+    function buildCard(r) {
+      const photosHTML = (r.photos && r.photos.length)
+        ? `<div class="flex gap-1.5 mt-3 overflow-hidden">
+            ${r.photos.map(src => `<img src="${src}" alt="Photo du véhicule de ${r.name}" class="h-14 w-20 object-cover rounded-lg flex-shrink-0 border border-white/10" loading="lazy" decoding="async" />`).join('')}
+           </div>`
+        : '';
+      const avatar = r.photo
+        ? `<img src="${r.photo}" alt="${r.name}" class="w-8 h-8 rounded-full object-cover flex-shrink-0" />`
+        : `<div class="w-8 h-8 rounded-full bg-primary/20 text-primary font-bold text-xs flex-shrink-0 flex items-center justify-center">${initials(r.name)}</div>`;
+
+      const el = document.createElement('div');
+      el.style.cssText = 'width:320px;flex-shrink:0;';
+      el.innerHTML = `
+        <div class="bg-dark border border-white/10 rounded-xl p-4 h-full">
+          <div class="flex gap-0.5 mb-2">${STAR_SVG.repeat(5)}</div>
+          <p class="text-white/75 text-xs leading-relaxed line-clamp-4">"${r.text}"</p>
+          ${photosHTML}
+          <div class="flex items-center gap-2 mt-3">
+            ${avatar}
+            <div>
+              <p class="font-semibold text-white text-xs">${formatName(r.name)}</p>
+            </div>
+          </div>
+        </div>`;
+      return el;
+    }
+
+    // Populate both sets (duplicate for seamless loop)
+    reviews.forEach(r => {
+      set1.appendChild(buildCard(r));
+      set2.appendChild(buildCard(r));
+    });
+  })();
+  </script>
+
+
+  <!-- ======================================================
+       RECHERCHE PERSONNALISÉE
+  ====================================================== -->
+  <section id="recherche" class="py-24 px-6 bg-dark">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+        <div>
+          <p class="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-4">Sur Mesure</p>
+          <h2 class="text-3xl md:text-5xl font-bold text-white leading-tight mb-6">
+            Recherche<br />Personnalisée
+          </h2>
+          <p class="text-white/60 leading-relaxed mb-5 text-sm md:text-base">
+            Vous avez un véhicule précis en tête ? Notre équipe de <strong class="text-white/80">mandataire automobile</strong> recherche pour vous le modèle idéal — neuf ou d'occasion — selon vos critères, votre budget et vos préférences. Spécialistes de l'<strong class="text-white/80">import depuis l'Allemagne</strong>, nous sourcçons directement auprès des réseaux allemands pour vous obtenir les meilleures conditions du marché.
+          </p>
+          <!-- ── Multi-step form ── -->
+          <div class="bg-surface border border-white/10 rounded-2xl p-7" id="recherche-form-wrap">
+
+            <!-- Progress bar -->
+            <div class="flex items-center gap-0 mb-6" id="form-progress">
+              <div class="flex flex-col items-center flex-1">
+                <div id="pb-1" class="w-8 h-8 rounded-full bg-primary text-white font-bold text-xs flex items-center justify-center transition-all">1</div>
+                <p id="pb-1-lbl" class="text-xs font-semibold text-white mt-1.5">Le véhicule</p>
+              </div>
+              <div class="h-0.5 flex-1 bg-white/15 mb-4" id="line-1-2"></div>
+              <div class="flex flex-col items-center flex-1">
+                <div id="pb-2" class="w-8 h-8 rounded-full bg-white/15 text-white/40 font-bold text-xs flex items-center justify-center transition-all">2</div>
+                <p id="pb-2-lbl" class="text-xs font-semibold text-white/40 mt-1.5">Coordonnées</p>
+              </div>
+              <div class="h-0.5 flex-1 bg-white/15 mb-4" id="line-2-3"></div>
+              <div class="flex flex-col items-center flex-1">
+                <div id="pb-3" class="w-8 h-8 rounded-full bg-white/15 text-white/40 font-bold text-xs flex items-center justify-center transition-all">3</div>
+                <p id="pb-3-lbl" class="text-xs font-semibold text-white/40 mt-1.5">Les détails</p>
+              </div>
+            </div>
+
+            <form id="rp-main-form" novalidate>
+
+              <!-- Step 1 : Véhicule -->
+              <div class="form-step active" id="fs-1">
+                <!-- Pack choice -->
+                <div class="mb-5">
+                  <label class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-2.5">
+                    Formule souhaitée <span class="text-red-400">*</span>
+                  </label>
+                  <div class="grid grid-cols-2 gap-2.5" id="pack-choice">
+                    <label id="pack-gestion-card"
+                           class="pack-card flex flex-col gap-1.5 border-2 border-white/15 rounded-xl p-3.5 cursor-pointer transition-all hover:border-primary/40">
+                      <input type="radio" name="pack" value="gestion" class="sr-only" required />
+                      <div class="flex items-center justify-between">
+                        <span class="font-bold text-white text-xs">Pack Gestion</span>
+                        <span class="text-primary font-bold text-xs">1 200 €</span>
+                      </div>
+                      <p class="text-xs text-white/50 leading-relaxed">Vous trouvez le véhicule, on s'occupe de l'administratif.</p>
+                    </label>
+                    <label id="pack-cle-card"
+                           class="pack-card flex flex-col gap-1.5 border-2 border-white/15 rounded-xl p-3.5 cursor-pointer transition-all hover:border-primary/40">
+                      <input type="radio" name="pack" value="cle-en-main" class="sr-only" />
+                      <div class="flex items-center justify-between">
+                        <span class="font-bold text-white text-xs">Pack Clé en Main</span>
+                        <span class="text-primary font-bold text-xs">Sur devis</span>
+                      </div>
+                      <p class="text-xs text-white/50 leading-relaxed">On gère tout, jusqu'à la livraison chez vous.</p>
+                    </label>
+                  </div>
+                  <p id="pack-error" class="text-xs text-red-400 mt-1.5 hidden">Veuillez choisir une formule pour continuer.</p>
+                </div>
+                <div class="space-y-3.5 mb-5">
+                  <div class="grid grid-cols-2 gap-3">
+                    <div>
+                      <label for="f-marque" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-1.5">Marque <span class="text-red-400">*</span></label>
+                      <input type="text" id="f-marque" placeholder="BMW, Porsche…"
+                             class="w-full border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors bg-white/5" required />
+                    </div>
+                    <div>
+                      <label for="f-modele" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-1.5">Modèle <span class="text-red-400">*</span></label>
+                      <input type="text" id="f-modele" placeholder="M3, 911…"
+                             class="w-full border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors bg-white/5" required />
+                    </div>
+                  </div>
+                  <div>
+                    <label for="f-budget" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-1.5">Budget maximum (€) <span class="text-red-400">*</span></label>
+                    <div class="relative">
+                      <input type="number" id="f-budget" placeholder="Ex : 35000" min="1000" step="500"
+                             class="w-full border border-white/15 rounded-xl px-3.5 py-2.5 pr-10 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors bg-white/5" required />
+                      <span class="absolute right-3.5 top-1/2 -translate-y-1/2 text-white/30 text-sm font-medium">€</span>
+                    </div>
+                  </div>
+                </div>
+                <button type="button" id="next-1"
+                        class="w-full bg-primary hover:bg-primary-hover text-white font-semibold py-3.5 rounded-xl text-sm tracking-wide transition-colors duration-200">
+                  Continuer — Mes coordonnées →
+                </button>
+              </div>
+
+              <!-- Step 2 : Coordonnées -->
+              <div class="form-step" id="fs-2">
+                <p id="fs-2-context" class="text-xs font-semibold text-primary uppercase tracking-[0.15em] mb-2 hidden"></p>
+                <div class="space-y-3.5 mb-5">
+                  <div class="grid grid-cols-2 gap-3">
+                    <div>
+                      <label for="f-nom" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-1.5">Nom <span class="text-red-400">*</span></label>
+                      <input type="text" id="f-nom" placeholder="Dupont"
+                             class="w-full border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors bg-white/5" required />
+                    </div>
+                    <div>
+                      <label for="f-prenom" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-1.5">Prénom <span class="text-red-400">*</span></label>
+                      <input type="text" id="f-prenom" placeholder="Jean"
+                             class="w-full border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors bg-white/5" required />
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-2 gap-3">
+                    <div>
+                      <label for="f-ville" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-1.5">Ville <span class="text-red-400">*</span></label>
+                      <input type="text" id="f-ville" placeholder="Paris"
+                             class="w-full border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors bg-white/5" required />
+                    </div>
+                    <div>
+                      <label for="f-cp" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-1.5">Code postal <span class="text-red-400">*</span></label>
+                      <input type="text" id="f-cp" placeholder="75001" maxlength="5"
+                             class="w-full border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors bg-white/5" required />
+                    </div>
+                  </div>
+                  <div>
+                    <label for="f-email" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-1.5">Email <span class="text-red-400">*</span></label>
+                    <input type="email" id="f-email" placeholder="jean.dupont@example.com"
+                           class="w-full border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors bg-white/5" required />
+                  </div>
+                  <div>
+                    <label for="f-tel" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-1.5">Téléphone <span class="text-red-400">*</span></label>
+                    <input type="tel" id="f-tel" placeholder="+33 6 00 00 00 00"
+                           class="w-full border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors bg-white/5" required />
+                  </div>
+                </div>
+                <div class="flex gap-3">
+                  <button type="button" id="back-2"
+                          class="px-5 py-3.5 rounded-xl text-sm font-semibold text-white border border-white/15 hover:bg-white/10 transition-colors flex-shrink-0">
+                    ← Retour
+                  </button>
+                  <button type="button" id="next-2"
+                          class="flex-1 bg-primary hover:bg-primary-hover text-white font-semibold py-3.5 rounded-xl text-sm tracking-wide transition-colors duration-200">
+                    Continuer — Les détails →
+                  </button>
+                </div>
+              </div>
+
+              <!-- Step 3 : Détails -->
+              <div class="form-step" id="fs-3">
+                <h3 id="fs-3-greeting" class="font-bold text-white text-sm mb-4">Plus de détails sur votre recherche</h3>
+                <div class="space-y-3.5 mb-5">
+                  <div class="grid grid-cols-2 gap-3">
+                    <div>
+                      <label for="f-carburant" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-1.5">Carburant</label>
+                      <div class="relative">
+                        <select id="f-carburant"
+                                class="w-full border border-white/15 rounded-xl px-3.5 py-2.5 pr-9 text-sm text-white focus:outline-none focus:border-primary transition-colors appearance-none bg-white/5">
+                          <option value="">Peu importe</option>
+                          <option value="essence">Essence</option>
+                          <option value="diesel">Diesel</option>
+                          <option value="hybride">Hybride (HEV)</option>
+                          <option value="phev">Hybride Rechargeable</option>
+                          <option value="electrique">Électrique</option>
+                          <option value="gpl">GPL</option>
+                        </select>
+                        <svg class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                      </div>
+                    </div>
+                    <div>
+                      <label for="f-boite" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-1.5">Boîte</label>
+                      <div class="relative">
+                        <select id="f-boite"
+                                class="w-full border border-white/15 rounded-xl px-3.5 py-2.5 pr-9 text-sm text-white focus:outline-none focus:border-primary transition-colors appearance-none bg-white/5">
+                          <option value="">Peu importe</option>
+                          <option value="manuelle">Manuelle</option>
+                          <option value="automatique">Automatique</option>
+                          <option value="sequentielle">Séquentielle / DSG</option>
+                        </select>
+                        <svg class="pointer-events-none absolute right-3 top-1/2 -translate-y-1/2 w-3.5 h-3.5 text-white/40" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+                      </div>
+                    </div>
+                  </div>
+                  <div class="grid grid-cols-3 gap-3">
+                    <div>
+                      <label for="f-annee" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-1.5">Année min</label>
+                      <input type="number" id="f-annee" placeholder="2018" min="1990" max="2026"
+                             class="w-full border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors bg-white/5" />
+                    </div>
+                    <div>
+                      <label for="f-km" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-1.5">KM max</label>
+                      <div class="relative">
+                        <input type="number" id="f-km" placeholder="80000" min="0" step="1000"
+                               class="w-full border border-white/15 rounded-xl px-3.5 py-2.5 pr-8 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors bg-white/5" />
+                        <span class="absolute right-2.5 top-1/2 -translate-y-1/2 text-white/30 text-xs">km</span>
+                      </div>
+                    </div>
+                    <div>
+                      <label for="f-puissance" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-1.5">Puiss. min</label>
+                      <div class="relative">
+                        <input type="number" id="f-puissance" placeholder="200" min="50" step="10"
+                               class="w-full border border-white/15 rounded-xl px-3.5 py-2.5 pr-8 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors bg-white/5" />
+                        <span class="absolute right-2.5 top-1/2 -translate-y-1/2 text-white/30 text-xs">ch</span>
+                      </div>
+                    </div>
+                  </div>
+                  <div>
+                    <label for="f-options" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-1.5">Options & équipements souhaités</label>
+                    <textarea id="f-options" rows="3"
+                              placeholder="Ex : toit ouvrant, sièges chauffants, caméra de recul, couleur sombre…"
+                              class="w-full border border-white/15 rounded-xl px-3.5 py-2.5 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors bg-white/5 resize-none leading-relaxed"></textarea>
+                  </div>
+                </div>
+                <div class="flex gap-3">
+                  <button type="button" id="back-3"
+                          class="px-5 py-3.5 rounded-xl text-sm font-semibold text-white border border-white/15 hover:bg-white/10 transition-colors flex-shrink-0">
+                    ← Retour
+                  </button>
+                  <button type="submit"
+                          class="flex-1 bg-primary hover:bg-primary-hover text-white font-semibold py-3.5 rounded-xl text-sm tracking-wide transition-colors duration-200">
+                    Envoyer ma demande
+                  </button>
+                </div>
+                <p class="text-center text-xs text-white/50 mt-3">🔒 Réponse sous 48h · Aucun engagement · Aucun spam</p>
+              </div>
+
+            </form>
+
+            <!-- Success -->
+            <div id="rp-success" class="form-success flex-col items-center text-center py-4 gap-3">
+              <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mx-auto">
+                <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                </svg>
+              </div>
+              <p class="font-bold text-white">Demande envoyée !</p>
+              <p class="text-sm text-white/60">Notre équipe vous recontacte sous 48h.</p>
+            </div>
+
+          </div>
+        </div>
+
+        <div class="relative">
+          <div class="rounded-3xl overflow-hidden shadow-2xl">
+            <img src="https://hancockmotors.fr/wp-content/uploads/2024/12/sq5-scaled.jpg"
+                 alt="Audi SQ5 — service de recherche personnalisée Hancock Motors" class="w-full h-[440px] object-cover"
+                 loading="lazy" decoding="async" width="1200" height="440" />
+          </div>
+          <!-- Floating badge -->
+          <div class="absolute -bottom-6 -left-4 bg-surface rounded-2xl shadow-xl p-5 flex items-center gap-4 border border-white/10">
+            <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0">
+              <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+              </svg>
+            </div>
+            <div>
+              <p class="font-bold text-white text-sm">Recherche Active</p>
+              <p class="text-xs text-white/50">Réponse sous 48h</p>
+            </div>
+          </div>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ======================================================
+       SERVICES DE DETAILING
+  ====================================================== -->
+  <section id="services" class="py-24 px-6 bg-dark text-white">
+    <div class="max-w-7xl mx-auto">
+
+      <div class="text-center mb-16">
+        <p class="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-4">Nos Expertises</p>
+        <h2 class="text-3xl md:text-5xl font-bold mb-5">Services de Detailing</h2>
+        <p class="text-white/45 max-w-lg mx-auto text-sm leading-relaxed">
+          Redonnez à votre véhicule son éclat d'origine grâce à nos soins professionnels haut de gamme.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Nettoyage -->
+        <div id="nettoyage" class="service-card group relative overflow-hidden rounded-2xl cursor-pointer">
+          <div class="h-[400px] overflow-hidden">
+            <img src="https://hancockmotors.fr/wp-content/uploads/2024/11/seat-clean-1024x683.jpg"
+                 alt="Nettoyage intérieur et extérieur de véhicule par Hancock Motors" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                 loading="lazy" decoding="async" width="1024" height="683" />
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-transparent flex flex-col justify-end p-7">
+            <span class="text-xs font-semibold text-primary bg-primary/15 border border-primary/25 px-3 py-1 rounded-full w-fit mb-3">Service 01</span>
+            <h3 class="text-white font-bold text-2xl mb-2">Nettoyage</h3>
+            <p class="text-white/60 text-sm mb-5 leading-relaxed">Intérieur & extérieur, résultat immaculé garanti. Aspiration, shampooing, désinfection complète.</p>
+            <a href="https://hancockmotors.fr/services/"
+               class="inline-flex items-center gap-2 text-white text-sm font-semibold bg-white/10 hover:bg-white/20 px-4 py-2.5 rounded-lg transition-colors w-fit">
+              En savoir plus
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Polissage -->
+        <div id="polissage" class="service-card group relative overflow-hidden rounded-2xl cursor-pointer">
+          <div class="h-[400px] overflow-hidden">
+            <img src="https://hancockmotors.fr/wp-content/uploads/2024/11/scratches-2-1024x683.jpg"
+                 alt="Polissage et lustrage de carrosserie automobile par Hancock Motors" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                 loading="lazy" decoding="async" width="1024" height="683" />
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-transparent flex flex-col justify-end p-7">
+            <span class="text-xs font-semibold text-primary bg-primary/15 border border-primary/25 px-3 py-1 rounded-full w-fit mb-3">Service 02</span>
+            <h3 class="text-white font-bold text-2xl mb-2">Polissage / Lustrage</h3>
+            <p class="text-white/60 text-sm mb-5 leading-relaxed">Élimination des micro-rayures, lustrage intensif pour une carrosserie au brillant parfait.</p>
+            <a href="https://hancockmotors.fr/services/"
+               class="inline-flex items-center gap-2 text-white text-sm font-semibold bg-white/10 hover:bg-white/20 px-4 py-2.5 rounded-lg transition-colors w-fit">
+              En savoir plus
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <!-- Céramique -->
+        <div id="ceramique" class="service-card group relative overflow-hidden rounded-2xl cursor-pointer">
+          <div class="h-[400px] overflow-hidden">
+            <img src="https://hancockmotors.fr/wp-content/uploads/2024/11/ceramique-7R-1024x683.jpg"
+                 alt="Application de protection céramique sur carrosserie automobile par Hancock Motors" class="w-full h-full object-cover group-hover:scale-105 transition-transform duration-700"
+                 loading="lazy" decoding="async" width="1024" height="683" />
+          </div>
+          <div class="absolute inset-0 bg-gradient-to-t from-dark via-dark/40 to-transparent flex flex-col justify-end p-7">
+            <span class="text-xs font-semibold text-primary bg-primary/15 border border-primary/25 px-3 py-1 rounded-full w-fit mb-3">Service 03</span>
+            <h3 class="text-white font-bold text-2xl mb-2">Protection Céramique</h3>
+            <p class="text-white/60 text-sm mb-5 leading-relaxed">Protection longue durée contre les rayures, les UV et toutes les agressions extérieures.</p>
+            <a href="https://hancockmotors.fr/protection-ceramique/"
+               class="inline-flex items-center gap-2 text-white text-sm font-semibold bg-white/10 hover:bg-white/20 px-4 py-2.5 rounded-lg transition-colors w-fit">
+              En savoir plus
+              <svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+      </div>
+
+      <div class="text-center mt-10">
+        <a href="https://hancockmotors.fr/services/"
+           class="inline-flex items-center gap-2 border border-white/20 hover:border-white/50 text-white font-semibold px-8 py-4 rounded-xl text-sm tracking-wide transition-colors duration-200">
+          Découvrir tous nos services
+        </a>
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ======================================================
+       VENDEZ VOTRE VOITURE
+  ====================================================== -->
+  <section id="vendre" class="py-24 px-6 bg-dark">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+        <!-- Image side -->
+        <div class="relative order-2 lg:order-1">
+          <div class="rounded-3xl overflow-hidden shadow-xl">
+            <img src="https://hancockmotors.fr/wp-content/uploads/2024/12/1-5-copy-3-scaled.jpg"
+                 alt="Reprise de véhicule — évaluation et rachat de voiture par Hancock Motors" class="w-full h-[520px] object-cover"
+                 loading="lazy" decoding="async" width="1200" height="520" />
+          </div>
+          <div class="absolute -top-5 -right-4 bg-primary rounded-2xl shadow-xl p-5 text-white text-center">
+            <p class="text-3xl font-bold">+200</p>
+            <p class="text-xs text-white/70 mt-0.5">Véhicules repris</p>
+          </div>
+        </div>
+
+        <!-- Form side -->
+        <div class="order-1 lg:order-2">
+          <p class="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-4">Reprise</p>
+          <h2 class="text-3xl md:text-5xl font-bold text-white leading-tight mb-6">
+            Vendez Votre<br />Voiture
+          </h2>
+          <p class="text-white/60 leading-relaxed mb-8 text-sm md:text-base">
+            Obtenez une estimation rapide et vendez votre véhicule au meilleur prix. Notre équipe vous garantit une réponse sous 24h et un processus simple, sans stress.
+          </p>
+
+          <form id="vendre-form" class="space-y-4" novalidate>
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-4">
+              <div>
+                <label for="v-nom" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-2">Prénom & Nom</label>
+                <input type="text" id="v-nom" placeholder="John Dupont" required
+                       class="w-full border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors bg-white/5" />
+              </div>
+              <div>
+                <label for="v-tel" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-2">Téléphone</label>
+                <input type="tel" id="v-tel" placeholder="+33 6 00 00 00 00" required
+                       class="w-full border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors bg-white/5" />
+              </div>
+            </div>
+            <div>
+              <label for="v-email" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-2">Email</label>
+              <input type="email" id="v-email" placeholder="john@example.com"
+                     class="w-full border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors bg-white/5" />
+            </div>
+            <div>
+              <label for="v-vehicule" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-2">Véhicule (Marque, Modèle, Année)</label>
+              <input type="text" id="v-vehicule" placeholder="BMW 320d, 2020" required
+                     class="w-full border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors bg-white/5" />
+            </div>
+            <div>
+              <label for="v-message" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-2">Message</label>
+              <textarea id="v-message" rows="3" placeholder="Kilométrage, état général, informations complémentaires..."
+                        class="w-full border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors resize-none bg-white/5"></textarea>
+            </div>
+            <button type="submit"
+                    class="w-full bg-primary hover:bg-primary-hover text-white font-semibold py-4 rounded-xl text-sm tracking-wide transition-colors duration-200">
+              Envoyer ma demande
+            </button>
+            <p class="text-center text-xs text-white/50">Réponse sous 24h · Aucun engagement</p>
+          </form>
+
+          <!-- Success -->
+          <div id="vendre-success" class="form-success flex-col items-center text-center py-6 gap-3">
+            <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mx-auto">
+              <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+              </svg>
+            </div>
+            <p class="font-bold text-white">Demande envoyée !</p>
+            <p class="text-sm text-white/60">Notre équipe vous contacte sous 24h.</p>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ======================================================
+       CONTACT
+  ====================================================== -->
+  <section id="contact" class="py-24 px-6 bg-surface">
+    <div class="max-w-7xl mx-auto">
+
+      <div class="text-center mb-14">
+        <p class="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-4">Nous Joindre</p>
+        <h2 class="text-3xl md:text-5xl font-bold text-white mb-5">Contact</h2>
+        <p class="text-white/60 max-w-md mx-auto text-sm leading-relaxed">
+          Une question, un projet ou une demande de renseignements ? Notre équipe est disponible pour vous accompagner.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 mb-12">
+
+        <div class="bg-dark rounded-2xl p-8 text-center shadow-sm border border-white/10 hover:shadow-md transition-shadow">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-5">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 5a2 2 0 012-2h3.28a1 1 0 01.948.684l1.498 4.493a1 1 0 01-.502 1.21l-2.257 1.13a11.042 11.042 0 005.516 5.516l1.13-2.257a1 1 0 011.21-.502l4.493 1.498a1 1 0 01.684.949V19a2 2 0 01-2 2h-1C9.716 21 3 14.284 3 6V5z"/>
+            </svg>
+          </div>
+          <h3 class="font-bold text-white mb-2 text-sm">Téléphone</h3>
+          <a href="tel:+33629324299" class="text-primary text-sm font-medium hover:underline">+33 6 29 32 42 99</a>
+        </div>
+
+        <div class="bg-dark rounded-2xl p-8 text-center shadow-sm border border-white/10 hover:shadow-md transition-shadow">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-5">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"/>
+            </svg>
+          </div>
+          <h3 class="font-bold text-white mb-2 text-sm">Email</h3>
+          <a href="mailto:contact@hancockmotors.fr" class="text-primary text-sm font-medium hover:underline">contact@hancockmotors.fr</a>
+        </div>
+
+        <div class="bg-dark rounded-2xl p-8 text-center shadow-sm border border-white/10 hover:shadow-md transition-shadow">
+          <div class="w-12 h-12 rounded-xl bg-primary/10 flex items-center justify-center mx-auto mb-5">
+            <svg class="w-6 h-6 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17.657 16.657L13.414 20.9a1.998 1.998 0 01-2.827 0l-4.244-4.243a8 8 0 1111.314 0z"/>
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 11a3 3 0 11-6 0 3 3 0 016 0z"/>
+            </svg>
+          </div>
+          <h3 class="font-bold text-white mb-2 text-sm">Localisation</h3>
+          <p class="text-white/60 text-sm">France</p>
+        </div>
+
+      </div>
+
+      <!-- Contact form -->
+      <div class="max-w-2xl mx-auto bg-dark rounded-2xl border border-white/10 shadow-sm p-8 md:p-10">
+
+        <form id="contact-form" novalidate>
+          <div class="space-y-5">
+
+            <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
+              <div>
+                <label for="ct-nom" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-1.5">Prénom & Nom</label>
+                <input type="text" id="ct-nom" placeholder="Jean Dupont"
+                       class="w-full border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors bg-white/5" required />
+              </div>
+              <div>
+                <label for="ct-email" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-1.5">Email</label>
+                <input type="email" id="ct-email" placeholder="jean@example.com"
+                       class="w-full border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors bg-white/5" required />
+              </div>
+            </div>
+
+            <div>
+              <label for="ct-sujet" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-1.5">Sujet</label>
+              <select id="ct-sujet" class="w-full border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:outline-none focus:border-primary transition-colors appearance-none bg-white/5" required>
+                <option value="" disabled selected>Choisissez un sujet</option>
+                <option value="vehicule">Question sur un véhicule</option>
+                <option value="detailing">Service de detailing</option>
+                <option value="reprise">Vente / Reprise</option>
+                <option value="autre">Autre demande</option>
+              </select>
+            </div>
+
+            <div>
+              <label for="ct-message" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-1.5">
+                Message <span class="font-normal text-white/40 lowercase normal-case">(facultatif)</span>
+              </label>
+              <textarea id="ct-message" rows="4" placeholder="Dites-nous en plus…"
+                        class="w-full border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors resize-none bg-white/5"></textarea>
+            </div>
+
+            <button type="submit"
+                    class="w-full bg-primary hover:bg-primary-hover text-white font-semibold py-4 rounded-xl text-sm tracking-wide transition-colors duration-200">
+              Envoyer mon message
+            </button>
+
+            <p class="text-center text-xs text-white/50">Nous répondons sous 24h · Vos données restent confidentielles</p>
+
+          </div>
+        </form>
+
+        <!-- Success -->
+        <div id="ct-success" class="form-success flex-col items-center text-center py-6 gap-3">
+          <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mx-auto">
+            <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+            </svg>
+          </div>
+          <p class="font-bold text-white">Message envoyé !</p>
+          <p class="text-sm text-white/60">Notre équipe vous répond sous 24h.</p>
+        </div>
+
+      </div>
+
+    </div>
+  </section>
+
+
+  <!-- ======================================================
+       FOOTER
+  ====================================================== -->
+  <footer class="bg-dark text-white pt-16 pb-8 px-6">
+    <div class="max-w-7xl mx-auto">
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-white/10">
+
+        <div class="md:col-span-1">
+          <img src="https://hancockmotors.fr/wp-content/uploads/2023/10/logo-blanc.png"
+               alt="Hancock Motors" class="h-10 w-auto mb-5" loading="lazy" decoding="async" />
+          <p class="text-white/40 text-sm leading-relaxed mb-6">
+            Spécialiste en véhicules de prestige et services de detailing haut de gamme, basé en France.
+          </p>
+          <div class="flex gap-3">
+            <a href="https://www.facebook.com/hancockmotors" target="_blank" rel="noopener noreferrer" aria-label="Facebook"
+               class="w-9 h-9 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors">
+              <svg class="w-4 h-4 text-white/50" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+              </svg>
+            </a>
+            <a href="https://www.instagram.com/hancockmotors" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
+               class="w-9 h-9 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors">
+              <svg class="w-4 h-4 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke-width="2"/>
+                <circle cx="12" cy="12" r="4" stroke-width="2"/>
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-semibold tracking-[0.15em] uppercase text-white/30 mb-5">Véhicules</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="#vehicules" class="text-white/50 hover:text-white transition-colors">Véhicules Disponibles</a></li>
+            <li><a href="vehicules-vendus.html" class="text-white/50 hover:text-white transition-colors">Véhicules Vendus</a></li>
+            <li><a href="https://hancockmotors.fr/recherche-personnalisee/" class="text-white/50 hover:text-white transition-colors">Recherche Personnalisée</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-semibold tracking-[0.15em] uppercase text-white/30 mb-5">Services</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="#nettoyage" class="text-white/50 hover:text-white transition-colors">Nettoyage</a></li>
+            <li><a href="#polissage" class="text-white/50 hover:text-white transition-colors">Polissage / Lustrage</a></li>
+            <li><a href="https://hancockmotors.fr/protection-ceramique/" class="text-white/50 hover:text-white transition-colors">Protection Céramique</a></li>
+            <li><a href="#vendre" class="text-white/50 hover:text-white transition-colors">Vendez Votre Voiture</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-semibold tracking-[0.15em] uppercase text-white/30 mb-5">Contact</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="#contact" class="text-white/50 hover:text-white transition-colors">Nous Contacter</a></li>
+            <li><a href="https://hancockmotors.fr/contact-us/" class="text-white/50 hover:text-white transition-colors">Formulaire en ligne</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/25">
+        <span>© Hancock Motors 2026. Tous droits réservés.</span>
+        <div class="flex gap-6">
+          <a href="#" class="hover:text-white/50 transition-colors">Mentions légales</a>
+          <a href="#" class="hover:text-white/50 transition-colors">Politique de confidentialité</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- ======================================================
+       FLOATING PHONE CTA
+  ====================================================== -->
+  <a href="https://wa.me/33629324299" target="_blank" rel="noopener noreferrer" id="float-cta"
+     class="fixed bottom-6 right-6 z-50 flex items-center gap-2.5 bg-[#25D366] text-white font-semibold px-5 py-3.5 rounded-2xl shadow-2xl transition-all duration-300 text-sm opacity-0 translate-y-4"
+     aria-label="Contacter Hancock Motors sur WhatsApp" style="pointer-events:none;">
+    <svg class="w-4 h-4 flex-shrink-0" viewBox="0 0 24 24" fill="currentColor">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413z"/>
+    </svg>
+    <span>WhatsApp</span>
+  </a>
+
+  <!-- ======================================================
+       INTEREST MODAL
+  ====================================================== -->
+  <div id="interest-modal" role="dialog" aria-modal="true" aria-labelledby="modal-title">
+    <div id="modal-box">
+      <button id="modal-close" aria-label="Fermer"
+              class="absolute top-4 right-4 text-white/40 hover:text-white transition-colors">
+        <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+
+      <p class="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-1">Véhicule sélectionné</p>
+      <h3 id="modal-title" class="text-lg font-bold text-white mb-5">—</h3>
+
+      <form id="modal-form" novalidate>
+        <div class="space-y-4">
+          <div>
+            <label for="m-nom" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-1.5">Prénom & Nom</label>
+            <input type="text" id="m-nom" placeholder="Jean Dupont"
+                   class="w-full border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors bg-white/5" required />
+          </div>
+          <div>
+            <label for="m-tel" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-1.5">Téléphone</label>
+            <input type="tel" id="m-tel" placeholder="+33 6 00 00 00 00"
+                   class="w-full border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors bg-white/5" required />
+            <p class="text-xs text-white/50 mt-1">Nous vous rappelons rapidement.</p>
+          </div>
+          <div>
+            <label for="m-email" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-1.5">
+              Email <span class="font-normal text-white/40 lowercase normal-case">(facultatif)</span>
+            </label>
+            <input type="email" id="m-email" placeholder="jean@example.com"
+                   class="w-full border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors bg-white/5" />
+          </div>
+          <button type="submit"
+                  class="w-full bg-primary hover:bg-primary-hover text-white font-semibold py-3.5 rounded-xl text-sm tracking-wide transition-colors duration-200">
+            Recevoir les informations
+          </button>
+          <p class="text-center text-xs text-white/50">Réponse sous 24h · Aucun engagement</p>
+        </div>
+      </form>
+
+      <div id="modal-success" class="form-success flex-col items-center text-center py-4 gap-3">
+        <div class="w-12 h-12 rounded-full bg-green-100 flex items-center justify-center mx-auto">
+          <svg class="w-6 h-6 text-green-500" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+          </svg>
+        </div>
+        <p class="font-bold text-white">Demande envoyée !</p>
+        <p class="text-sm text-white/60">Notre équipe vous contacte sous 24h.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ======================================================
+       JAVASCRIPT
+  ====================================================== -->
+  <script>
+    // ── BMW M4 photo carousel ────────────────────────────
+    (function () {
+      const total = 30;
+      const imgEl    = document.getElementById('m4-img');
+      const counterEl = document.getElementById('m4-counter');
+      let current = 0;
+      window.m4Slide = function (dir) {
+        current = (current + dir + total) % total;
+        imgEl.src = 'Photos voiture/BMW M4 Cab/bmw-m4-cabriolet-gris-mat-' + (current + 1) + '.jpg';
+        counterEl.textContent = (current + 1) + ' / ' + total;
+      };
+    })();
+
+    // ── Mercedes CLA 220d photo carousel ────────────────
+    (function () {
+      const total = 21;
+      const imgEl     = document.getElementById('cla-img');
+      const counterEl = document.getElementById('cla-counter');
+      let current = 0;
+      window.claSlide = function (dir) {
+        current = (current + dir + total) % total;
+        imgEl.src = 'photos voiture/Mercedes-Benz CLA 220d/mercedes-cla-220d-amg-line-noir-cosmos-' + (current + 1) + '.jpg';
+        counterEl.textContent = (current + 1) + ' / ' + total;
+      };
+    })();
+
+    // ── Mobile menu ──────────────────────────────────────
+    const menuBtn    = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+    mobileMenu.querySelectorAll('a').forEach(link =>
+      link.addEventListener('click', () => mobileMenu.classList.add('hidden'))
+    );
+
+    // ── Header opacity on scroll + progress bar ──────────
+    const header      = document.getElementById('header');
+    const progressBar = document.getElementById('progress-bar');
+    const floatCta    = document.getElementById('float-cta');
+    window.addEventListener('scroll', () => {
+      const scrollY = window.scrollY;
+      header.style.background = scrollY > 60
+        ? 'rgba(5,11,32,0.98)'
+        : 'rgba(5,11,32,0.92)';
+      const max = document.body.scrollHeight - window.innerHeight;
+      progressBar.style.width = (max > 0 ? (scrollY / max) * 100 : 0) + '%';
+      if (scrollY > 400) {
+        floatCta.style.opacity = '1';
+        floatCta.style.transform = 'translateY(0)';
+        floatCta.style.pointerEvents = 'auto';
+      } else {
+        floatCta.style.opacity = '0';
+        floatCta.style.transform = 'translateY(16px)';
+        floatCta.style.pointerEvents = 'none';
+      }
+    });
+
+    // ── Background Paths hero ─────────────────────────────
+    (function () {
+      const COUNT = 36;
+
+      function buildSVG(position) {
+        const ns = 'http://www.w3.org/2000/svg';
+        const svg = document.createElementNS(ns, 'svg');
+        svg.setAttribute('viewBox', '0 0 696 316');
+        svg.setAttribute('fill', 'none');
+        svg.style.cssText = 'width:100%;height:100%;';
+
+        for (let i = 0; i < COUNT; i++) {
+          const p = position;
+          const d =
+            `M${-380 - i*5*p} ${-189 + i*6}` +
+            `C${-380 - i*5*p} ${-189 + i*6} ` +
+            `${-312 - i*5*p} ${216 - i*6} ` +
+            `${152 - i*5*p} ${343 - i*6}` +
+            `C${616 - i*5*p} ${470 - i*6} ` +
+            `${684 - i*5*p} ${875 - i*6} ` +
+            `${684 - i*5*p} ${875 - i*6}`;
+
+          const path = document.createElementNS(ns, 'path');
+          path.setAttribute('d', d);
+          path.setAttribute('stroke', '#ffffff');
+          path.setAttribute('stroke-width', String(0.5 + i * 0.03));
+          path.setAttribute('stroke-opacity', String(0.1 + i * 0.03));
+
+          const dur = (20 + Math.random() * 10).toFixed(1) + 's';
+          const delay = (Math.random() * -25).toFixed(1) + 's';
+          // Use a large arbitrary length so dasharray covers the full path
+          const len = 1800;
+          path.style.cssText =
+            `--len:${len};--dur:${dur};stroke-dasharray:${len};` +
+            `stroke-dashoffset:${len};animation:bpDash ${dur} linear ${delay} infinite;`;
+
+          svg.appendChild(path);
+        }
+        return svg;
+      }
+
+      document.getElementById('bp-layer-1').appendChild(buildSVG(1));
+      document.getElementById('bp-layer-2').appendChild(buildSVG(1));
+    }());
+
+    // ── Recherche 3-step form ─────────────────────────────
+    (function () {
+      const formSteps = document.querySelectorAll('.form-step');
+      const pb        = [null, document.getElementById('pb-1'), document.getElementById('pb-2'), document.getElementById('pb-3')];
+      const pbLbl     = [null, document.getElementById('pb-1-lbl'), document.getElementById('pb-2-lbl'), document.getElementById('pb-3-lbl')];
+      const line12    = document.getElementById('line-1-2');
+      const line23    = document.getElementById('line-2-3');
+
+      function activateStep(n) {
+        formSteps.forEach(s => s.classList.remove('active'));
+        document.getElementById('fs-' + n).classList.add('active');
+        [1,2,3].forEach(i => {
+          const active = i <= n, done = i < n;
+          pb[i].className = `w-8 h-8 rounded-full font-bold text-xs flex items-center justify-center transition-all ${active ? 'bg-primary text-white' : 'bg-white/15 text-white/40'}`;
+          pbLbl[i].className = `text-xs font-semibold mt-1.5 ${active ? 'text-white' : 'text-white/40'}`;
+          pb[i].innerHTML = done
+            ? `<svg class="w-3.5 h-3.5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/></svg>`
+            : i;
+        });
+        line12.style.background = n >= 2 ? '#405FF2' : '';
+        line23.style.background = n >= 3 ? '#405FF2' : '';
+      }
+
+      // Pack card selection
+      document.querySelectorAll('.pack-card').forEach(card => {
+        card.addEventListener('click', () => {
+          document.querySelectorAll('.pack-card').forEach(c => c.classList.remove('selected'));
+          card.classList.add('selected');
+          card.querySelector('input[type="radio"]').checked = true;
+          document.getElementById('pack-error').classList.add('hidden');
+        });
+      });
+
+      function validateStep1() {
+        const pack   = document.querySelector('input[name="pack"]:checked');
+        const marque = document.getElementById('f-marque').value.trim();
+        const modele = document.getElementById('f-modele').value.trim();
+        const budget = document.getElementById('f-budget').value.trim();
+        if (!pack) { document.getElementById('pack-error').classList.remove('hidden'); return false; }
+        if (!marque) { document.getElementById('f-marque').focus(); return false; }
+        if (!modele) { document.getElementById('f-modele').focus(); return false; }
+        if (!budget) { document.getElementById('f-budget').focus(); return false; }
+        return true;
+      }
+
+      function validateStep2() {
+        for (const id of ['f-nom','f-prenom','f-ville','f-cp','f-email','f-tel']) {
+          const el = document.getElementById(id);
+          if (!el.value.trim()) { el.focus(); return false; }
+        }
+        return true;
+      }
+
+      document.getElementById('next-1').addEventListener('click', () => {
+        if (!validateStep1()) return;
+        const marque = document.getElementById('f-marque').value.trim();
+        const modele = document.getElementById('f-modele').value.trim();
+        const ctx = document.getElementById('fs-2-context');
+        ctx.textContent = `Concernant votre demande — ${marque} ${modele}`;
+        ctx.classList.remove('hidden');
+        activateStep(2);
+      });
+
+      document.getElementById('back-2').addEventListener('click', () => activateStep(1));
+
+      document.getElementById('next-2').addEventListener('click', () => {
+        if (!validateStep2()) return;
+        const prenom = document.getElementById('f-prenom').value.trim();
+        document.getElementById('fs-3-greeting').textContent = `Parfait ${prenom}, quelques détails supplémentaires`;
+        activateStep(3);
+      });
+
+      document.getElementById('back-3').addEventListener('click', () => activateStep(2));
+
+      document.getElementById('rp-main-form').addEventListener('submit', (e) => {
+        e.preventDefault();
+        document.getElementById('form-progress').style.display = 'none';
+        document.getElementById('rp-main-form').style.display = 'none';
+        document.getElementById('rp-success').classList.add('show');
+      });
+    }());
+
+    // ── Contact form ──────────────────────────────────────
+    document.getElementById('contact-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nom   = document.getElementById('ct-nom').value.trim();
+      const email = document.getElementById('ct-email').value.trim();
+      const sujet = document.getElementById('ct-sujet').value;
+      if (!nom || !email || !sujet) return;
+      e.target.style.display = 'none';
+      document.getElementById('ct-success').classList.add('show');
+    });
+
+    // ── Interest modal ────────────────────────────────────
+    const modal      = document.getElementById('interest-modal');
+    const modalTitle = document.getElementById('modal-title');
+    const modalClose = document.getElementById('modal-close');
+    const modalForm  = document.getElementById('modal-form');
+    const modalSucc  = document.getElementById('modal-success');
+
+    function openModal(carName) {
+      modalTitle.textContent = carName;
+      modalForm.style.display  = '';
+      modalSucc.classList.remove('show');
+      modalForm.reset();
+      modal.classList.add('open');
+      document.body.style.overflow = 'hidden';
+      document.getElementById('m-nom').focus();
+    }
+
+    function closeModal() {
+      modal.classList.remove('open');
+      document.body.style.overflow = '';
+    }
+
+    document.querySelectorAll('.interest-btn').forEach(btn => {
+      btn.addEventListener('click', () => openModal(btn.dataset.car));
+    });
+
+    modalClose.addEventListener('click', closeModal);
+    modal.addEventListener('click', (e) => { if (e.target === modal) closeModal(); });
+    document.addEventListener('keydown', (e) => { if (e.key === 'Escape') closeModal(); });
+
+    modalForm.addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nom = document.getElementById('m-nom').value.trim();
+      const tel = document.getElementById('m-tel').value.trim();
+      if (!nom || !tel) return;
+      modalForm.style.display = 'none';
+      modalSucc.classList.add('show');
+    });
+
+    // ── Lenis + GSAP scroll animations ───────────────────
+    if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
+      gsap.registerPlugin(ScrollTrigger);
+
+      gsap.ticker.lagSmoothing(0);
+
+      // Section fade+slideY
+      document.querySelectorAll('section').forEach(sec => {
+        gsap.from(sec, {
+          opacity: 0, y: 48,
+          duration: 0.9, ease: 'power2.out',
+          scrollTrigger: { trigger: sec, start: 'top 88%', once: true }
+        });
+      });
+
+      // Hide sold car cards
+      document.querySelectorAll('#vehicules .car-card').forEach(card => {
+        const badge = card.querySelector('.absolute span, span.absolute');
+        if (badge && badge.textContent.trim() === 'Vendu') card.style.display = 'none';
+      });
+
+      // Stagger: car cards
+      document.querySelectorAll('#vehicules .grid').forEach(grid => {
+        gsap.from(grid.children, {
+          opacity: 0, y: 36,
+          duration: 0.6, stagger: 0.1, ease: 'power2.out',
+          scrollTrigger: { trigger: grid, start: 'top 85%', once: true }
+        });
+      });
+
+      // Stagger: service cards
+      document.querySelectorAll('#services .grid').forEach(grid => {
+        gsap.from(grid.children, {
+          opacity: 0, y: 36,
+          duration: 0.6, stagger: 0.1, ease: 'power2.out',
+          scrollTrigger: { trigger: grid, start: 'top 85%', once: true }
+        });
+      });
+
+      // Stagger: contact cards
+      document.querySelectorAll('#contact .grid').forEach(grid => {
+        gsap.from(grid.children, {
+          opacity: 0, y: 28,
+          duration: 0.55, stagger: 0.1, ease: 'power2.out',
+          scrollTrigger: { trigger: grid, start: 'top 85%', once: true }
+        });
+      });
+
+      // Feature strip icons
+      document.querySelectorAll('.py-14 .grid').forEach(grid => {
+        gsap.from(grid.children, {
+          opacity: 0, y: 24,
+          duration: 0.5, stagger: 0.1, ease: 'power2.out',
+          scrollTrigger: { trigger: grid, start: 'top 88%', once: true }
+        });
+      });
+    }
+
+    // ── Stats counter ─────────────────────────────────────
+    (function () {
+      const stats = document.querySelectorAll('.stat-count');
+      if (!stats.length) return;
+      const obs = new IntersectionObserver((entries) => {
+        entries.forEach(entry => {
+          if (!entry.isIntersecting) return;
+          const el     = entry.target;
+          const target = parseInt(el.dataset.target, 10);
+          const prefix = el.dataset.prefix || '';
+          const suffix = el.dataset.suffix || '';
+          const dur    = 1200;
+          const start  = performance.now();
+          (function step(now) {
+            const p    = Math.min((now - start) / dur, 1);
+            const ease = 1 - Math.pow(1 - p, 3);
+            el.textContent = prefix + Math.round(ease * target) + suffix;
+            if (p < 1) requestAnimationFrame(step);
+          }(performance.now()));
+          obs.unobserve(el);
+        });
+      }, { threshold: 0.5 });
+      stats.forEach(s => obs.observe(s));
+    }());
+
+    // ── Vendez votre voiture form ─────────────────────────
+    document.getElementById('vendre-form').addEventListener('submit', (e) => {
+      e.preventDefault();
+      const nom      = document.getElementById('v-nom').value.trim();
+      const tel      = document.getElementById('v-tel').value.trim();
+      const vehicule = document.getElementById('v-vehicule').value.trim();
+      if (!nom || !tel || !vehicule) return;
+      e.target.style.display = 'none';
+      document.getElementById('vendre-success').classList.add('show');
+    });
+
+    // ── Nav dropdowns with hide delay ────────────────────
+    document.querySelectorAll('.nav-group').forEach(group => {
+      const menu = group.querySelector('.dropdown-menu');
+      let timer;
+      group.addEventListener('mouseenter', () => {
+        clearTimeout(timer);
+        menu.classList.add('open');
+      });
+      group.addEventListener('mouseleave', () => {
+        timer = setTimeout(() => menu.classList.remove('open'), 200);
+      });
+    });
+  </script>
+
+</body>
+</html>
