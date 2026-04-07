@@ -1401,33 +1401,57 @@
     });
     document.getElementById('back-3').addEventListener('click', () => activateStep(2));
 
-    document.getElementById('rp-main-form').addEventListener('submit', (e) => {
+document.getElementById('rp-main-form').addEventListener('submit', (e) => {
       e.preventDefault();
-      const pack = (document.querySelector('input[name="pack"]:checked') || {}).value || '';
+      const pack     = (document.querySelector('input[name="pack"]:checked') || {}).value || '';
+      const marque   = document.getElementById('f-marque').value;
+      const modele   = document.getElementById('f-modele').value;
+      const budget   = document.getElementById('f-budget').value;
+      const nom      = document.getElementById('f-nom').value;
+      const prenom   = document.getElementById('f-prenom').value;
+      const ville    = document.getElementById('f-ville').value;
+      const cp       = document.getElementById('f-cp').value;
+      const email    = document.getElementById('f-email').value;
+      const tel      = document.getElementById('f-tel').value;
+      const carburant= document.getElementById('f-carburant').value;
+      const boite    = document.getElementById('f-boite').value;
+      const annee    = document.getElementById('f-annee').value;
+      const km       = document.getElementById('f-km').value;
+      const puissance= document.getElementById('f-puissance').value;
+      const options  = document.getElementById('f-options').value;
       const msg = [
         'Formule : ' + pack,
-        'Marque : ' + document.getElementById('f-marque').value,
-        'Modèle : ' + document.getElementById('f-modele').value,
-        'Budget : ' + document.getElementById('f-budget').value + ' €',
-        'Nom : ' + document.getElementById('f-nom').value,
-        'Prénom : ' + document.getElementById('f-prenom').value,
-        'Ville : ' + document.getElementById('f-ville').value,
-        'Code postal : ' + document.getElementById('f-cp').value,
-        'Email : ' + document.getElementById('f-email').value,
-        'Téléphone : ' + document.getElementById('f-tel').value,
-        'Carburant : ' + document.getElementById('f-carburant').value,
-        'Boîte : ' + document.getElementById('f-boite').value,
-        'Année minimum : ' + document.getElementById('f-annee').value,
-        'KM maximum : ' + document.getElementById('f-km').value,
-        'Puissance minimum : ' + document.getElementById('f-puissance').value,
-        'Options souhaitées : ' + document.getElementById('f-options').value,
+        'Marque : ' + marque,
+        'Modèle : ' + modele,
+        'Budget : ' + budget + ' €',
+        'Nom : ' + nom,
+        'Prénom : ' + prenom,
+        'Ville : ' + ville,
+        'Code postal : ' + cp,
+        'Email : ' + email,
+        'Téléphone : ' + tel,
+        'Carburant : ' + carburant,
+        'Boîte : ' + boite,
+        'Année minimum : ' + annee,
+        'KM maximum : ' + km,
+        'Puissance minimum : ' + puissance,
+        'Options souhaitées : ' + options,
         '\nPage : ' + window.location.href
       ].join('\n');
       emailjs.send('service_o41pfif', 'template_n3z29ws', {
         subject: 'Nouvelle demande — Recherche Personnalisée',
         message: msg,
-        reply_to: document.getElementById('f-email').value
+        reply_to: email
       }, 'J4kN91J3N0qwBdAVA').catch(() => {});
+      fetch('https://hook.eu1.make.com/1qqcpa38k4xnmh6xu71b2imwv7ghxjm1', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          pack, marque, modele, budget,
+          nom, prenom, ville, cp, email, tel,
+          carburant, boite, annee, km, puissance, options
+        })
+      }).catch(() => {});
       document.getElementById('form-progress').style.display = 'none';
       document.getElementById('rp-main-form').style.display = 'none';
       const s = document.getElementById('form-success');
