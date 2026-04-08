@@ -169,6 +169,7 @@
       background: #E524270D;
     }
     .pack-card.selected .font-bold.text-white { color: #E52427; }
+    .couleur-pill.selected { border-color: #405FF2; background: #405FF21A; color: #fff; }
 
     /* ── Success ─────────────────────────────────────────── */
     #form-success { display: none; }
@@ -854,6 +855,23 @@
                 </div>
               </div>
               <div>
+                <label class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-2">Couleur souhaitée</label>
+                <div id="f-couleur-pills" class="flex flex-wrap gap-2">
+                  <button type="button" data-couleur="noir"        class="couleur-pill px-3 py-1.5 rounded-lg border border-white/15 text-xs text-white/70 hover:border-primary/60 transition-colors bg-white/5">Noir</button>
+                  <button type="button" data-couleur="blanc"       class="couleur-pill px-3 py-1.5 rounded-lg border border-white/15 text-xs text-white/70 hover:border-primary/60 transition-colors bg-white/5">Blanc</button>
+                  <button type="button" data-couleur="gris"        class="couleur-pill px-3 py-1.5 rounded-lg border border-white/15 text-xs text-white/70 hover:border-primary/60 transition-colors bg-white/5">Gris</button>
+                  <button type="button" data-couleur="argent"      class="couleur-pill px-3 py-1.5 rounded-lg border border-white/15 text-xs text-white/70 hover:border-primary/60 transition-colors bg-white/5">Argent</button>
+                  <button type="button" data-couleur="bleu"        class="couleur-pill px-3 py-1.5 rounded-lg border border-white/15 text-xs text-white/70 hover:border-primary/60 transition-colors bg-white/5">Bleu</button>
+                  <button type="button" data-couleur="rouge"       class="couleur-pill px-3 py-1.5 rounded-lg border border-white/15 text-xs text-white/70 hover:border-primary/60 transition-colors bg-white/5">Rouge</button>
+                  <button type="button" data-couleur="vert"        class="couleur-pill px-3 py-1.5 rounded-lg border border-white/15 text-xs text-white/70 hover:border-primary/60 transition-colors bg-white/5">Vert</button>
+                  <button type="button" data-couleur="orange"      class="couleur-pill px-3 py-1.5 rounded-lg border border-white/15 text-xs text-white/70 hover:border-primary/60 transition-colors bg-white/5">Orange</button>
+                  <button type="button" data-couleur="beige"       class="couleur-pill px-3 py-1.5 rounded-lg border border-white/15 text-xs text-white/70 hover:border-primary/60 transition-colors bg-white/5">Beige / Marron</button>
+                  <button type="button" data-couleur="jaune"       class="couleur-pill px-3 py-1.5 rounded-lg border border-white/15 text-xs text-white/70 hover:border-primary/60 transition-colors bg-white/5">Jaune</button>
+                  <button type="button" data-couleur="autre"       class="couleur-pill px-3 py-1.5 rounded-lg border border-white/15 text-xs text-white/70 hover:border-primary/60 transition-colors bg-white/5">Autre</button>
+                </div>
+                <input type="hidden" id="f-couleur" />
+              </div>
+              <div>
                 <label for="f-options" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-2">Options & équipements souhaités</label>
                 <textarea id="f-options" rows="4"
                           placeholder="Ex : toit ouvrant, sièges chauffants, caméra de recul, pack sport, couleur sombre, intérieur cuir, 4x4…"
@@ -1401,8 +1419,19 @@
     });
     document.getElementById('back-3').addEventListener('click', () => activateStep(2));
 
-document.getElementById('rp-main-form').addEventListener('submit', (e) => {
+    // Couleur multi-select pills
+    document.querySelectorAll('#f-couleur-pills .couleur-pill').forEach(pill => {
+      pill.addEventListener('click', () => {
+        pill.classList.toggle('selected');
+        const selected = [...document.querySelectorAll('#f-couleur-pills .couleur-pill.selected')]
+          .map(p => p.dataset.couleur);
+        document.getElementById('f-couleur').value = selected.join(', ');
+      });
+    });
+
+    document.getElementById('rp-main-form').addEventListener('submit', (e) => {
       e.preventDefault();
+
       const pack     = (document.querySelector('input[name="pack"]:checked') || {}).value || '';
       const marque   = document.getElementById('f-marque').value;
       const modele   = document.getElementById('f-modele').value;
@@ -1418,7 +1447,9 @@ document.getElementById('rp-main-form').addEventListener('submit', (e) => {
       const annee    = document.getElementById('f-annee').value;
       const km       = document.getElementById('f-km').value;
       const puissance= document.getElementById('f-puissance').value;
+      const couleur  = document.getElementById('f-couleur').value;
       const options  = document.getElementById('f-options').value;
+
       const msg = [
         'Formule : ' + pack,
         'Marque : ' + marque,
@@ -1435,23 +1466,30 @@ document.getElementById('rp-main-form').addEventListener('submit', (e) => {
         'Année minimum : ' + annee,
         'KM maximum : ' + km,
         'Puissance minimum : ' + puissance,
+        'Couleur souhaitée : ' + couleur,
         'Options souhaitées : ' + options,
         '\nPage : ' + window.location.href
       ].join('\n');
+
+      // 1. EmailJS — inchangé
       emailjs.send('service_o41pfif', 'template_n3z29ws', {
         subject: 'Nouvelle demande — Recherche Personnalisée',
         message: msg,
         reply_to: email
       }, 'J4kN91J3N0qwBdAVA').catch(() => {});
+
+      // 2. Make — déclenche la recherche Apify
       fetch('https://hook.eu1.make.com/1qqcpa38k4xnmh6xu71b2imwv7ghxjm1', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           pack, marque, modele, budget,
           nom, prenom, ville, cp, email, tel,
-          carburant, boite, annee, km, puissance, options
+          carburant, boite, annee, km, puissance, couleur, options
         })
       }).catch(() => {});
+
+      // Affichage confirmation — inchangé
       document.getElementById('form-progress').style.display = 'none';
       document.getElementById('rp-main-form').style.display = 'none';
       const s = document.getElementById('form-success');
