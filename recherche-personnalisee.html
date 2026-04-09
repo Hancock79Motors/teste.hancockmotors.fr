@@ -83,8 +83,8 @@
         extend: {
           fontFamily: { sans: ['DM Sans', 'sans-serif'] },
           colors: {
-            primary: '#E52427',
-            'primary-hover': '#F03336',
+            primary: '#405FF2',
+            'primary-hover': '#4E6CFB',
             dark: '#050B20',
             surface: '#0D1530',
           }
@@ -152,7 +152,7 @@
       white-space: nowrap;
     }
     .pack-tab.active {
-      background: #E52427;
+      background: #405FF2;
       color: #fff;
     }
 
@@ -165,10 +165,10 @@
 
     /* ── Pack cards ──────────────────────────────────────── */
     .pack-card.selected {
-      border-color: #E52427;
-      background: #E524270D;
+      border-color: #405FF2;
+      background: #405FF20D;
     }
-    .pack-card.selected .font-bold.text-white { color: #E52427; }
+    .pack-card.selected .font-bold.text-white { color: #405FF2; }
     .couleur-pill.selected { border-color: #405FF2; background: #405FF21A; color: #fff; }
 
     /* ── Success ─────────────────────────────────────────── */
@@ -1186,7 +1186,7 @@
           else { s.classList.remove('active'); s.style.transform = d < 0 ? 'translateY(-40px)' : 'translateY(40px)'; }
         });
         dots.forEach((d, i) => {
-          d.style.background = i === idx ? '#E52427' : 'rgba(255,255,255,0.15)';
+          d.style.background = i === idx ? '#405FF2' : 'rgba(255,255,255,0.15)';
           d.style.width      = i === idx ? '24px' : '8px';
         });
         if (hint) hint.style.opacity = idx === slides.length - 1 ? '0' : '1';
@@ -1220,7 +1220,7 @@
 
         // Dots
         dotsCnt.innerHTML = steps.map((_, i) =>
-          `<div class="step-dot" style="width:${i===0?'24px':'8px'};background:${i===0?'#E52427':'rgba(255,255,255,0.15)'};cursor:pointer"></div>`
+          `<div class="step-dot" style="width:${i===0?'24px':'8px'};background:${i===0?'#405FF2':'rgba(255,255,255,0.15)'};cursor:pointer"></div>`
         ).join('');
         dotsCnt.querySelectorAll('.step-dot').forEach((dot, i) => {
           dot.addEventListener('click', () => showStep(i, true));
@@ -1345,8 +1345,8 @@
           pb[i].textContent = i;
         }
       });
-      line12.style.background = n >= 2 ? '#E52427' : '#e5e7eb';
-      line23.style.background = n >= 3 ? '#E52427' : '#e5e7eb';
+      line12.style.background = n >= 2 ? '#405FF2' : '#e5e7eb';
+      line23.style.background = n >= 3 ? '#405FF2' : '#e5e7eb';
     }
 
     // ── Pack card selection ───────────────────────────────
