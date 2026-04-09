@@ -908,10 +908,6 @@
           <p class="text-white/60 text-sm max-w-sm mx-auto leading-relaxed">
             Merci — notre équipe a bien reçu votre demande de recherche personnalisée et vous recontacte sous 48h pour un premier échange.
           </p>
-          <a href="index.html"
-             class="inline-flex items-center gap-2 mt-4 text-sm font-semibold text-primary border-b border-primary pb-0.5 hover:text-primary-hover transition-colors">
-            Retour à l'accueil
-          </a>
         </div>
 
       </div>
@@ -1330,6 +1326,7 @@
     function activateStep(n) {
       steps.forEach(s => s.classList.remove('active'));
       document.getElementById('fs-' + n).classList.add('active');
+      document.getElementById('formulaire').scrollIntoView({ behavior: 'smooth', block: 'start' });
 
       // Update progress indicators
       [1,2,3].forEach(i => {
