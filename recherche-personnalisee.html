@@ -327,7 +327,7 @@
         Décrivez le véhicule de vos rêves, nous nous occupons de tout — recherche, vérification, administratif et livraison à domicile.
       </p>
       <div class="flex flex-col sm:flex-row gap-4">
-        <a href="#formulaire"
+        <a href="#" onclick="event.preventDefault();document.getElementById('formulaire').scrollIntoView({behavior:'smooth',block:'start'});"
            class="inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover text-white font-semibold px-8 py-4 rounded-xl text-sm tracking-wide transition-colors duration-200">
           Faire ma demande
           <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -466,7 +466,7 @@
             </li>
           </ul>
 
-          <a href="#formulaire" data-select-pack="gestion"
+          <a href="#" data-select-pack="gestion"
              class="w-full inline-flex items-center justify-center gap-2 border border-white/30 text-white font-semibold px-6 py-3.5 rounded-xl text-sm tracking-wide hover:bg-white hover:text-dark transition-colors duration-200">
             Choisir ce pack
           </a>
@@ -520,7 +520,7 @@
             </li>
           </ul>
 
-          <a href="#formulaire" data-select-pack="cle-en-main"
+          <a href="#" data-select-pack="cle-en-main"
              class="w-full inline-flex items-center justify-center gap-2 bg-primary hover:bg-primary-hover text-white font-semibold px-6 py-3.5 rounded-xl text-sm tracking-wide transition-colors duration-200">
             Choisir ce pack
           </a>
@@ -734,14 +734,14 @@
                   <label for="f-nom" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-2">
                     Nom <span class="text-red-400">*</span>
                   </label>
-                  <input type="text" id="f-nom" placeholder="Dupont"
+                  <input type="text" id="f-nom" placeholder="Dupont" autocomplete="family-name"
                          class="w-full border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:border-primary transition-colors bg-white/5" required />
                 </div>
                 <div>
                   <label for="f-prenom" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-2">
                     Prénom <span class="text-red-400">*</span>
                   </label>
-                  <input type="text" id="f-prenom" placeholder="Jean"
+                  <input type="text" id="f-prenom" placeholder="Jean" autocomplete="given-name"
                          class="w-full border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:border-primary transition-colors bg-white/5" required />
                 </div>
               </div>
@@ -750,14 +750,14 @@
                   <label for="f-ville" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-2">
                     Ville <span class="text-red-400">*</span>
                   </label>
-                  <input type="text" id="f-ville" placeholder="Paris"
+                  <input type="text" id="f-ville" placeholder="Paris" autocomplete="address-level2"
                          class="w-full border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:border-primary transition-colors bg-white/5" required />
                 </div>
                 <div class="col-span-2 sm:col-span-1">
                   <label for="f-cp" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-2">
                     Code postal <span class="text-red-400">*</span>
                   </label>
-                  <input type="text" id="f-cp" placeholder="75001" maxlength="5"
+                  <input type="text" id="f-cp" placeholder="75001" maxlength="5" autocomplete="postal-code"
                          class="w-full border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:border-primary transition-colors bg-white/5" required />
                 </div>
               </div>
@@ -765,14 +765,14 @@
                 <label for="f-email" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-2">
                   Adresse email <span class="text-red-400">*</span>
                 </label>
-                <input type="email" id="f-email" placeholder="jean.dupont@example.com"
+                <input type="email" id="f-email" placeholder="jean.dupont@example.com" autocomplete="email"
                        class="w-full border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:border-primary transition-colors bg-white/5" required />
               </div>
               <div>
                 <label for="f-tel" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-2">
                   Téléphone <span class="text-red-400">*</span>
                 </label>
-                <input type="tel" id="f-tel" placeholder="+33 6 00 00 00 00"
+                <input type="tel" id="f-tel" placeholder="+33 6 00 00 00 00" autocomplete="tel"
                        class="w-full border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:border-primary transition-colors bg-white/5" required />
               </div>
             </div>
@@ -1368,7 +1368,8 @@
 
     // ── Top-page pack buttons → pre-select form card ─────
     document.querySelectorAll('[data-select-pack]').forEach(link => {
-      link.addEventListener('click', () => {
+      link.addEventListener('click', (e) => {
+        e.preventDefault();
         const pack = link.dataset.selectPack;
         const card = document.querySelector(`.pack-card input[value="${pack}"]`)?.closest('.pack-card');
         if (!card) return;
@@ -1377,6 +1378,7 @@
         card.querySelector('input[type="radio"]').checked = true;
         document.getElementById('pack-error').classList.add('hidden');
         if (window._switchStepsPack) window._switchStepsPack(pack);
+        document.getElementById('formulaire').scrollIntoView({ behavior: 'smooth', block: 'start' });
       });
     });
 
