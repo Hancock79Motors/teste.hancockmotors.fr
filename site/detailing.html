@@ -1,0 +1,878 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Detailing & Protection — Hancock Motors</title>
+  <meta name="description" content="Correction de vernis, protection céramique et rénovation de cuir. Hancock Motors sublime et protège votre investissement automobile au sein de notre atelier." />
+  <link rel="canonical" href="https://hancockmotors.fr/detailing" />
+  <meta name="robots" content="index, follow" />
+
+  <!-- Open Graph -->
+  <meta property="og:type"        content="website" />
+  <meta property="og:title"       content="Detailing & Protection — Hancock Motors" />
+  <meta property="og:description" content="Correction de vernis, protection céramique et rénovation de cuir haut de gamme." />
+  <meta property="og:url"         content="https://hancockmotors.fr/detailing" />
+  <meta property="og:image"       content="https://hancockmotors.fr/wp-content/uploads/2024/11/polissage-1024x683.jpg" />
+  <meta property="og:locale"      content="fr_FR" />
+  <meta property="og:site_name"   content="Hancock Motors" />
+
+  <!-- Schema JSON-LD -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "AutoRepair",
+    "name": "Hancock Motors — Detailing & Protection",
+    "url": "https://hancockmotors.fr/detailing",
+    "description": "Correction de vernis, protection céramique et rénovation d'intérieurs automobiles haut de gamme.",
+    "inLanguage": "fr",
+    "telephone": "+33629324299",
+    "email": "contact@hancockmotors.fr",
+    "address": { "@type": "PostalAddress", "addressCountry": "FR" }
+  }
+  </script>
+
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['DM Sans', 'sans-serif'] },
+          colors: {
+            primary: '#FF0000',
+            'primary-hover': '#CC0000',
+            dark: '#050B20',
+            surface: '#0D1530',
+          }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { font-family: 'DM Sans', sans-serif; }
+    html { scroll-behavior: smooth; }
+
+    /* ── Nav ─────────────────────────────────────────── */
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: '';
+      position: absolute;
+      left: 0; bottom: -2px;
+      width: 0; height: 1px;
+      background: rgba(255,255,255,0.6);
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    .dropdown-menu {
+      opacity: 0;
+      pointer-events: none;
+      transform: translateY(6px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .dropdown-menu.open {
+      opacity: 1;
+      pointer-events: auto;
+      transform: translateY(0);
+    }
+
+    /* ── Animations ─────────────────────────────────── */
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(24px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+    .fade-up { animation: fadeUp 0.7s ease both; }
+
+    /* ── Process steps ──────────────────────────────── */
+    .step-card {
+      transition: transform 0.3s ease, border-color 0.3s ease, box-shadow 0.3s ease;
+    }
+    .step-card:hover {
+      transform: translateY(-5px);
+      border-color: rgba(255,0,0,0.35);
+      box-shadow: 0 24px 60px rgba(255,0,0,0.08);
+    }
+    .step-icon { transition: background 0.3s ease; }
+    .step-card:hover .step-icon { background: rgba(255,0,0,0.18); }
+
+    /* ── Pack cards ─────────────────────────────────── */
+    .pack-card {
+      transition: transform 0.3s ease, box-shadow 0.3s ease;
+    }
+    .pack-card:hover { transform: translateY(-5px); }
+    .pack-card.featured { border-color: #FF0000; position: relative; }
+
+    /* ── Avant/Après gallery ────────────────────────── */
+    .avant-apres-cell { overflow: hidden; border-radius: 1rem; position: relative; cursor: pointer; }
+    .avant-apres-cell img { transition: transform 0.6s ease; width: 100%; height: 100%; object-fit: cover; }
+    .avant-apres-cell:hover img { transform: scale(1.05); }
+    .avant-apres-badge {
+      position: absolute; bottom: 1rem; left: 1rem;
+      font-size: 0.65rem; font-weight: 700; letter-spacing: 0.12em; text-transform: uppercase;
+      padding: 0.3rem 0.75rem; border-radius: 999px;
+    }
+    .badge-avant { background: rgba(0,0,0,0.65); color: rgba(255,255,255,0.7); border: 1px solid rgba(255,255,255,0.15); }
+    .badge-apres { background: rgba(255,0,0,0.85); color: #fff; }
+
+    /* ── Form ───────────────────────────────────────── */
+    input:invalid:not(:placeholder-shown),
+    textarea:invalid:not(:placeholder-shown) { border-color: #f87171; }
+    input:valid:not(:placeholder-shown) { border-color: #4ade80; }
+    .form-success { display: none; }
+    .form-success.show { display: flex; }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body class="bg-dark text-white">
+
+  <!-- ======================================================
+       HEADER
+  ====================================================== -->
+  <header id="header" class="fixed top-0 left-0 right-0 z-50 transition-all duration-300"
+          style="background: rgba(5,11,32,0.92); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);">
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-20">
+
+      <a href="index.html" class="flex-shrink-0">
+        <img src="assets/logo-blanc.png" alt="Hancock Motors" class="h-10 w-auto" />
+      </a>
+
+      <!-- Desktop nav -->
+      <nav class="hidden lg:flex items-center gap-8">
+
+        <div class="nav-group relative">
+          <a href="index.html#vehicules" class="nav-link text-white text-sm font-medium tracking-wide flex items-center gap-1.5">
+            Véhicules Disponibles
+            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
+            </svg>
+          </a>
+          <div class="dropdown-menu absolute top-full left-0 mt-3 bg-surface text-white rounded-xl shadow-2xl min-w-[210px] overflow-hidden border border-white/10">
+            <a href="vehicules.html"
+               class="flex items-center gap-3 px-5 py-3.5 text-sm hover:bg-white/5 hover:text-primary transition-colors border-b border-white/10">
+              <svg class="w-4 h-4 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+              </svg>
+              Tous les véhicules
+            </a>
+            <a href="vehicules-vendus.html"
+               class="flex items-center gap-3 px-5 py-3.5 text-sm hover:bg-white/5 hover:text-primary transition-colors">
+              <svg class="w-4 h-4 text-white/40 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+              </svg>
+              Véhicules Vendus
+            </a>
+          </div>
+        </div>
+
+        <a href="recherche-personnalisee.html" class="nav-link text-white text-sm font-medium tracking-wide">Recherche Personnalisée</a>
+
+        <a href="detailing.html" class="nav-link text-primary text-sm font-medium tracking-wide">Detailing &amp; Protection</a>
+
+        <a href="vendez-votre-voiture.html" class="nav-link text-white text-sm font-medium tracking-wide">Vendez Votre Voiture</a>
+        <a href="#contact" class="nav-link text-white text-sm font-medium tracking-wide">Contact</a>
+      </nav>
+
+      <a href="vehicules.html"
+         class="hidden lg:inline-flex items-center bg-primary hover:bg-primary-hover text-white text-sm font-semibold px-6 py-3 rounded-lg transition-colors duration-200">
+        Voir les Véhicules
+      </a>
+
+      <button id="menu-btn" class="lg:hidden text-white" aria-label="Menu">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+
+    <!-- Mobile menu -->
+    <div id="mobile-menu" class="hidden lg:hidden bg-dark border-t border-white/10">
+      <nav class="flex flex-col px-6 py-4 gap-1">
+        <a href="index.html#vehicules" class="text-white text-sm font-medium py-3 border-b border-white/10">Véhicules Disponibles</a>
+        <a href="vehicules-vendus.html" class="text-white/55 text-sm py-2.5 pl-5 border-b border-white/5">↳ Véhicules Vendus</a>
+        <a href="recherche-personnalisee.html" class="text-white text-sm font-medium py-3 border-b border-white/10">Recherche Personnalisée</a>
+        <a href="detailing.html" class="text-primary text-sm font-medium py-3 border-b border-white/10">Detailing &amp; Protection</a>
+        <a href="vendez-votre-voiture.html" class="text-white text-sm font-medium py-3 border-b border-white/10">Vendez Votre Voiture</a>
+        <a href="#contact" class="text-white text-sm font-medium py-3 border-b border-white/10">Contact</a>
+        <a href="vehicules.html"
+           class="mt-3 bg-primary text-white text-sm font-semibold px-6 py-3 rounded-lg text-center">
+          Voir les Véhicules
+        </a>
+      </nav>
+    </div>
+  </header>
+
+
+  <!-- ======================================================
+       HERO — H1
+  ====================================================== -->
+  <section class="relative min-h-[65vh] flex items-end pb-20 pt-44 px-6 overflow-hidden">
+    <div class="absolute inset-0 z-0">
+      <img src="https://hancockmotors.fr/wp-content/uploads/2024/11/polissage-1024x683.jpg"
+           alt="Detailing & Protection Haute Performance" class="w-full h-full object-cover" fetchpriority="high" />
+      <div class="absolute inset-0" style="background: linear-gradient(to top, #050B20 0%, rgba(5,11,32,0.75) 50%, rgba(5,11,32,0.35) 100%);"></div>
+      <!-- Grain overlay -->
+      <div class="absolute inset-0 opacity-30"
+           style="background-image: url(\"data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E\");"></div>
+    </div>
+    <div class="relative z-10 max-w-7xl mx-auto w-full">
+      <p class="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-4 fade-up" style="animation-delay:0.1s">
+        Atelier Esthétique
+      </p>
+      <h1 class="text-4xl md:text-6xl lg:text-7xl font-bold text-white leading-tight mb-6 fade-up" style="animation-delay:0.2s">
+        Detailing &amp;<br />Protection<br />
+        <span class="text-primary">Haute Performance</span>
+      </h1>
+      <p class="text-white/60 text-base md:text-lg max-w-2xl leading-relaxed mb-10 fade-up" style="animation-delay:0.35s">
+        Correction de vernis, protection céramique et rénovation d'intérieurs. Hancock Motors sublime et protège votre investissement automobile au sein de notre atelier.
+      </p>
+      <div class="flex flex-col sm:flex-row gap-4 fade-up" style="animation-delay:0.5s">
+        <a href="#contact"
+           class="group inline-flex items-center gap-3 bg-primary hover:bg-primary-hover text-white font-semibold px-8 py-4 rounded-2xl text-sm tracking-wide transition-all duration-300 shadow-lg hover:-translate-y-0.5">
+          Demander un devis Detailing
+          <span class="group-hover:translate-x-1.5 transition-transform duration-300">→</span>
+        </a>
+        <a href="#processus"
+           class="group inline-flex items-center gap-3 border border-white/30 hover:border-white/60 text-white font-semibold px-8 py-4 rounded-2xl text-sm tracking-wide transition-all duration-300 hover:-translate-y-0.5">
+          Voir notre méthode
+          <span class="opacity-50 group-hover:opacity-100 group-hover:translate-x-1.5 transition-all duration-300">→</span>
+        </a>
+      </div>
+    </div>
+
+    <!-- Scroll indicator -->
+    <div class="absolute bottom-8 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 fade-up" style="animation-delay:0.9s">
+      <span class="text-white/25 text-xs tracking-[0.2em] uppercase">Découvrir</span>
+      <div class="w-px h-10 bg-gradient-to-b from-white/20 to-transparent"></div>
+    </div>
+  </section>
+
+
+  <!-- ======================================================
+       PROCESSUS — L'EXCELLENCE EXTÉRIEURE (H2)
+  ====================================================== -->
+  <section id="processus" class="py-24 px-6 bg-dark">
+    <div class="max-w-7xl mx-auto">
+
+      <div class="text-center mb-16">
+        <p class="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-4">Cœur de Métier</p>
+        <h2 class="text-3xl md:text-5xl font-bold text-white mb-5 leading-tight">
+          L'Excellence Extérieure
+        </h2>
+        <h3 class="text-lg md:text-xl font-medium text-white/50 max-w-2xl mx-auto leading-relaxed">
+          Le Detailing : la quête de la perfection esthétique
+        </h3>
+      </div>
+
+      <!-- 3-step process -->
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6 relative">
+
+        <!-- Connector line (desktop) -->
+        <div class="hidden md:block absolute top-14 left-1/6 right-1/6 h-px bg-gradient-to-r from-transparent via-primary/30 to-transparent pointer-events-none" style="left:18%; right:18%;"></div>
+
+        <!-- Étape 1 : Préparation -->
+        <div class="step-card bg-surface border border-white/10 rounded-2xl p-8 relative overflow-hidden">
+          <span class="absolute top-4 right-5 text-7xl font-black text-white/[0.04] select-none leading-none pointer-events-none">01</span>
+          <div class="relative z-10">
+            <div class="step-icon w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-7">
+              <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                      d="M19.428 15.428a2 2 0 00-1.022-.547l-2.387-.477a6 6 0 00-3.86.517l-.318.158a6 6 0 01-3.86.517L6.05 15.21a2 2 0 00-1.806.547M8 4h8l-1 1v5.172a2 2 0 00.586 1.414l5 5c1.26 1.26.367 3.414-1.415 3.414H4.828c-1.782 0-2.674-2.154-1.414-3.414l5-5A2 2 0 009 10.172V5L8 4z"/>
+              </svg>
+            </div>
+            <p class="text-xs font-semibold text-primary/80 tracking-[0.15em] uppercase mb-3">Étape 1</p>
+            <h3 class="text-xl font-bold text-white mb-4">Préparation</h3>
+            <p class="text-white/55 text-sm leading-relaxed mb-5">
+              Lavage technique multi-seaux, décontamination ferreux et dégoudronnage, barre d'argile sur toute la carrosserie, nettoyage moteur.
+            </p>
+            <ul class="space-y-2">
+              <li class="flex items-start gap-2 text-xs text-white/40">
+                <span class="w-1 h-1 rounded-full bg-primary mt-1.5 flex-shrink-0"></span>
+                Décontamination ferreux &amp; barre d'argile
+              </li>
+              <li class="flex items-start gap-2 text-xs text-white/40">
+                <span class="w-1 h-1 rounded-full bg-primary mt-1.5 flex-shrink-0"></span>
+                Nettoyage de jantes &amp; cavités
+              </li>
+              <li class="flex items-start gap-2 text-xs text-white/40">
+                <span class="w-1 h-1 rounded-full bg-primary mt-1.5 flex-shrink-0"></span>
+                Nettoyage moteur sur demande
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Étape 2 : Correction -->
+        <div class="step-card bg-surface border border-white/10 rounded-2xl p-8 relative overflow-hidden">
+          <span class="absolute top-4 right-5 text-7xl font-black text-white/[0.04] select-none leading-none pointer-events-none">02</span>
+          <div class="relative z-10">
+            <div class="step-icon w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-7">
+              <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                      d="M15.232 5.232l3.536 3.536m-2.036-5.036a2.5 2.5 0 113.536 3.536L6.5 21.036H3v-3.572L16.732 3.732z"/>
+              </svg>
+            </div>
+            <p class="text-xs font-semibold text-primary/80 tracking-[0.15em] uppercase mb-3">Étape 2</p>
+            <h3 class="text-xl font-bold text-white mb-4">Correction de Vernis</h3>
+            <p class="text-white/55 text-sm leading-relaxed mb-5">
+              Polissage multi-étapes pour supprimer les micro-rayures, tourbillons et oxydations. Résultat miroir, profondeur de peinture restaurée à neuf.
+            </p>
+            <ul class="space-y-2">
+              <li class="flex items-start gap-2 text-xs text-white/40">
+                <span class="w-1 h-1 rounded-full bg-primary mt-1.5 flex-shrink-0"></span>
+                Polissage heavy-cut pour défauts profonds
+              </li>
+              <li class="flex items-start gap-2 text-xs text-white/40">
+                <span class="w-1 h-1 rounded-full bg-primary mt-1.5 flex-shrink-0"></span>
+                Polissage finition ultra-brillance
+              </li>
+              <li class="flex items-start gap-2 text-xs text-white/40">
+                <span class="w-1 h-1 rounded-full bg-primary mt-1.5 flex-shrink-0"></span>
+                IPA wipe-down avant protection
+              </li>
+            </ul>
+          </div>
+        </div>
+
+        <!-- Étape 3 : Protection -->
+        <div class="step-card bg-surface border border-white/10 rounded-2xl p-8 relative overflow-hidden">
+          <span class="absolute top-4 right-5 text-7xl font-black text-white/[0.04] select-none leading-none pointer-events-none">03</span>
+          <div class="relative z-10">
+            <div class="step-icon w-14 h-14 rounded-2xl bg-primary/10 flex items-center justify-center mb-7">
+              <svg class="w-7 h-7 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.8"
+                      d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
+              </svg>
+            </div>
+            <p class="text-xs font-semibold text-primary/80 tracking-[0.15em] uppercase mb-3">Étape 3</p>
+            <h3 class="text-xl font-bold text-white mb-4">Protection Céramique</h3>
+            <p class="text-white/55 text-sm leading-relaxed mb-5">
+              Pose d'un revêtement céramique nano-technologique : bouclier hydrophobe, protection UV maximale, brillance longue durée et entretien facilité.
+            </p>
+            <ul class="space-y-2">
+              <li class="flex items-start gap-2 text-xs text-white/40">
+                <span class="w-1 h-1 rounded-full bg-primary mt-1.5 flex-shrink-0"></span>
+                Protection 2 à 5 ans selon gamme
+              </li>
+              <li class="flex items-start gap-2 text-xs text-white/40">
+                <span class="w-1 h-1 rounded-full bg-primary mt-1.5 flex-shrink-0"></span>
+                Effet hydrophobe &amp; anti-saleté
+              </li>
+              <li class="flex items-start gap-2 text-xs text-white/40">
+                <span class="w-1 h-1 rounded-full bg-primary mt-1.5 flex-shrink-0"></span>
+                Résistance aux UV &amp; produits chimiques
+              </li>
+            </ul>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ======================================================
+       SELLERIE & INTÉRIEUR (H2)
+  ====================================================== -->
+  <section id="sellerie" class="py-24 px-6 bg-surface">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-16 items-center">
+
+        <!-- Image côté gauche -->
+        <div class="relative rounded-2xl overflow-hidden" style="min-height: 420px;">
+          <img src="https://hancockmotors.fr/wp-content/uploads/2024/11/nettoyage-1024x683.jpg"
+               alt="Rénovation cuir et sellerie automobile" class="w-full h-full object-cover absolute inset-0" />
+          <div class="absolute inset-0" style="background: linear-gradient(135deg, rgba(5,11,32,0.5) 0%, transparent 60%);"></div>
+          <!-- Badge flottant -->
+          <div class="absolute bottom-6 left-6 bg-dark/90 border border-white/10 rounded-xl px-5 py-4 backdrop-blur-sm">
+            <p class="text-primary text-xs font-bold tracking-widest uppercase mb-1">Expertise Unique</p>
+            <p class="text-white text-sm font-semibold">Reteinte sur mesure</p>
+            <p class="text-white/45 text-xs mt-0.5">Pigmentation &amp; mat d'origine</p>
+          </div>
+        </div>
+
+        <!-- Texte côté droit -->
+        <div>
+          <p class="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-4">Expertise Complémentaire</p>
+          <h2 class="text-3xl md:text-5xl font-bold text-white leading-tight mb-6">
+            Sellerie &amp;<br />Intérieur
+          </h2>
+          <h3 class="text-xl font-semibold text-white/70 mb-6">Rénovation &amp; Reteinte du Cuir</h3>
+          <p class="text-white/55 text-sm leading-relaxed mb-8">
+            Pour un véhicule parfait, nous proposons un service expert de restauration des cuirs. Nous réparons et reteignons vos volants usés et vos sièges — bourrelets abîmés inclus — avec une pigmentation sur mesure pour retrouver l'aspect mat d'origine.
+          </p>
+
+          <!-- Keywords as tags -->
+          <div class="flex flex-wrap gap-2 mb-8">
+            <span class="text-xs font-semibold bg-primary/10 border border-primary/20 text-primary px-3 py-1.5 rounded-full">Restauration cuir auto</span>
+            <span class="text-xs font-semibold bg-white/5 border border-white/10 text-white/60 px-3 py-1.5 rounded-full">Reteinte volant</span>
+            <span class="text-xs font-semibold bg-white/5 border border-white/10 text-white/60 px-3 py-1.5 rounded-full">Entretien cuir prestige</span>
+            <span class="text-xs font-semibold bg-white/5 border border-white/10 text-white/60 px-3 py-1.5 rounded-full">Réparation sièges</span>
+          </div>
+
+          <!-- 3 micro-features -->
+          <div class="space-y-5">
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+                </svg>
+              </div>
+              <div>
+                <p class="text-white text-sm font-semibold mb-1">Diagnostic cuir inclus</p>
+                <p class="text-white/40 text-xs leading-relaxed">Évaluation de l'état du cuir, identification des zones à traiter et recommandation des produits adaptés.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M7 21a4 4 0 01-4-4V5a2 2 0 012-2h4a2 2 0 012 2v12a4 4 0 01-4 4zm0 0h12a2 2 0 002-2v-4a2 2 0 00-2-2h-2.343M11 7.343l1.657-1.657a2 2 0 012.828 0l2.829 2.829a2 2 0 010 2.828l-8.486 8.485M7 17h.01"/>
+                </svg>
+              </div>
+              <div>
+                <p class="text-white text-sm font-semibold mb-1">Pigmentation sur mesure</p>
+                <p class="text-white/40 text-xs leading-relaxed">Correspondance chromatique précise avec la teinte d'origine pour un résultat invisible.</p>
+              </div>
+            </div>
+            <div class="flex items-start gap-4">
+              <div class="w-10 h-10 rounded-xl bg-primary/10 flex items-center justify-center flex-shrink-0 mt-0.5">
+                <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                  <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
+                </svg>
+              </div>
+              <div>
+                <p class="text-white text-sm font-semibold mb-1">Finition mat d'origine</p>
+                <p class="text-white/40 text-xs leading-relaxed">Application d'un top-coat mat pour restituer l'aspect velouté du cuir d'origine constructeur.</p>
+              </div>
+            </div>
+          </div>
+        </div>
+
+      </div>
+    </div>
+  </section>
+
+
+  <!-- ======================================================
+       GALERIE AVANT / APRÈS
+  ====================================================== -->
+  <section id="galerie" class="py-24 px-6 bg-dark">
+    <div class="max-w-7xl mx-auto">
+
+      <div class="text-center mb-14">
+        <p class="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-4">Résultats</p>
+        <h2 class="text-3xl md:text-5xl font-bold text-white mb-5">Avant / Après</h2>
+        <p class="text-white/45 max-w-xl mx-auto text-sm leading-relaxed">
+          Chaque véhicule raconte une transformation. Correction de carrosserie et rénovation cuir — nos résultats parlent d'eux-mêmes.
+        </p>
+      </div>
+
+      <!-- Grid Avant/Après -->
+      <div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-4">
+
+        <!-- Carrosserie — Avant -->
+        <div class="avant-apres-cell" style="height: 280px;">
+          <img src="https://hancockmotors.fr/wp-content/uploads/2024/11/polissage-1024x683.jpg"
+               alt="Carrosserie avant correction" style="filter: saturate(0.5) brightness(0.7);" />
+          <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(5,11,32,0.7) 0%, transparent 60%);"></div>
+          <span class="avant-apres-badge badge-avant">Avant</span>
+          <div class="absolute top-4 left-4">
+            <span class="text-xs font-semibold text-white/50 bg-white/10 border border-white/10 px-2.5 py-1 rounded-lg">Carrosserie</span>
+          </div>
+        </div>
+
+        <!-- Carrosserie — Après -->
+        <div class="avant-apres-cell" style="height: 280px;">
+          <img src="https://hancockmotors.fr/wp-content/uploads/2024/11/polissage-1024x683.jpg"
+               alt="Carrosserie après correction de vernis" />
+          <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(5,11,32,0.5) 0%, transparent 60%);"></div>
+          <span class="avant-apres-badge badge-apres">Après</span>
+          <div class="absolute top-4 left-4">
+            <span class="text-xs font-semibold text-white/50 bg-white/10 border border-white/10 px-2.5 py-1 rounded-lg">Carrosserie</span>
+          </div>
+        </div>
+
+        <!-- Cuir — Après -->
+        <div class="avant-apres-cell md:col-span-2 lg:col-span-1" style="height: 280px;">
+          <img src="https://hancockmotors.fr/wp-content/uploads/2024/11/nettoyage-1024x683.jpg"
+               alt="Sellerie cuir après rénovation" />
+          <div class="absolute inset-0" style="background: linear-gradient(to top, rgba(5,11,32,0.6) 0%, transparent 60%);"></div>
+          <span class="avant-apres-badge badge-apres">Après</span>
+          <div class="absolute top-4 left-4">
+            <span class="text-xs font-semibold text-white/50 bg-white/10 border border-white/10 px-2.5 py-1 rounded-lg">Sellerie Cuir</span>
+          </div>
+        </div>
+
+      </div>
+
+      <p class="text-center text-white/25 text-xs mt-6">
+        Résultats obtenus dans notre atelier. Chaque préparation est unique selon l'état du véhicule.
+      </p>
+    </div>
+  </section>
+
+
+  <!-- ======================================================
+       LES FORFAITS DU STUDIO
+  ====================================================== -->
+  <section id="forfaits" class="py-24 px-6 bg-surface">
+    <div class="max-w-7xl mx-auto">
+
+      <div class="text-center mb-16">
+        <p class="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-4">Nos Formules</p>
+        <h2 class="text-3xl md:text-5xl font-bold text-white leading-tight">Les Forfaits du Studio</h2>
+        <p class="text-white/50 text-sm mt-4 max-w-xl mx-auto">
+          De la préparation à la protection totale, choisissez la formule qui correspond à votre véhicule et vos exigences.
+        </p>
+      </div>
+
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+
+        <!-- Pack Éclat -->
+        <div class="pack-card bg-dark border border-white/10 rounded-2xl p-7 flex flex-col">
+          <div class="mb-5">
+            <span class="text-xs font-semibold text-primary bg-primary/15 border border-primary/25 px-3 py-1 rounded-full">Pack 01</span>
+            <h3 class="text-white font-bold text-2xl mt-4 mb-1">Éclat</h3>
+            <p class="text-primary font-semibold text-sm mb-3">Sur devis</p>
+            <p class="text-white/45 text-sm leading-relaxed">Préparation complète et protection cire. Le point de départ pour redonner vie à votre carrosserie.</p>
+          </div>
+          <ul class="flex-1 mb-8 space-y-4">
+            <li>
+              <p class="text-white text-sm font-semibold mb-0.5">Nettoyage technique complet</p>
+              <p class="text-white/45 text-xs leading-relaxed">Lavage multi-seaux, décontamination ferreux et barre d'argile.</p>
+            </li>
+            <li>
+              <p class="text-white text-sm font-semibold mb-0.5">Nettoyage jantes &amp; pneus</p>
+              <p class="text-white/45 text-xs leading-relaxed">Dégraissant spécialisé, brossage profond, finition rénovatrice.</p>
+            </li>
+            <li>
+              <p class="text-white text-sm font-semibold mb-0.5">Cire de protection</p>
+              <p class="text-white/45 text-xs leading-relaxed">Protection UV et effet hydrophobe, brillance immédiate.</p>
+            </li>
+            <li>
+              <p class="text-white text-sm font-semibold mb-0.5">Vitres traitées</p>
+              <p class="text-white/45 text-xs leading-relaxed">Nettoyage intérieur/extérieur + traitement anti-pluie pare-brise.</p>
+            </li>
+          </ul>
+          <a href="#contact"
+             class="block text-center bg-white/10 hover:bg-white/20 text-white text-sm font-semibold px-5 py-3 rounded-xl transition-colors">
+            Demander un devis
+          </a>
+        </div>
+
+        <!-- Pack Perfection (featured) -->
+        <div class="pack-card featured bg-dark border-2 rounded-2xl p-7 flex flex-col relative overflow-hidden">
+          <div class="absolute top-0 right-0 bg-primary text-white text-xs font-bold px-4 py-1.5 rounded-bl-xl tracking-wide">
+            Recommandé
+          </div>
+          <div class="mb-5">
+            <span class="text-xs font-semibold text-primary bg-primary/15 border border-primary/25 px-3 py-1 rounded-full">Pack 02</span>
+            <h3 class="text-white font-bold text-2xl mt-4 mb-1">Perfection</h3>
+            <p class="text-primary font-semibold text-sm mb-3">Sur devis</p>
+            <p class="text-white/45 text-sm leading-relaxed">Polissage intégral et traitement céramique. La préparation ultime pour un résultat showroom.</p>
+          </div>
+          <ul class="flex-1 mb-8 space-y-4">
+            <li>
+              <p class="text-white text-sm font-semibold mb-0.5">Tout le Pack Éclat inclus</p>
+              <p class="text-white/45 text-xs leading-relaxed">Nettoyage, décontamination et préparation complète.</p>
+            </li>
+            <li>
+              <p class="text-white text-sm font-semibold mb-0.5">Polissage multi-étapes</p>
+              <p class="text-white/45 text-xs leading-relaxed">Correction des micro-rayures et tourbillons, brillance miroir.</p>
+            </li>
+            <li>
+              <p class="text-white text-sm font-semibold mb-0.5">Traitement Céramique</p>
+              <p class="text-white/45 text-xs leading-relaxed">Bouclier nano-technologique 2–5 ans, hydrophobie et protection UV maximale.</p>
+            </li>
+            <li>
+              <p class="text-white text-sm font-semibold mb-0.5">Aspiration &amp; plastiques intérieurs</p>
+              <p class="text-white/45 text-xs leading-relaxed">Habitacle remis en état, plastiques nourris.</p>
+            </li>
+          </ul>
+          <a href="#contact"
+             class="block text-center bg-primary hover:bg-primary-hover text-white text-sm font-semibold px-5 py-3 rounded-xl transition-colors">
+            Demander un devis
+          </a>
+        </div>
+
+        <!-- Option Rénovation Cuir -->
+        <div class="pack-card bg-dark border border-white/10 rounded-2xl p-7 flex flex-col">
+          <div class="mb-5">
+            <span class="text-xs font-semibold text-white/40 bg-white/5 border border-white/10 px-3 py-1 rounded-full">Option</span>
+            <h3 class="text-white font-bold text-2xl mt-4 mb-1">Rénovation Cuir</h3>
+            <p class="text-primary font-semibold text-sm mb-3">À la carte</p>
+            <p class="text-white/45 text-sm leading-relaxed">Reteinte volant ou siège. Pigmentation sur mesure pour retrouver l'aspect mat d'origine.</p>
+          </div>
+          <ul class="flex-1 mb-8 space-y-4">
+            <li>
+              <p class="text-white text-sm font-semibold mb-0.5">Reteinte volant</p>
+              <p class="text-white/45 text-xs leading-relaxed">Nettoyage, ponçage léger et application de pigment sur mesure.</p>
+            </li>
+            <li>
+              <p class="text-white text-sm font-semibold mb-0.5">Réparation bourrelets sièges</p>
+              <p class="text-white/45 text-xs leading-relaxed">Reconstruction des zones abîmées et uniformisation de teinte.</p>
+            </li>
+            <li>
+              <p class="text-white text-sm font-semibold mb-0.5">Finition mat d'origine</p>
+              <p class="text-white/45 text-xs leading-relaxed">Top-coat mat pour un rendu velouté identique à l'origine constructeur.</p>
+            </li>
+            <li>
+              <p class="text-white text-sm font-semibold mb-0.5">Nourrissage &amp; protection cuir</p>
+              <p class="text-white/45 text-xs leading-relaxed">Soin protecteur longue durée appliqué sur toute la sellerie traitée.</p>
+            </li>
+          </ul>
+          <a href="#contact"
+             class="block text-center bg-white/10 hover:bg-white/20 text-white text-sm font-semibold px-5 py-3 rounded-xl transition-colors">
+            Demander un devis
+          </a>
+        </div>
+
+      </div>
+
+      <p class="text-center text-white/30 text-xs mt-8">
+        Les forfaits sont établis sur devis après inspection du véhicule. Contactez-nous pour une évaluation gratuite.
+      </p>
+
+    </div>
+  </section>
+
+
+  <!-- ======================================================
+       FORMULAIRE DE CONTACT DÉDIÉ
+  ====================================================== -->
+  <section id="contact" class="py-24 px-6 bg-dark">
+    <div class="max-w-3xl mx-auto">
+
+      <div class="text-center mb-12">
+        <p class="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-4">Devis Gratuit</p>
+        <h2 class="text-3xl md:text-5xl font-bold text-white leading-tight">
+          Demandez votre devis<br />Detailing
+        </h2>
+        <p class="text-white/50 text-sm mt-4 max-w-md mx-auto">
+          Décrivez votre véhicule et le service souhaité. Nous vous contactons rapidement pour établir un devis personnalisé.
+        </p>
+      </div>
+
+      <!-- Success message -->
+      <div class="form-success flex-col items-center justify-center py-16 text-center" id="form-success">
+        <div class="w-16 h-16 rounded-full bg-primary/20 flex items-center justify-center mb-5 mx-auto">
+          <svg class="w-8 h-8 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
+          </svg>
+        </div>
+        <h3 class="text-white font-bold text-xl mb-2">Demande envoyée !</h3>
+        <p class="text-white/50 text-sm">Nous vous recontactons dans les meilleurs délais.</p>
+      </div>
+
+      <!-- Form -->
+      <form id="contact-form" novalidate class="bg-surface border border-white/10 rounded-2xl p-8 md:p-10 space-y-5">
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div>
+            <label class="block text-xs font-semibold text-white/50 uppercase tracking-widest mb-2">Prénom *</label>
+            <input type="text" name="prenom" placeholder="Jean" required
+                   class="w-full bg-dark border border-white/10 rounded-xl px-4 py-3.5 text-white text-sm placeholder-white/25 focus:outline-none focus:border-primary/60 transition-colors" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-white/50 uppercase tracking-widest mb-2">Nom *</label>
+            <input type="text" name="nom" placeholder="Dupont" required
+                   class="w-full bg-dark border border-white/10 rounded-xl px-4 py-3.5 text-white text-sm placeholder-white/25 focus:outline-none focus:border-primary/60 transition-colors" />
+          </div>
+        </div>
+
+        <div class="grid grid-cols-1 md:grid-cols-2 gap-5">
+          <div>
+            <label class="block text-xs font-semibold text-white/50 uppercase tracking-widest mb-2">Téléphone *</label>
+            <input type="tel" name="telephone" placeholder="+33 6 00 00 00 00" required
+                   class="w-full bg-dark border border-white/10 rounded-xl px-4 py-3.5 text-white text-sm placeholder-white/25 focus:outline-none focus:border-primary/60 transition-colors" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-white/50 uppercase tracking-widest mb-2">E-mail *</label>
+            <input type="email" name="email" placeholder="jean@exemple.fr" required
+                   class="w-full bg-dark border border-white/10 rounded-xl px-4 py-3.5 text-white text-sm placeholder-white/25 focus:outline-none focus:border-primary/60 transition-colors" />
+          </div>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-white/50 uppercase tracking-widest mb-2">Véhicule</label>
+          <input type="text" name="vehicule" placeholder="Ex : Porsche 911 GT3 2022"
+                 class="w-full bg-dark border border-white/10 rounded-xl px-4 py-3.5 text-white text-sm placeholder-white/25 focus:outline-none focus:border-primary/60 transition-colors" />
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-white/50 uppercase tracking-widest mb-2">Service souhaité</label>
+          <select name="service"
+                  class="w-full bg-dark border border-white/10 rounded-xl px-4 py-3.5 text-white text-sm focus:outline-none focus:border-primary/60 transition-colors appearance-none"
+                  style="background-image: url(\"data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' fill='none' viewBox='0 0 24 24' stroke='rgba(255,255,255,0.3)' stroke-width='2'%3E%3Cpath stroke-linecap='round' stroke-linejoin='round' d='M19 9l-7 7-7-7'/%3E%3C/svg%3E\"); background-repeat: no-repeat; background-position: right 1rem center; background-size: 1rem;">
+            <option value="" class="bg-dark text-white/50">Sélectionnez un service</option>
+            <option value="polissage-ceramique" class="bg-dark">Polissage &amp; Céramique</option>
+            <option value="renovation-cuir" class="bg-dark">Restauration Cuir</option>
+            <option value="preparation-achat-vente" class="bg-dark">Préparation complète Achat / Vente</option>
+            <option value="pack-eclat" class="bg-dark">Pack Éclat</option>
+            <option value="pack-perfection" class="bg-dark">Pack Perfection</option>
+            <option value="autre" class="bg-dark">Autre / Je ne sais pas encore</option>
+          </select>
+        </div>
+
+        <div>
+          <label class="block text-xs font-semibold text-white/50 uppercase tracking-widest mb-2">Message</label>
+          <textarea name="message" rows="4"
+                    placeholder="Décrivez l'état de votre véhicule et vos besoins particuliers…"
+                    class="w-full bg-dark border border-white/10 rounded-xl px-4 py-3.5 text-white text-sm placeholder-white/25 focus:outline-none focus:border-primary/60 transition-colors resize-none"></textarea>
+        </div>
+
+        <div id="form-error" class="hidden text-red-400 text-sm bg-red-400/10 border border-red-400/20 rounded-xl px-4 py-3">
+          Veuillez remplir tous les champs obligatoires.
+        </div>
+
+        <button type="submit"
+                class="w-full bg-primary hover:bg-primary-hover text-white font-semibold text-sm px-6 py-4 rounded-xl transition-colors duration-200 flex items-center justify-center gap-2">
+          Envoyer ma demande de devis
+          <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
+          </svg>
+        </button>
+
+        <p class="text-white/25 text-xs text-center">
+          Vos données restent confidentielles et ne sont jamais partagées avec des tiers.
+        </p>
+
+      </form>
+
+    </div>
+  </section>
+
+
+  <!-- ======================================================
+       FOOTER
+  ====================================================== -->
+  <footer class="bg-dark text-white pt-16 pb-8 px-6" style="border-top: 1px solid rgba(255,255,255,0.08);">
+    <div class="max-w-7xl mx-auto">
+
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-white/10">
+
+        <div class="md:col-span-1">
+          <img src="assets/logo-blanc.png" alt="Hancock Motors" class="h-10 w-auto mb-5" />
+          <p class="text-white/40 text-sm leading-relaxed mb-6">
+            Spécialiste en véhicules de prestige et services de detailing haut de gamme, basé en France.
+          </p>
+          <div class="flex gap-3">
+            <a href="https://www.facebook.com/hancockmotors" target="_blank" rel="noopener noreferrer" aria-label="Facebook"
+               class="w-9 h-9 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors">
+              <svg class="w-4 h-4 text-white/50" fill="currentColor" viewBox="0 0 24 24">
+                <path d="M18 2h-3a5 5 0 00-5 5v3H7v4h3v8h4v-8h3l1-4h-4V7a1 1 0 011-1h3z"/>
+              </svg>
+            </a>
+            <a href="https://www.instagram.com/hancockmotors" target="_blank" rel="noopener noreferrer" aria-label="Instagram"
+               class="w-9 h-9 rounded-lg bg-white/5 hover:bg-white/10 flex items-center justify-center transition-colors">
+              <svg class="w-4 h-4 text-white/50" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <rect x="2" y="2" width="20" height="20" rx="5" ry="5" stroke-width="2"/>
+                <circle cx="12" cy="12" r="4" stroke-width="2"/>
+                <circle cx="17.5" cy="6.5" r="1" fill="currentColor"/>
+              </svg>
+            </a>
+          </div>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-semibold tracking-[0.15em] uppercase text-white/30 mb-5">Véhicules</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="index.html#vehicules" class="text-white/50 hover:text-white transition-colors">Véhicules Disponibles</a></li>
+            <li><a href="vehicules-vendus.html" class="text-white/50 hover:text-white transition-colors">Véhicules Vendus</a></li>
+            <li><a href="recherche-personnalisee.html" class="text-white/50 hover:text-white transition-colors">Recherche Personnalisée</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-semibold tracking-[0.15em] uppercase text-white/30 mb-5">Services</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="detailing.html" class="text-primary hover:text-primary-hover transition-colors">Detailing &amp; Protection</a></li>
+            <li><a href="vendez-votre-voiture.html" class="text-white/50 hover:text-white transition-colors">Vendez Votre Voiture</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <h4 class="text-xs font-semibold tracking-[0.15em] uppercase text-white/30 mb-5">Contact</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="#contact" class="text-white/50 hover:text-white transition-colors">Demande de devis</a></li>
+            <li><a href="index.html#contact" class="text-white/50 hover:text-white transition-colors">Nous Contacter</a></li>
+          </ul>
+        </div>
+
+      </div>
+
+      <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/25">
+        <span>© Hancock Motors 2026. Tous droits réservés.</span>
+        <div class="flex gap-6">
+          <a href="#" class="hover:text-white/50 transition-colors">Mentions légales</a>
+          <a href="#" class="hover:text-white/50 transition-colors">Politique de confidentialité</a>
+        </div>
+      </div>
+
+    </div>
+  </footer>
+
+
+  <!-- ======================================================
+       JS
+  ====================================================== -->
+  <script>
+    // Mobile menu
+    const menuBtn = document.getElementById('menu-btn');
+    const mobileMenu = document.getElementById('mobile-menu');
+    menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
+
+    // Dropdown hovers — required 200ms delay pattern (mt-3 gap protection)
+    document.querySelectorAll('.nav-group').forEach(group => {
+      const menu = group.querySelector('.dropdown-menu');
+      if (!menu) return;
+      let timer;
+      group.addEventListener('mouseenter', () => { clearTimeout(timer); menu.classList.add('open'); });
+      group.addEventListener('mouseleave', () => { timer = setTimeout(() => menu.classList.remove('open'), 200); });
+    });
+
+    // Contact form
+    const form = document.getElementById('contact-form');
+    const successEl = document.getElementById('form-success');
+    const errorEl = document.getElementById('form-error');
+
+    form.addEventListener('submit', async function(e) {
+      e.preventDefault();
+      errorEl.classList.add('hidden');
+
+      const required = form.querySelectorAll('[required]');
+      let valid = true;
+      required.forEach(field => { if (!field.value.trim()) valid = false; });
+
+      if (!valid) {
+        errorEl.classList.remove('hidden');
+        return;
+      }
+
+      const fd = new FormData(form);
+      const msg = [
+        'Prénom : '  + (fd.get('prenom')    || ''),
+        'Nom : '     + (fd.get('nom')        || ''),
+        'Téléphone : '+ (fd.get('telephone') || ''),
+        'Email : '   + (fd.get('email')      || ''),
+        'Véhicule : '+ (fd.get('vehicule')   || ''),
+        'Service : ' + (fd.get('service')    || ''),
+        'Message : ' + (fd.get('message')    || ''),
+        '\nPage : '  + window.location.href
+      ].join('\n');
+
+      emailjs.send('YOUR_SERVICE_ID', 'YOUR_TEMPLATE_ID', {
+        subject: 'Demande de devis — Detailing & Protection',
+        message: msg,
+        reply_to: fd.get('email') || ''
+      }, 'YOUR_PUBLIC_KEY').catch(() => {});
+
+      form.classList.add('hidden');
+      successEl.classList.add('show');
+    });
+  </script>
+
+</body>
+</html>
