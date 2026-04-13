@@ -1363,6 +1363,7 @@
         scrollToStep(target);
         showStep(target, true);
         if (target === numSteps - 1) scrollDone = true;
+        else if (target < current) scrollDone = false; // retour en arrière = re-bloque
         setTimeout(() => { arrowNav = false; }, 250);
       }, { passive: true });
 
@@ -1408,7 +1409,24 @@
       }
 
       function onScroll() {
-        if (scrollDone || arrowNav) return;
+        if (arrowNav) return;
+        if (scrollDone) {
+          // User re-entered the section scrolling down after already completing it.
+          // Skip to the exit point instantly — no re-blocking.
+          if (!jumpLock) {
+            const scrolled   = -section.getBoundingClientRect().top;
+            const scrollable = section.offsetHeight - window.innerHeight;
+            if (scrolled > 0 && scrolled < scrollable - 5) {
+              jumpLock = true;
+              window.scrollTo({
+                top: section.offsetTop + section.offsetHeight - window.innerHeight,
+                behavior: 'instant'
+              });
+              setTimeout(() => { jumpLock = false; }, 200);
+            }
+          }
+          return;
+        }
         const top      = section.getBoundingClientRect().top;
         const scrolled = -top;
         const scrollable = section.offsetHeight - window.innerHeight;
@@ -1416,10 +1434,9 @@
         const progress = Math.max(0, Math.min(1, scrolled / scrollable));
         const idx = Math.min(numSteps - 1, Math.floor(progress * numSteps));
         showStep(idx);
-        if (idx === numSteps - 1 && !scrollDone) {
+        if (idx === numSteps - 1) {
           scrollDone = true;
-          // Snap to the very bottom of the sticky section so the next scroll
-          // immediately exits into the next page section — no "dead zone" feeling.
+          // Snap to the very bottom so exit to next section is immediate.
           jumpLock = true;
           window.scrollTo({
             top: section.offsetTop + section.offsetHeight - window.innerHeight,
