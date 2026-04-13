@@ -180,6 +180,23 @@
       to   { opacity: 1; transform: translateY(0); }
     }
     .fade-up { animation: fadeUp 0.7s ease both; }
+
+    /* ── Reviews mobile slider ───────────────────────────── */
+    @media (max-width: 767px) {
+      #reviews-track {
+        display: flex;
+        overflow-x: auto;
+        scroll-snap-type: x mandatory;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+        gap: 1rem;
+      }
+      #reviews-track::-webkit-scrollbar { display: none; }
+      #reviews-track .review-card {
+        scroll-snap-align: start;
+        flex: 0 0 100%;
+      }
+    }
   </style>
   <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
@@ -255,16 +272,54 @@
       </button>
     </div>
 
-    <div id="mobile-menu" class="hidden lg:hidden bg-dark border-t border-white/10">
-      <nav class="flex flex-col px-6 py-4 gap-1">
-        <a href="index.html#vehicules"   class="text-white text-sm font-medium py-3 border-b border-white/10">Véhicules Disponibles</a>
-        <a href="vehicules-vendus.html" class="text-white/55 text-sm py-2.5 pl-5 border-b border-white/5">↳ Véhicules Vendus</a>
-        <a href="recherche-personnalisee.html" class="text-white text-sm font-medium py-3 border-b border-white/10">Recherche Personnalisée</a>
-        <a href="detailing.html" class="text-white text-sm font-medium py-3 border-b border-white/10">Esthétique</a>
-        <a href="index.html#vendre"      class="text-white text-sm font-medium py-3 border-b border-white/10">Vendez Votre Voiture</a>
-        <a href="index.html#contact"     class="text-white text-sm font-medium py-3 border-b border-white/10">Contact</a>
-        <a href="vehicules.html" class="mt-3 bg-primary text-white text-sm font-semibold px-6 py-3 rounded-lg text-center">Voir les Véhicules</a>
+    <!-- Mobile menu fullscreen overlay -->
+    <div id="mobile-menu" class="fixed inset-0 z-[60] flex flex-col lg:hidden"
+         style="background:#050B20; opacity:0; pointer-events:none;"
+         aria-hidden="true">
+      <div class="flex items-center justify-between px-6 py-5 flex-shrink-0">
+        <a href="index.html"><img src="assets/logo-blanc.png" alt="Hancock Motors" class="h-8 w-auto"/></a>
+        <button id="menu-close" class="text-white/70 hover:text-white transition-colors" aria-label="Fermer le menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="h-px bg-white/10 mx-6 flex-shrink-0"></div>
+      <nav class="flex-1 flex flex-col justify-center px-8 overflow-y-auto">
+        <a href="vehicules.html" class="mob-link flex items-baseline gap-5 py-4 border-b border-white/5">
+          <span class="text-primary text-xs font-bold w-6 flex-shrink-0 tabular-nums">01</span>
+          <span class="text-white text-4xl font-extrabold tracking-tight leading-none">Véhicules</span>
+        </a>
+        <a href="recherche-personnalisee.html" class="mob-link flex items-baseline gap-5 py-4 border-b border-white/5">
+          <span class="text-primary text-xs font-bold w-6 flex-shrink-0 tabular-nums">02</span>
+          <span class="text-white text-4xl font-extrabold tracking-tight leading-none">Recherche</span>
+        </a>
+        <a href="detailing.html" class="mob-link flex items-baseline gap-5 py-4 border-b border-white/5">
+          <span class="text-primary text-xs font-bold w-6 flex-shrink-0 tabular-nums">03</span>
+          <span class="text-white text-4xl font-extrabold tracking-tight leading-none">Esthétique</span>
+        </a>
+        <a href="vendez-votre-voiture.html" class="mob-link flex items-baseline gap-5 py-4 border-b border-white/5">
+          <span class="text-primary text-xs font-bold w-6 flex-shrink-0 tabular-nums">04</span>
+          <span class="text-white text-4xl font-extrabold tracking-tight leading-none">Vendre</span>
+        </a>
+        <a href="index.html#contact" class="mob-link flex items-baseline gap-5 py-4">
+          <span class="text-primary text-xs font-bold w-6 flex-shrink-0 tabular-nums">05</span>
+          <span class="text-white text-4xl font-extrabold tracking-tight leading-none">Contact</span>
+        </a>
       </nav>
+      <div class="px-8 pb-10 flex-shrink-0">
+        <div class="h-px bg-white/10 mb-8"></div>
+        <a href="vehicules.html" class="mob-footer block w-full text-center bg-primary hover:bg-primary-hover text-white font-bold text-sm py-4 rounded-xl mb-6 transition-colors duration-200">Voir les Véhicules →</a>
+        <div class="mob-footer flex items-center justify-between">
+          <a href="tel:+33629324299" class="text-white/50 text-sm font-medium hover:text-white transition-colors">+33 6 29 32 42 99</a>
+          <div class="flex items-center gap-5">
+            <a href="https://www.instagram.com/hancockmotors" class="text-white/40 hover:text-white transition-colors" aria-label="Instagram">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/hancockmotors" class="text-white/40 hover:text-white transition-colors" aria-label="Facebook">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -613,10 +668,10 @@
       <p class="text-center text-xs font-semibold tracking-[0.3em] uppercase text-primary mb-3">ILS NOUS ONT FAIT CONFIANCE</p>
       <h2 class="text-center text-2xl md:text-3xl font-bold text-white mb-10">Ce que disent nos clients</h2>
 
-      <div class="grid grid-cols-1 md:grid-cols-3 gap-5">
+      <div id="reviews-track" class="grid md:grid-cols-3 gap-5">
 
         <!-- Avis 1 — M. VORGER · Audi RS7 -->
-        <div class="rounded-2xl border border-white/10 bg-[#080E22] p-6 flex flex-col gap-4">
+        <div class="review-card rounded-2xl border border-white/10 bg-[#080E22] p-6 flex flex-col gap-4">
           <div class="flex gap-0.5 text-primary text-base">
             <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
           </div>
@@ -633,7 +688,7 @@
         </div>
 
         <!-- Avis 2 — M. ARMAND · Porsche Boxster S -->
-        <div class="rounded-2xl border border-white/10 bg-[#080E22] p-6 flex flex-col gap-4">
+        <div class="review-card rounded-2xl border border-white/10 bg-[#080E22] p-6 flex flex-col gap-4">
           <div class="flex gap-0.5 text-primary text-base">
             <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
           </div>
@@ -650,7 +705,7 @@
         </div>
 
         <!-- Avis 3 — M. CODINA · BMW M2 -->
-        <div class="rounded-2xl border border-white/10 bg-[#080E22] p-6 flex flex-col gap-4">
+        <div class="review-card rounded-2xl border border-white/10 bg-[#080E22] p-6 flex flex-col gap-4">
           <div class="flex gap-0.5 text-primary text-base">
             <span>★</span><span>★</span><span>★</span><span>★</span><span>★</span>
           </div>
@@ -667,6 +722,8 @@
         </div>
 
       </div>
+      <!-- Pagination dots — mobile slider only -->
+      <div id="reviews-dots" class="flex justify-center items-center gap-2 mt-5 md:hidden" aria-hidden="true"></div>
     </div>
   </section>
 
@@ -1089,10 +1146,6 @@
        JAVASCRIPT
   ====================================================== -->
   <script>
-    // ── Mobile menu ───────────────────────────────────────
-    document.getElementById('menu-btn').addEventListener('click', () => {
-      document.getElementById('mobile-menu').classList.toggle('hidden');
-    });
 
     // ── Header scroll ─────────────────────────────────────
     window.addEventListener('scroll', () => {
@@ -1114,6 +1167,22 @@
     }
     rpDots.forEach(d => d.addEventListener('click', () => rpGo(parseInt(d.dataset.i))));
     setInterval(() => rpGo((rpCur + 1) % rpSlides.length), 4000);
+
+    // Hero carousel — touch swipe support
+    (function () {
+      const hero = document.getElementById('rp-hero');
+      let tx = 0, ty = 0;
+      hero.addEventListener('touchstart', e => {
+        tx = e.touches[0].clientX;
+        ty = e.touches[0].clientY;
+      }, { passive: true });
+      hero.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - tx;
+        const dy = e.changedTouches[0].clientY - ty;
+        if (Math.abs(dx) < 40 || Math.abs(dx) < Math.abs(dy)) return;
+        rpGo((rpCur + (dx < 0 ? 1 : -1) + rpSlides.length) % rpSlides.length);
+      }, { passive: true });
+    }());
 
     // ── Steps scroll-drive (par pack) ────────────────────
     (function () {
@@ -1275,6 +1344,28 @@
         setTimeout(() => { arrowNav = false; }, 200);
       });
 
+      // Steps — horizontal swipe support
+      let stSwipeX = 0, stSwipeY = 0;
+      section.addEventListener('touchstart', e => {
+        stSwipeX = e.touches[0].clientX;
+        stSwipeY = e.touches[0].clientY;
+      }, { passive: true });
+      section.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - stSwipeX;
+        const dy = e.changedTouches[0].clientY - stSwipeY;
+        // Only act on clearly horizontal swipes
+        if (Math.abs(dx) < 50 || Math.abs(dx) < Math.abs(dy) * 1.5) return;
+        const target = dx < 0
+          ? Math.min(current + 1, numSteps - 1)
+          : Math.max(current - 1, 0);
+        if (target === current) return;
+        arrowNav = true;
+        scrollToStep(target);
+        showStep(target, true);
+        if (target === numSteps - 1) scrollDone = true;
+        setTimeout(() => { arrowNav = false; }, 250);
+      }, { passive: true });
+
       function renderSteps(pack) {
         const packData = STEPS[pack];
         const steps = packData.steps;
@@ -1325,8 +1416,16 @@
         const progress = Math.max(0, Math.min(1, scrolled / scrollable));
         const idx = Math.min(numSteps - 1, Math.floor(progress * numSteps));
         showStep(idx);
-        if (idx === numSteps - 1) {
+        if (idx === numSteps - 1 && !scrollDone) {
           scrollDone = true;
+          // Snap to the very bottom of the sticky section so the next scroll
+          // immediately exits into the next page section — no "dead zone" feeling.
+          jumpLock = true;
+          window.scrollTo({
+            top: section.offsetTop + section.offsetHeight - window.innerHeight,
+            behavior: 'smooth'
+          });
+          setTimeout(() => { jumpLock = false; }, 600);
         }
       }
 
@@ -1564,6 +1663,57 @@
       s.style.display = 'flex';
     });
 
+    // ── Reviews mobile slider dots ────────────────────────
+    (function () {
+      const track = document.getElementById('reviews-track');
+      const dotsCnt = document.getElementById('reviews-dots');
+      if (!track || !dotsCnt) return;
+      const cards = track.querySelectorAll('.review-card');
+      const n = cards.length;
+      let activeDot = 0;
+
+      function renderDots(idx) {
+        if (activeDot === idx && dotsCnt.children.length === n) {
+          // Just update styles without rebuilding DOM
+          [...dotsCnt.children].forEach((d, i) => {
+            d.style.background = i === idx ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.25)';
+            d.style.width = i === idx ? '20px' : '6px';
+          });
+          activeDot = idx;
+          return;
+        }
+        activeDot = idx;
+        dotsCnt.innerHTML = '';
+        for (let i = 0; i < n; i++) {
+          const d = document.createElement('button');
+          d.setAttribute('aria-label', 'Avis ' + (i + 1));
+          d.style.cssText = [
+            'height:6px',
+            'border-radius:9999px',
+            'background:' + (i === idx ? 'rgba(255,255,255,0.9)' : 'rgba(255,255,255,0.25)'),
+            'width:' + (i === idx ? '20px' : '6px'),
+            'transition:all 0.3s ease',
+            'border:none',
+            'cursor:pointer',
+            'padding:0',
+            'flex-shrink:0',
+          ].join(';');
+          const ci = i;
+          d.addEventListener('click', () => {
+            cards[ci].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'start' });
+          });
+          dotsCnt.appendChild(d);
+        }
+      }
+
+      renderDots(0);
+
+      track.addEventListener('scroll', () => {
+        const idx = Math.round(track.scrollLeft / track.offsetWidth);
+        renderDots(Math.max(0, Math.min(n - 1, idx)));
+      }, { passive: true });
+    }());
+
     // ── Lenis + GSAP scroll animations ───────────────────
     if (!window.matchMedia('(prefers-reduced-motion: reduce)').matches) {
       gsap.registerPlugin(ScrollTrigger);
@@ -1596,6 +1746,7 @@
 
   </script>
   <script src="assets/shifting-nav.js"></script>
+  <script src="assets/mobile-nav.js"></script>
 
 </body>
 </html>
