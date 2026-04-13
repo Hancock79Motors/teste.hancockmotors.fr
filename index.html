@@ -329,11 +329,6 @@
 
     </div>
 
-    <!-- Scroll indicator -->
-    <div class="absolute bottom-10 left-1/2 -translate-x-1/2 flex flex-col items-center gap-2 hero-fade-in" style="animation-delay:1s">
-      <span class="text-white/25 text-xs tracking-[0.2em] uppercase">Découvrir</span>
-      <div class="w-px h-10 bg-gradient-to-b from-white/20 to-transparent"></div>
-    </div>
   </section>
 
 
@@ -461,7 +456,7 @@
       </div>
 
       <!-- JS renders the 3 last available cars here -->
-      <div id="stock-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6">
+      <div id="stock-grid" class="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
         <!-- Fallback skeleton (hidden once JS runs) -->
         <div class="col-span-full text-center py-16 text-white/25 text-sm" id="stock-loading">
           Chargement du stock…
@@ -1150,10 +1145,11 @@
         const badge    = car.statut === 'Réservé' ? 'bg-yellow-500' : 'bg-primary';
         const detailUrl = 'vehicule.html?id=' + car.id;
         const imgFilter = car.id === 'mercedes-cla-edition1-220d' ? 'brightness(1.5) contrast(1.05)' : '';
+        const isThird = featured.indexOf(car) === 2;
         const card = document.createElement('div');
-        card.className = 'bg-surface border border-white/10 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300';
+        card.className = (isThird ? 'hidden lg:block ' : '') + 'bg-surface border border-white/10 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300';
         card.innerHTML = `
-          <a href="${detailUrl}" class="block overflow-hidden h-64 bg-white/5 relative">
+          <a href="${detailUrl}" class="block overflow-hidden h-36 sm:h-48 lg:h-64 bg-white/5 relative">
             <img src="${photo}" alt="${car.titre}"
                  class="w-full h-full object-cover" loading="lazy" decoding="async"
                  style="${imgFilter ? 'filter:' + imgFilter : ''}" />

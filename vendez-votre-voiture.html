@@ -120,70 +120,50 @@
       </a>
 
       <!-- Desktop nav -->
-      <nav class="hidden lg:flex items-center gap-8">
+      <nav class="relative hidden lg:flex items-center gap-1" id="shift-nav-group">
+        <button id="shift-tab-1" data-shift-tab="1" class="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium tracking-wide text-white/70 hover:text-white transition-colors duration-200">
+          Véhicules
+          <svg data-chevron class="w-3 h-3 transition-transform duration-200 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        <a href="recherche-personnalisee.html" class="rounded-full px-3 py-1.5 text-sm font-medium tracking-wide text-white/70 hover:text-white transition-colors duration-200">Recherche Personnalisée</a>
+        <button id="shift-tab-2" data-shift-tab="2" class="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium tracking-wide text-white/70 hover:text-white transition-colors duration-200">
+          Esthétique
+          <svg data-chevron class="w-3 h-3 transition-transform duration-200 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </button>
+        <a href="vendez-votre-voiture.html" class="rounded-full px-3 py-1.5 text-sm font-medium tracking-wide text-white transition-colors duration-200">Vendez Votre Voiture</a>
+        <a href="index.html#contact" class="rounded-full px-3 py-1.5 text-sm font-medium tracking-wide text-white/70 hover:text-white transition-colors duration-200">Contact</a>
 
-        <div class="nav-group relative">
-          <a href="index.html#vehicules" class="nav-link text-white text-sm font-medium tracking-wide flex items-center gap-1.5">
-            Véhicules Disponibles
-            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
-            </svg>
-          </a>
-          <div class="dropdown-menu absolute top-full left-0 mt-3 bg-surface text-white rounded-xl shadow-2xl min-w-[210px] overflow-hidden border border-white/10">
-            <a href="vehicules.html"
-               class="flex items-center gap-3 px-5 py-3.5 text-sm hover:bg-white/5 hover:text-primary transition-colors border-b border-white/10">
+        <div id="shift-overlay" class="absolute left-0 top-[calc(100%+20px)] w-72 rounded-xl border border-white/10 bg-surface shadow-2xl p-4 z-50"
+             style="opacity:0; transform:translateY(8px); pointer-events:none; transition:opacity .2s ease, transform .2s ease;">
+          <div class="absolute -top-5 left-0 right-0 h-5"></div>
+          <span id="shift-nub" class="absolute top-0 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rotate-45 border border-white/10 bg-surface"
+                style="left:80px; transition:left .22s ease;"></span>
+          <div data-content="1" hidden>
+            <p class="text-xs font-semibold uppercase tracking-widest text-white/40 mb-3">Véhicules</p>
+            <a href="vehicules.html" class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-white/80 hover:bg-white/5 hover:text-white transition-colors">
               <svg class="w-4 h-4 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/>
               </svg>
               Tous les véhicules
             </a>
-            <a href="vehicules.html?statut=vendu"
-               class="flex items-center gap-3 px-5 py-3.5 text-sm hover:bg-white/5 hover:text-primary transition-colors">
-              <svg class="w-4 h-4 text-gray-400 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <a href="vehicules-vendus.html" class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-white/80 hover:bg-white/5 hover:text-white transition-colors">
+              <svg class="w-4 h-4 text-white/40 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/>
               </svg>
               Véhicules Vendus
             </a>
           </div>
-        </div>
-
-        <a href="recherche-personnalisee.html" class="nav-link text-white text-sm font-medium tracking-wide">Recherche Personnalisée</a>
-
-        <div class="nav-group relative">
-          <a href="index.html#services" class="nav-link text-white text-sm font-medium tracking-wide flex items-center gap-1.5">
-            Services
-            <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-              <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
-            </svg>
-          </a>
-          <div class="dropdown-menu absolute top-full left-0 mt-3 bg-surface text-white rounded-xl shadow-2xl min-w-[220px] overflow-hidden border border-white/10">
-            <a href="index.html#nettoyage"
-               class="flex items-center gap-3 px-5 py-3.5 text-sm hover:bg-white/5 hover:text-primary transition-colors border-b border-white/10">
-              <svg class="w-4 h-4 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 2C6.48 2 2 6.48 2 12s4.48 10 10 10 10-4.48 10-10S17.52 2 12 2zm-1 14H9V8h2v8zm4 0h-2V8h2v8z"/>
-              </svg>
-              Nettoyage
-            </a>
-            <a href="index.html#polissage"
-               class="flex items-center gap-3 px-5 py-3.5 text-sm hover:bg-white/5 hover:text-primary transition-colors border-b border-white/10">
-              <svg class="w-4 h-4 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <circle cx="12" cy="12" r="10" stroke-width="2"/>
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12l2.5 2.5L16 9"/>
-              </svg>
-              Polissage / Lustrage
-            </a>
-            <a href="index.html#ceramique"
-               class="flex items-center gap-3 px-5 py-3.5 text-sm hover:bg-white/5 hover:text-primary transition-colors">
-              <svg class="w-4 h-4 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
-                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/>
-              </svg>
-              Protection Céramique
-            </a>
+          <div data-content="2" hidden>
+            <p class="text-xs font-semibold uppercase tracking-widest text-white/40 mb-3">Studio Esthétique</p>
+            <a href="detailing.html" class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-white/80 hover:bg-white/5 hover:text-white transition-colors">Detailing</a>
+            <a href="detailing.html#excellence" class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-white/80 hover:bg-white/5 hover:text-white transition-colors">Polissage</a>
+            <a href="detailing.html#sellerie" class="flex items-center gap-3 rounded-lg px-3 py-2.5 text-sm text-white/80 hover:bg-white/5 hover:text-white transition-colors">Rénovation Cuir</a>
           </div>
         </div>
-
-        <a href="vendez-votre-voiture.html" class="nav-link text-white text-sm font-medium tracking-wide" style="text-decoration-line: underline; text-underline-offset: 4px; opacity:1;">Vendez Votre Voiture</a>
-        <a href="index.html#contact" class="nav-link text-white text-sm font-medium tracking-wide">Contact</a>
       </nav>
 
       <a href="vehicules.html"
@@ -203,7 +183,7 @@
       <nav class="flex flex-col px-6 py-4 gap-1">
         <a href="index.html#vehicules"   class="text-white text-sm font-medium py-3 border-b border-white/10">Véhicules Disponibles</a>
         <a href="recherche-personnalisee.html" class="text-white text-sm font-medium py-3 border-b border-white/10">Recherche Personnalisée</a>
-        <a href="index.html#services"    class="text-white text-sm font-medium py-3 border-b border-white/10">Services</a>
+        <a href="detailing.html" class="text-white text-sm font-medium py-3 border-b border-white/10">Esthétique</a>
         <a href="vendez-votre-voiture.html" class="text-primary text-sm font-semibold py-3 border-b border-white/10">Vendez Votre Voiture</a>
         <a href="index.html#contact"     class="text-white text-sm font-medium py-3 border-b border-white/10">Contact</a>
         <a href="vehicules.html"
@@ -719,15 +699,6 @@
     const mobileMenu = document.getElementById('mobile-menu');
     menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
 
-    // ── Dropdown menus ───────────────────────────────────
-    document.querySelectorAll('.nav-group').forEach(group => {
-      const dropdown = group.querySelector('.dropdown-menu');
-      if (!dropdown) return;
-      let timer;
-      group.addEventListener('mouseenter', () => { clearTimeout(timer); dropdown.classList.add('open'); });
-      group.addEventListener('mouseleave', () => { timer = setTimeout(() => dropdown.classList.remove('open'), 200); });
-    });
-
     // ── Step state ───────────────────────────────────────
     let currentStep = 1;
 
@@ -843,6 +814,7 @@
       el.addEventListener('input', () => el.style.borderColor = '');
     });
   </script>
+  <script src="assets/shifting-nav.js"></script>
 
 </body>
 </html>
