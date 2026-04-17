@@ -1307,16 +1307,46 @@
         setTimeout(() => { jumpLock = false; }, 200);
       }
 
-      function showStep(idx, force) {
+      function showStep(idx, force, dir = 'y') {
         if (idx === current && !force) return;
+        const oldCurrent = current;
         current = idx;
         const slides = area.querySelectorAll('.steps-slide');
         const dots   = dotsCnt.querySelectorAll('.step-dot');
+        
         slides.forEach((s, i) => {
           const d = i - idx;
-          if (d === 0) { s.style.transform = ''; s.classList.add('active'); }
-          else { s.classList.remove('active'); s.style.transform = d < 0 ? 'translateY(-40px)' : 'translateY(40px)'; }
+          if (d === 0) { 
+            // C'est le slide entrant
+            if (!s.classList.contains('active')) {
+              s.style.transition = 'none';
+              if (dir === 'x') {
+                s.style.transform = (i > oldCurrent) ? 'translateX(100px)' : 'translateX(-100px)';
+              } else {
+                s.style.transform = (i > oldCurrent) ? 'translateY(40px)' : 'translateY(-40px)';
+              }
+              s.offsetHeight; // Force reflow
+            }
+            s.style.transition = '';
+            s.style.transform = ''; 
+            s.classList.add('active'); 
+          } else { 
+            // Ce sont les slides sortants ou déjà hors champ
+            if (s.classList.contains('active')) {
+              s.style.transition = '';
+            } else {
+              s.style.transition = 'none';
+            }
+            
+            if (dir === 'x') {
+              s.style.transform = d < 0 ? 'translateX(-100px)' : 'translateX(100px)';
+            } else {
+              s.style.transform = d < 0 ? 'translateY(-40px)' : 'translateY(40px)';
+            }
+            s.classList.remove('active'); 
+          }
         });
+
         dots.forEach((d, i) => {
           d.style.background = i === idx ? '#E52427' : 'rgba(255,255,255,0.15)';
           d.style.width      = i === idx ? '24px' : '8px';
@@ -1332,7 +1362,7 @@
         arrowNav = true;
         scrollDone = false;
         scrollToStep(target);
-        showStep(target, true);
+        showStep(target, true, 'x');
         setTimeout(() => { arrowNav = false; }, 200);
       });
       btnNext && btnNext.addEventListener('click', () => {
@@ -1340,7 +1370,7 @@
         const target = current + 1;
         arrowNav = true;
         scrollToStep(target);
-        showStep(target, true);
+        showStep(target, true, 'x');
         if (target === numSteps - 1) scrollDone = true;
         setTimeout(() => { arrowNav = false; }, 200);
       });
@@ -1362,7 +1392,7 @@
         if (target === current) return;
         arrowNav = true;
         scrollToStep(target);
-        showStep(target, true);
+        showStep(target, true, 'x');
         if (target === numSteps - 1) scrollDone = true;
         else if (target < current) scrollDone = false; // retour en arrière = re-bloque
         setTimeout(() => { arrowNav = false; }, 250);
@@ -1381,7 +1411,12 @@
           `<div class="step-dot" style="width:${i===0?'24px':'8px'};background:${i===0?'#E52427':'rgba(255,255,255,0.15)'};cursor:pointer"></div>`
         ).join('');
         dotsCnt.querySelectorAll('.step-dot').forEach((dot, i) => {
-          dot.addEventListener('click', () => showStep(i, true));
+          dot.addEventListener('click', () => {
+            arrowNav = true;
+            scrollToStep(i);
+            showStep(i, true, 'x');
+            setTimeout(() => { arrowNav = false; }, 200);
+          });
         });
 
         // Slides
@@ -1453,7 +1488,7 @@
         if (scrollable <= 0) return;
         const progress = Math.max(0, Math.min(1, scrolled / scrollable));
         const idx = Math.min(numSteps - 1, Math.floor(progress * numSteps));
-        showStep(idx);
+        showStep(idx, false, 'y');
         if (idx === numSteps - 1) {
           scrollDone = true;
           // Snap to the very bottom so exit to next section is immediate.
