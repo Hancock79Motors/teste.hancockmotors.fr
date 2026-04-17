@@ -133,72 +133,10 @@
       transform: translateY(0);
       pointer-events: auto;
     }
-    /* ── Step dots (horizontal — desktop) ─────────────── */
+    /* ── Step dots ───────────────────────────────────────── */
     .step-dot {
       height: 4px; border-radius: 9999px;
       transition: background 0.3s ease, width 0.3s ease;
-    }
-
-    /* ── Steps area wrapper (desktop baseline) ───────────── */
-    #steps-area-wrapper {
-      flex: 1;
-      position: relative;
-      overflow: hidden;
-      display: flex;
-      flex-direction: column;
-    }
-    #steps-area {
-      flex: 1;
-      position: relative;
-      overflow: hidden;
-    }
-
-    /* ── Step dots sidebar (vertical — mobile only) ─────── */
-    #steps-sidebar {
-      display: none;
-    }
-    @media (max-width: 767px) {
-      /* Masquer les dots horizontaux du header sur mobile */
-      #step-progress { display: none !important; }
-
-      /* Afficher la sidebar verticale */
-      #steps-sidebar {
-        display: flex;
-        flex-direction: column;
-        align-items: center;
-        justify-content: center;
-        gap: 8px;
-        padding: 0 10px 0 6px;
-        flex-shrink: 0;
-      }
-
-      /* Le conteneur steps-area + sidebar s'affiche côte à côte */
-      #steps-area-wrapper {
-        display: flex;
-        flex-direction: row;
-        align-items: stretch;
-        flex: 1;
-        overflow: hidden;
-      }
-
-      #steps-area {
-        flex: 1;
-      }
-
-      /* Dots verticaux sur mobile : cercles */
-      .step-dot-v {
-        width: 8px;
-        height: 8px;
-        border-radius: 9999px;
-        background: rgba(255,255,255,0.15);
-        transition: background 0.3s ease, height 0.3s ease;
-        flex-shrink: 0;
-        cursor: pointer;
-      }
-      .step-dot-v.active {
-        background: #E52427;
-        height: 24px;
-      }
     }
     /* ── Pack toggle ─────────────────────────────────────── */
     .pack-tab {
@@ -668,16 +606,12 @@
         <!-- Pack description -->
         <p id="pack-intro" class="text-center text-sm text-white/45 max-w-md mx-auto mt-4 leading-relaxed"></p>
 
-        <!-- Progress dots (desktop only) -->
+        <!-- Progress dots -->
         <div class="flex justify-center items-center gap-2 mt-5" id="step-progress"></div>
       </div>
 
-      <!-- Steps cards area + sidebar vertical dots (mobile) -->
-      <div id="steps-area-wrapper">
-        <div id="steps-area"></div>
-        <!-- Sidebar dots — mobile only -->
-        <div id="steps-sidebar"></div>
-      </div>
+      <!-- Steps cards area (populated by JS) -->
+      <div class="flex-1 relative overflow-hidden" id="steps-area"></div>
 
       <!-- Arrow navigation -->
       <div class="flex justify-center items-center gap-6 pb-4 flex-shrink-0">
@@ -1387,15 +1321,6 @@
           d.style.background = i === idx ? '#E52427' : 'rgba(255,255,255,0.15)';
           d.style.width      = i === idx ? '24px' : '8px';
         });
-        // Sync sidebar vertical dots (mobile)
-        const sidebarDots = document.querySelectorAll('#steps-sidebar .step-dot-v');
-        sidebarDots.forEach((d, i) => {
-          if (i === idx) {
-            d.classList.add('active');
-          } else {
-            d.classList.remove('active');
-          }
-        });
         if (hint) hint.style.opacity = idx === slides.length - 1 ? '0' : '1';
         if (btnPrev) btnPrev.disabled = idx === 0;
         if (btnNext) btnNext.disabled = idx === slides.length - 1;
@@ -1451,7 +1376,7 @@
         numSteps = steps.length;
         section.style.height = (numSteps * 70 + 70) + 'vh';
 
-        // Dots horizontaux (desktop)
+        // Dots
         dotsCnt.innerHTML = steps.map((_, i) =>
           `<div class="step-dot" style="width:${i===0?'24px':'8px'};background:${i===0?'#E52427':'rgba(255,255,255,0.15)'};cursor:pointer"></div>`
         ).join('');
@@ -1459,31 +1384,29 @@
           dot.addEventListener('click', () => showStep(i, true));
         });
 
-        // Dots verticaux (sidebar mobile)
-        const sidebar = document.getElementById('steps-sidebar');
-        if (sidebar) {
-          sidebar.innerHTML = steps.map((_, i) =>
-            `<div class="step-dot-v${i===0?' active':''}" data-sidx="${i}"></div>`
-          ).join('');
-          sidebar.querySelectorAll('.step-dot-v').forEach((dot, i) => {
-            dot.addEventListener('click', () => showStep(i, true));
-          });
-        }
-
         // Slides
         area.innerHTML = steps.map((s, i) => `
           <div class="steps-slide ${i===0?'active':''}" data-idx="${i}">
-            <div class="max-w-xl w-full">
-              <div class="flex items-center gap-4 mb-5">
-                <div class="w-14 h-14 rounded-2xl ${s.iconCls} flex items-center justify-center text-2xl flex-shrink-0">${s.icon}</div>
+            <div class="max-w-xl w-full bg-[#0B1228] border-2 border-primary/20 shadow-[0_16px_40px_-8px_rgba(229,36,39,0.15)] rounded-[2rem] p-8 md:p-10 relative overflow-hidden group">
+              <!-- Glow effect background -->
+              <div class="absolute -top-32 -right-32 w-64 h-64 bg-primary/10 rounded-full blur-[80px] pointer-events-none group-hover:bg-primary/20 transition-colors duration-500"></div>
+
+              <div class="relative z-10 flex flex-col md:flex-row md:items-center gap-5 mb-6">
+                <div class="w-16 h-16 rounded-2xl ${s.iconCls} flex items-center justify-center text-3xl flex-shrink-0 shadow-lg">${s.icon}</div>
                 <div>
-                  <p class="text-xs font-semibold tracking-[0.15em] uppercase text-primary mb-1">Étape ${i+1} / ${steps.length}</p>
-                  <h3 class="text-xl md:text-2xl font-bold">${s.title}</h3>
+                  <div class="inline-flex items-center gap-2 bg-primary/10 border border-primary/20 px-3 py-1 rounded-full mb-2">
+                    <span class="w-2 h-2 rounded-full bg-primary animate-pulse"></span>
+                    <span class="text-xs font-bold tracking-[0.1em] uppercase text-primary">Étape ${i+1} sur ${steps.length}</span>
+                  </div>
+                  <h3 class="text-2xl md:text-3xl font-extrabold text-white leading-tight">${s.title}</h3>
                 </div>
               </div>
-              <p class="text-white/45 text-sm mb-5">${s.sub}</p>
-              <div class="text-white/65 text-sm leading-relaxed ${s.paras.length>1?'space-y-3':''} bg-white/5 rounded-2xl p-6 border border-white/10">
-                ${s.paras.map(p=>`<p>${p}</p>`).join('')}
+              
+              <div class="relative z-10">
+                <p class="text-white/80 font-medium text-base mb-5 pb-5 border-b border-white/10">${s.sub}</p>
+                <div class="text-white/60 text-sm leading-relaxed ${s.paras.length>1?'space-y-3':''}">
+                  ${s.paras.map(p=>`<p>${p}</p>`).join('')}
+                </div>
               </div>
             </div>
           </div>
