@@ -138,6 +138,41 @@
       height: 4px; border-radius: 9999px;
       transition: background 0.3s ease, width 0.3s ease;
     }
+
+    @media (max-width: 767px) {
+      /* Désactiver scroll-jacking et animations absolues sur mobile */
+      #how-it-works { height: auto !important; padding-bottom: 2rem; }
+      #how-it-works > div.sticky { position: static !important; height: auto !important; overflow: visible !important; }
+      #steps-area {
+        position: relative !important;
+        display: flex !important;
+        flex-direction: row !important;
+        align-items: stretch !important;
+        overflow-x: auto !important;
+        overflow-y: hidden !important;
+        scroll-snap-type: x mandatory;
+        padding: 0 1.5rem 1rem 1.5rem !important;
+        gap: 1rem;
+        -webkit-overflow-scrolling: touch;
+        scrollbar-width: none;
+      }
+      #steps-area::-webkit-scrollbar { display: none; }
+      .steps-slide {
+        position: static !important;
+        opacity: 1 !important;
+        transform: none !important;
+        pointer-events: auto !important;
+        scroll-snap-align: center;
+        flex: 0 0 88% !important; 
+        padding: 0 !important;
+        height: auto !important; /* La hauteur s'ajustera au flex */
+      }
+      .steps-slide > div {
+        height: 100%; /* S'assure que les cartes ont la même hauteur */
+      }
+      /* Cacher flèches/aide sur mobile (inutile avec scroll horizontal natif) */
+      #steps-prev, #steps-next, #steps-scroll-hint { display: none !important; }
+    }
     /* ── Pack toggle ─────────────────────────────────────── */
     .pack-tab {
       padding: 0.4rem 1.1rem;
@@ -1375,13 +1410,15 @@
         setTimeout(() => { arrowNav = false; }, 200);
       });
 
-      // Steps — horizontal swipe support
+      // Steps — horizontal swipe support (desktop only, mobile uses native CSS scroll snap)
       let stSwipeX = 0, stSwipeY = 0;
       section.addEventListener('touchstart', e => {
+        if (window.innerWidth < 768) return;
         stSwipeX = e.touches[0].clientX;
         stSwipeY = e.touches[0].clientY;
       }, { passive: true });
       section.addEventListener('touchend', e => {
+        if (window.innerWidth < 768) return;
         const dx = e.changedTouches[0].clientX - stSwipeX;
         const dy = e.changedTouches[0].clientY - stSwipeY;
         // Only act on clearly horizontal swipes
@@ -1404,7 +1441,11 @@
         const introEl = document.getElementById('pack-intro');
         if (introEl) introEl.textContent = packData.desc;
         numSteps = steps.length;
-        section.style.height = (numSteps * 70 + 70) + 'vh';
+        if (window.innerWidth >= 768) {
+          section.style.height = (numSteps * 70 + 70) + 'vh';
+        } else {
+          section.style.height = 'auto';
+        }
 
         // Dots
         dotsCnt.innerHTML = steps.map((_, i) =>
@@ -1412,6 +1453,12 @@
         ).join('');
         dotsCnt.querySelectorAll('.step-dot').forEach((dot, i) => {
           dot.addEventListener('click', () => {
+            if (window.innerWidth < 768) {
+              const slide = area.children[i];
+              const offset = (area.clientWidth - slide.offsetWidth) / 2;
+              area.scrollTo({ left: slide.offsetLeft - area.offsetLeft - offset, behavior: 'smooth' });
+              return;
+            }
             arrowNav = true;
             scrollToStep(i);
             showStep(i, true, 'x');
@@ -1459,11 +1506,14 @@
 
         scrollDone = false;
         current = -1;
-        showStep(0, true);
-        onScroll();
+        if (window.innerWidth >= 768) {
+          showStep(0, true);
+          onScroll();
+        }
       }
 
       function onScroll() {
+        if (window.innerWidth < 768) return;
         if (arrowNav) return;
         if (scrollDone) {
           // User re-entered the section scrolling down after already completing it.
@@ -1545,6 +1595,37 @@
       }, { passive: true });
 
       window.addEventListener('scroll', onScroll, { passive: true });
+      window.addEventListener('resize', () => { 
+         if (window.innerWidth >= 768) {
+           section.style.height = (numSteps * 70 + 70) + 'vh';
+         } else {
+           section.style.height = 'auto';
+         }
+         onScroll();
+      });
+
+      // Synchronisation native scroll des dots (uniquement mobile)
+      area.addEventListener('scroll', () => {
+        if (window.innerWidth >= 768) return;
+        const center = area.scrollLeft + area.clientWidth / 2;
+        let minDiff = Infinity;
+        let activeIdx = 0;
+        Array.from(area.children).forEach((slide, i) => {
+           const slideCenter = slide.offsetLeft + slide.offsetWidth / 2 - area.offsetLeft;
+           const diff = Math.abs(slideCenter - center);
+           if (diff < minDiff) { 
+             minDiff = diff; 
+             activeIdx = i; 
+           }
+        });
+        const dots = dotsCnt.querySelectorAll('.step-dot');
+        dots.forEach((d, i) => {
+           d.style.background = i === activeIdx ? '#E52427' : 'rgba(255,255,255,0.15)';
+           d.style.width      = i === activeIdx ? '24px' : '8px';
+        });
+        current = activeIdx;
+      }, { passive: true });
+
       renderSteps('gestion');
     }());
 
