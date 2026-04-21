@@ -166,7 +166,7 @@
         <!-- Tab 2: Esthétique (active page) -->
         <button id="shift-tab-2" data-shift-tab="2"
                 class="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium tracking-wide text-primary transition-colors duration-200">
-          Esthétique
+          Detailing
           <svg data-chevron class="w-3 h-3 text-primary/60 transition-transform duration-200 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
           </svg>
@@ -252,21 +252,54 @@
       </button>
     </div>
 
-    <!-- Mobile menu -->
-    <div id="mobile-menu" class="hidden lg:hidden bg-dark border-t border-white/10">
-      <nav class="flex flex-col px-6 py-4 gap-1">
-        <a href="index.html#vehicules" class="text-white text-sm font-medium py-3 border-b border-white/10">Véhicules Disponibles</a>
-        <a href="vehicules-vendus.html" class="text-white/55 text-sm py-2.5 pl-5 border-b border-white/5">↳ Véhicules Vendus</a>
-        <a href="recherche-personnalisee.html" class="text-white text-sm font-medium py-3 border-b border-white/10">Recherche Personnalisée</a>
-        <a href="detailing.html" class="text-primary text-sm font-medium py-3 border-b border-white/10">Esthétique</a>
-        <a href="detailing.html#excellence" class="text-white/55 text-sm py-2.5 pl-5 border-b border-white/5">↳ Polissage & Correction</a>
-        <a href="detailing.html#sellerie" class="text-white/55 text-sm py-2.5 pl-5 border-b border-white/10">↳ Sellerie & Cuir</a>
-        <a href="vendez-votre-voiture.html" class="text-white text-sm font-medium py-3 border-b border-white/10">Vendez Votre Voiture</a>
-        <a href="#studio" class="text-white text-sm font-medium py-3 border-b border-white/10">Contact</a>
-        <a href="#studio" class="mt-3 bg-primary text-white text-sm font-semibold px-6 py-3 rounded-lg text-center">
-          Prendre rendez-vous
+    <!-- Mobile menu fullscreen overlay -->
+    <div id="mobile-menu" class="fixed inset-0 z-[60] flex flex-col lg:hidden"
+         style="background:#050B20; opacity:0; pointer-events:none;"
+         aria-hidden="true">
+      <div class="flex items-center justify-between px-6 py-5 flex-shrink-0">
+        <a href="index.html"><img src="assets/logo-blanc.png" alt="Hancock Motors" class="h-8 w-auto"/></a>
+        <button id="menu-close" class="text-white/70 hover:text-white transition-colors" aria-label="Fermer le menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="h-px bg-white/10 mx-6 flex-shrink-0"></div>
+      <nav class="flex-1 flex flex-col justify-center px-8 overflow-y-auto">
+        <a href="vehicules.html" class="mob-link flex items-baseline gap-5 py-4 border-b border-white/5">
+          <span class="text-primary text-xs font-bold w-6 flex-shrink-0 tabular-nums">01</span>
+          <span class="text-white text-4xl font-extrabold tracking-tight leading-none">Véhicules</span>
+        </a>
+        <a href="recherche-personnalisee.html" class="mob-link flex items-baseline gap-5 py-4 border-b border-white/5">
+          <span class="text-primary text-xs font-bold w-6 flex-shrink-0 tabular-nums">02</span>
+          <span class="text-white text-4xl font-extrabold tracking-tight leading-none">Recherche</span>
+        </a>
+        <a href="detailing.html" class="mob-link flex items-baseline gap-5 py-4 border-b border-white/5">
+          <span class="text-primary text-xs font-bold w-6 flex-shrink-0 tabular-nums">03</span>
+          <span class="text-white text-4xl font-extrabold tracking-tight leading-none">Detailing</span>
+        </a>
+        <a href="vendez-votre-voiture.html" class="mob-link flex items-baseline gap-5 py-4 border-b border-white/5">
+          <span class="text-primary text-xs font-bold w-6 flex-shrink-0 tabular-nums">04</span>
+          <span class="text-white text-4xl font-extrabold tracking-tight leading-none">Vendre</span>
+        </a>
+        <a href="#studio" class="mob-link flex items-baseline gap-5 py-4">
+          <span class="text-primary text-xs font-bold w-6 flex-shrink-0 tabular-nums">05</span>
+          <span class="text-white text-4xl font-extrabold tracking-tight leading-none">Contact</span>
         </a>
       </nav>
+      <div class="px-8 pb-10 flex-shrink-0">
+        <div class="h-px bg-white/10 mb-8"></div>
+        <a href="#studio" class="mob-footer block w-full text-center bg-primary hover:bg-primary-hover text-white font-bold text-sm py-4 rounded-xl mb-6 transition-colors duration-200">Prendre rendez-vous →</a>
+        <div class="mob-footer flex items-center justify-between">
+          <a href="tel:+33629324299" class="text-white/50 text-sm font-medium hover:text-white transition-colors">+33 6 29 32 42 99</a>
+          <div class="flex items-center gap-5">
+            <a href="https://www.instagram.com/hancockmotors" class="text-white/40 hover:text-white transition-colors" aria-label="Instagram">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/hancockmotors" class="text-white/40 hover:text-white transition-colors" aria-label="Facebook">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
     </div>
   </header>
 
@@ -330,6 +363,172 @@
     </div>
   </section>
 
+
+  <!-- ======================================================
+       SECTION 1.5 — NETTOYAGE & ENTRETIEN (Packs)
+  ====================================================== -->
+  <section id="nettoyage" class="py-24 md:py-32 px-6 relative overflow-hidden" style="background: #0a0f1e;">
+    <div class="absolute -top-40 -right-40 w-96 h-96 bg-primary/10 rounded-full blur-[120px] pointer-events-none"></div>
+    <div class="max-w-7xl mx-auto relative z-10">
+
+      <!-- Header -->
+      <div class="mb-16 md:mb-24 text-center max-w-3xl mx-auto">
+        <div class="flex items-center justify-center gap-5 mb-6">
+          <div class="w-12 h-px bg-primary"></div>
+          <p class="text-xs font-semibold tracking-[0.25em] uppercase text-primary">Le Hub Entretien</p>
+          <div class="w-12 h-px bg-primary"></div>
+        </div>
+        <h2 class="text-4xl md:text-6xl font-bold text-white leading-tight">
+          Nettoyage<br />
+          <span class="font-serif italic text-white/50">Haute précision.</span>
+        </h2>
+        <p class="text-white/40 text-base mt-6 leading-relaxed">
+          Un nettoyage chirurgical pour redonner à votre véhicule sa propreté originelle. Nos packs sont conçus pour sublimer chaque détail, de la pointe du pneu jusqu'au cœur de la fibre.
+        </p>
+      </div>
+
+      <!-- Les Packs Grid (2 cols) -->
+      <div class="grid grid-cols-1 lg:grid-cols-2 gap-8 mb-8">
+
+        <!-- Pack Extérieur Card -->
+        <div class="bg-surface/50 border border-white/5 rounded-3xl p-8 lg:p-10 hover:border-primary/30 transition-all duration-300 relative overflow-hidden group">
+          <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center">
+              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M12 3v1m0 16v1m9-9h-1M4 12H3m15.364 6.364l-.707-.707M6.343 6.343l-.707-.707m12.728 0l-.707.707M6.343 17.657l-.707.707M16 12a4 4 0 11-8 0 4 4 0 018 0z"/></svg>
+            </div>
+            <div>
+              <span class="inline-block text-[10px] font-bold tracking-[0.3em] uppercase text-primary mb-1">Pack 01</span>
+              <h3 class="text-white font-bold text-3xl">Extérieur</h3>
+            </div>
+          </div>
+          
+          <p class="text-white/50 text-sm leading-relaxed mb-8 h-10">Élimine les salissures et préserve l'éclat de la peinture sans risque de micro-rayures (technique multi-seaux).</p>
+          
+          <div class="space-y-4">
+            <div class="bg-black/20 rounded-xl p-4 border border-white/5">
+              <div class="flex items-center gap-3 mb-2"><span class="text-primary font-bold text-xs">01.</span><h4 class="text-white text-sm font-semibold">Pré-lavage & Jantes</h4></div>
+              <p class="text-white/40 text-xs leading-relaxed">Rinçage actif, dégraissage spécifique des pneus et brossage des jantes au pinceau.</p>
+            </div>
+            <div class="bg-black/20 rounded-xl p-4 border border-white/5">
+              <div class="flex items-center gap-3 mb-2"><span class="text-primary font-bold text-xs">02.</span><h4 class="text-white text-sm font-semibold">Lavage Manuel & Décontamination</h4></div>
+              <p class="text-white/40 text-xs leading-relaxed">Shampoing doux multi-seaux, décontaminant ferreux, dégoudronnant et passage à l'argile.</p>
+            </div>
+            <div class="bg-black/20 rounded-xl p-4 border border-white/5">
+              <div class="flex items-center gap-3 mb-2"><span class="text-primary font-bold text-xs">03.</span><h4 class="text-white text-sm font-semibold">Séchage & Protection Cire</h4></div>
+              <p class="text-white/40 text-xs leading-relaxed">Séchage au souffleur/microfibre densité extrême. Application de cire anti-UV déperlante.</p>
+            </div>
+            <div class="bg-black/20 rounded-xl p-4 border border-white/5">
+              <div class="flex items-center gap-3 mb-2"><span class="text-primary font-bold text-xs">04.</span><h4 class="text-white text-sm font-semibold">Finitions</h4></div>
+              <p class="text-white/40 text-xs leading-relaxed">Nettoyage vitres haute transparence et dressing protecteur des flancs de pneus.</p>
+            </div>
+          </div>
+        </div>
+
+        <!-- Pack Intérieur Card -->
+        <div class="bg-surface/50 border border-white/5 rounded-3xl p-8 lg:p-10 hover:border-primary/30 transition-all duration-300 relative overflow-hidden group">
+          <div class="absolute top-0 left-0 w-full h-1 bg-gradient-to-r from-transparent via-primary/50 to-transparent opacity-0 group-hover:opacity-100 transition-opacity duration-500"></div>
+          <div class="flex items-center gap-4 mb-6">
+            <div class="w-14 h-14 rounded-2xl bg-white/5 border border-white/10 flex items-center justify-center">
+              <svg class="w-7 h-7 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="1.5" d="M19 11H5m14 0a2 2 0 012 2v6a2 2 0 01-2 2H5a2 2 0 01-2-2v-6a2 2 0 012-2m14 0V9a2 2 0 00-2-2M5 11V9a2 2 0 002-2m0 0V5a2 2 0 012-2h6a2 2 0 012 2v2M7 7h10"/></svg>
+            </div>
+            <div>
+              <span class="inline-block text-[10px] font-bold tracking-[0.3em] uppercase text-primary mb-1">Pack 02</span>
+              <h3 class="text-white font-bold text-3xl">Habitacle</h3>
+            </div>
+          </div>
+          
+          <p class="text-white/50 text-sm leading-relaxed mb-8 h-10">Un environnement sain et apaisant grâce à un nettoyage en profondeur des cuirs, tissus et plastiques.</p>
+          
+          <div class="space-y-4">
+            <div class="bg-black/20 rounded-xl p-4 border border-white/5">
+              <div class="flex items-center gap-3 mb-2"><span class="text-primary font-bold text-xs">01.</span><h4 class="text-white text-sm font-semibold">Aspiration Avancée</h4></div>
+              <p class="text-white/40 text-xs leading-relaxed">Examen minutieux et extraction des particules sur moquettes, tapis, sièges et glissières.</p>
+            </div>
+            <div class="bg-black/20 rounded-xl p-4 border border-white/5">
+              <div class="flex items-center gap-3 mb-2"><span class="text-primary font-bold text-xs">02.</span><h4 class="text-white text-sm font-semibold">Hygiène Plastiques & Vapeur</h4></div>
+              <p class="text-white/40 text-xs leading-relaxed">Dégraissage au pinceau et désinfection vapeur des commandes, volants et grilles d'aération.</p>
+            </div>
+            <div class="bg-black/20 rounded-xl p-4 border border-white/5">
+              <div class="flex items-center gap-3 mb-2"><span class="text-primary font-bold text-xs">03.</span><h4 class="text-white text-sm font-semibold">Soin Textiles & Cuirs</h4></div>
+              <p class="text-white/40 text-xs leading-relaxed">Shampoing des tissus et nettoyage/hydratation des cuirs pour un toucher souple originel.</p>
+            </div>
+            <div class="bg-black/20 rounded-xl p-4 border border-white/5">
+              <div class="flex items-center gap-3 mb-2"><span class="text-primary font-bold text-xs">04.</span><h4 class="text-white text-sm font-semibold">Vitres & Désodorisation</h4></div>
+              <p class="text-white/40 text-xs leading-relaxed">Dégraissage interne des surfaces vitrées et pose d'un parfum d'intérieur signature.</p>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <!-- Pack Complet (Full span) -->
+      <div class="bg-gradient-to-r from-primary/20 via-surface to-dark border border-primary/30 rounded-3xl p-8 lg:p-12 relative overflow-hidden flex flex-col md:flex-row items-center gap-10">
+        <div class="absolute top-0 right-0 bg-primary text-white text-[10px] font-bold px-4 py-2 rounded-bl-xl tracking-widest uppercase shadow-lg shadow-primary/20">Signature</div>
+        <div class="md:w-1/3">
+          <span class="inline-block text-[10px] font-bold tracking-[0.3em] uppercase text-primary mb-2">Pack 03</span>
+          <h3 class="text-white font-bold text-4xl mb-4">Complet</h3>
+          <p class="text-white/60 text-sm leading-relaxed">L'alliance parfaite. La fusion du soin extérieur complet et du nettoyage méticuleux de l'habitacle pour un véhicule qui renaît littéralement.</p>
+        </div>
+        <div class="md:w-2/3 flex flex-col sm:flex-row items-center justify-between gap-6">
+          <ul class="space-y-3 shrink-0">
+             <li class="flex items-center gap-3"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-white/80 text-sm font-medium">100% des étapes Extérieures</span></li>
+             <li class="flex items-center gap-3"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-white/80 text-sm font-medium">100% des étapes Habitacle</span></li>
+             <li class="flex items-center gap-3"><svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg><span class="text-white/80 text-sm font-medium">Garantie base ultra-saine</span></li>
+          </ul>
+          <a href="#studio" class="inline-flex shrink-0 items-center gap-3 bg-white text-dark hover:bg-white/90 font-bold px-8 py-4 rounded-xl transition-all duration-300 transform hover:scale-105 shadow-[0_0_20px_rgba(255,255,255,0.2)]">
+            Obtenir un devis
+            <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>
+          </a>
+        </div>
+      </div>
+
+    </div>
+  </section>
+
+  <!-- ======================================================
+       SECTION 1.6 — NETTOYAGE EN PROFONDEUR (SUR DEVIS)
+  ====================================================== -->
+  <section class="py-24 px-6 relative overflow-hidden" style="background: #111116;">
+    <div class="h-px w-full absolute top-0 left-0" style="background: linear-gradient(to right, transparent, rgba(229,36,39,0.4) 30%, rgba(229,36,39,0.4) 70%, transparent);"></div>
+
+    <div class="max-w-7xl mx-auto flex flex-col lg:flex-row items-center gap-14 text-white">
+      <!-- Agrandissement de l'image (min-h-[600px] ou [700px]) pour voir les détails de la pluie -->
+      <div class="w-full lg:w-1/2 relative group">
+        <div class="neon-frame rounded-2xl overflow-hidden relative z-10" style="min-height: 600px; border: 1px solid rgba(229,36,39,0.7); box-shadow: 0 0 12px rgba(229,36,39,0.25), 0 0 2px rgba(229,36,39,0.5);">
+          <img src="images/Detailing/nettoyage%20acoudoir.jpeg" alt="Nettoyage en profondeur habitacle automobile Hancock Motors" class="absolute inset-0 w-full h-full object-cover transition-transform duration-700 group-hover:scale-105" />
+        </div>
+        <div class="absolute top-1/2 left-1/2 -translate-x-1/2 -translate-y-1/2 w-3/4 h-3/4 bg-primary/20 blur-[100px] z-0 rounded-full pointer-events-none"></div>
+      </div>
+      
+      <div class="w-full lg:w-1/2 lg:pl-6 relative z-10">
+        <p class="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-4">Sauvetage & Restauration</p>
+        <h2 class="text-4xl md:text-5xl font-bold leading-tight mb-4">
+          La remise à<br />
+          <span class="font-serif italic text-white/50 font-normal">zéro.</span>
+        </h2>
+        <p class="text-white/60 text-sm leading-relaxed mb-6">
+          Votre véhicule a subi des dégâts exceptionnels (taches tenaces, fluides, poils d'animaux incrustés, odeurs de tabac) ? 
+          Nous proposons un service de restauration extrême nécessitant des techniques avancées (vapeur combinée, injection/extraction enzymatique, démontage de sellerie).
+        </p>
+        
+        <ul class="space-y-4 mb-8">
+          <li class="flex items-start gap-3 text-sm"><span class="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0 mt-1.5"></span><span class="text-white/60">Traitement des <strong class="text-white font-medium">odeurs tenaces</strong> via neutralisateur enzymatique et générateur d'ozone.</span></li>
+          <li class="flex items-start gap-3 text-sm"><span class="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0 mt-1.5"></span><span class="text-white/60">Extraction assistée des <strong class="text-white font-medium">poils d'animaux</strong> et du sable dans la moquette.</span></li>
+          <li class="flex items-start gap-3 text-sm"><span class="w-1.5 h-1.5 rounded-full bg-primary flex-shrink-0 mt-1.5"></span><span class="text-white/60">Désinfection approfondie et désincrustation des textiles à cœur à l'extracteur.</span></li>
+        </ul>
+
+        <div class="bg-surface border border-white/10 rounded-xl p-5 mb-8 flex items-start gap-4">
+           <div class="w-10 h-10 rounded-full bg-white/5 flex-shrink-0 flex items-center justify-center border border-white/10">
+             <svg class="w-5 h-5 text-white/70" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M13 16h-1v-4h-1m1-4h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"/></svg>
+           </div>
+           <div>
+             <p class="text-white font-bold text-sm mb-1">Uniquement sur devis personnalisé</p>
+             <p class="text-white/40 text-xs leading-relaxed">Cette prestation extrême s'évalue après inspection sur place de l'habitacle.</p>
+           </div>
+        </div>
+      </div>
+    </div>
+  </section>
 
   <!-- ======================================================
        SECTION 2 — L'EXCELLENCE EXTÉRIEURE (Timeline)
@@ -975,10 +1174,6 @@
        JS
   ====================================================== -->
   <script>
-    // Mobile menu toggle
-    const menuBtn = document.getElementById('menu-btn');
-    const mobileMenu = document.getElementById('mobile-menu');
-    menuBtn.addEventListener('click', () => mobileMenu.classList.toggle('hidden'));
 
     // Contact form
     const form = document.getElementById('studio-form');
@@ -1021,6 +1216,7 @@
     });
   </script>
   <script src="assets/shifting-nav.js"></script>
+  <script src="assets/mobile-nav.js"></script>
   <script>
     function openLightbox(btn) {
       const img = btn.querySelector('img');
