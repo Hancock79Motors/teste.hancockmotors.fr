@@ -1,8 +1,10 @@
 ---
 description: Rules for editing the Hancock Motors marketing website
 paths:
-  - "index.html"
+  - "*.html"
 ---
+
+⚠️ Ce fichier s'applique à toutes les pages HTML, pas uniquement index.html.
 
 # Hancock Motors Website
 
@@ -17,8 +19,8 @@ Single-page French-language luxury car dealership site using **Tailwind CSS (CDN
 
 | Token | Hex | Used for |
 |---|---|---|
-| `primary` | `#405FF2` | CTAs, price tags, accent labels, underlines |
-| `primary-hover` | `#4E6CFB` | Button hover state |
+| `primary` | `#E52427` | CTAs, price tags, accent labels, underlines |
+| `primary-hover` | `#F03336` | Button hover state |
 | `dark` | `#050B20` | Nav background, headings, footer |
 
 ## Key JavaScript Behaviours
