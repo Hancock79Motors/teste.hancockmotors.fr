@@ -537,6 +537,8 @@
                 <!-- Key specs — compact rows -->
                 <div class="bg-surface rounded-xl border border-white/10 divide-y divide-white/5 mb-5">
                   ${[
+                    ['Année', car.annee],
+                    ['Kilométrage', car.km != null ? fmtKm(car.km) : null],
                     ['Carburant', car.carburant],
                     ['Boîte', car.boite],
                     ['Puissance', car.puissance],
