@@ -33,7 +33,17 @@
       "Bash(open -a Safari \"/Users/tobyhancock/Desktop/Claude test Site/index.html\")",
       "mcp__plugin_claude-mem_mcp-search__smart_outline",
       "Bash(python3 *)",
-      "Bash(git add *)"
+      "Bash(git add *)",
+      "Bash(git rm *)",
+      "Bash(git restore *)",
+      "Bash(git commit -m ' *)",
+      "Bash(git push *)",
+      "Bash(git pull *)",
+      "Bash(git stash *)",
+      "Bash(git *)",
+      "Bash(awk NR>=160 && NR<=210 *)",
+      "Bash(awk NR>=710 && NR<=760 *)",
+      "Bash(node -e \"$\\(cat cars-data.js\\); console.log\\('OK', CARS.length, 'cars'\\); console.log\\('Last:', CARS[CARS.length-1].id, '—', CARS[CARS.length-1].titre, '—', CARS[CARS.length-1].prix\\);\")"
     ],
     "additionalDirectories": [
       "/Users/tobyhancock/.claude/agents"
