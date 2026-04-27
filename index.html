@@ -516,7 +516,7 @@
       </div>
 
       <!-- JS renders the 3 last available cars here -->
-      <div id="stock-grid" class="grid grid-cols-2 lg:grid-cols-3 gap-4 md:gap-6">
+      <div id="stock-grid" class="flex gap-4 md:gap-6 overflow-x-auto snap-x snap-mandatory -mx-6 px-6 pb-2 lg:grid lg:grid-cols-3 lg:overflow-visible lg:mx-0 lg:px-0" style="scrollbar-width:none;-ms-overflow-style:none;">
         <!-- Fallback skeleton (hidden once JS runs) -->
         <div class="col-span-full text-center py-16 text-white/25 text-sm" id="stock-loading">
           Chargement du stock…
@@ -1185,17 +1185,13 @@
   <script src="cars-data.js"></script>
 
   <script>
-    // ── Sélection de Stock — 3 voitures vedettes ──────────
+    // ── Sélection de Stock — annonces récentes (Disponible / Réservé) ──
     (function () {
       if (typeof CARS === 'undefined') return;
       const grid    = document.getElementById('stock-grid');
       const loading = document.getElementById('stock-loading');
-      const FEATURED_IDS = [
-        'porsche-928-s4',
-        'bmw-m4-f83-cabriolet',
-        'mercedes-cla-edition1-220d',
-      ];
-      const featured = FEATURED_IDS.map(id => CARS.find(c => c.id === id)).filter(Boolean);
+      // Auto: ordre du tableau CARS = plus récent en premier (cf. règle stock-photos)
+      const featured = CARS.filter(c => c.statut !== 'Vendu').slice(0, 12);
       if (!featured.length) return;
       if (loading) loading.remove();
       featured.forEach(car => {
@@ -1205,9 +1201,8 @@
         const badge    = car.statut === 'Réservé' ? 'bg-yellow-500' : 'bg-primary';
         const detailUrl = 'vehicule.html?id=' + car.id;
         const imgFilter = car.id === 'mercedes-cla-edition1-220d' ? 'brightness(1.5) contrast(1.05)' : '';
-        const isThird = featured.indexOf(car) === 2;
         const card = document.createElement('div');
-        card.className = (isThird ? 'hidden lg:block ' : '') + 'bg-surface border border-white/10 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300';
+        card.className = 'bg-surface border border-white/10 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 flex-shrink-0 w-[78%] max-w-sm snap-start lg:w-auto lg:max-w-none lg:flex-shrink';
         card.innerHTML = `
           <a href="${detailUrl}" class="block overflow-hidden h-36 sm:h-48 lg:h-64 bg-white/5 relative">
             <img src="${photo}" alt="${car.titre}"
