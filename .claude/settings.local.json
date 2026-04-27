@@ -43,7 +43,9 @@
       "Bash(git *)",
       "Bash(awk NR>=160 && NR<=210 *)",
       "Bash(awk NR>=710 && NR<=760 *)",
-      "Bash(node -e \"$\\(cat cars-data.js\\); console.log\\('OK', CARS.length, 'cars'\\); console.log\\('Last:', CARS[CARS.length-1].id, '—', CARS[CARS.length-1].titre, '—', CARS[CARS.length-1].prix\\);\")"
+      "Bash(node -e \"$\\(cat cars-data.js\\); console.log\\('OK', CARS.length, 'cars'\\); console.log\\('Last:', CARS[CARS.length-1].id, '—', CARS[CARS.length-1].titre, '—', CARS[CARS.length-1].prix\\);\")",
+      "Bash(lsof -ti:8000)",
+      "Bash(xargs kill *)"
     ],
     "additionalDirectories": [
       "/Users/tobyhancock/.claude/agents"
