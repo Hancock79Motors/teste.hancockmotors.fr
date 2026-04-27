@@ -1,0 +1,7 @@
+User-agent: *
+Allow: /
+
+Disallow: /hancockmotors_fr__.html
+Disallow: /Contrat_Mandat_Long_Final.docx
+
+Sitemap: https://hancockmotors.fr/sitemap.xml
