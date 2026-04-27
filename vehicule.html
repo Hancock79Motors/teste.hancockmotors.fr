@@ -43,22 +43,27 @@
     .dropdown-menu.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
 
     /* ── Main carousel ─────────────────────────────────────── */
-    #main-carousel-wrap { position: relative; background: #111; border-radius: 16px; overflow: hidden; aspect-ratio: 4/3; }
-    #main-track { display: flex; height: 100%; transition: transform 0.4s cubic-bezier(0.25,0.8,0.25,1); }
+    #main-carousel-wrap { position: relative; background: #111; border-radius: 16px; overflow: hidden; aspect-ratio: 4/3; touch-action: pan-y; }
+    #main-track { display: flex; height: 100%; transition: transform 0.35s cubic-bezier(0.25,0.8,0.25,1); will-change: transform; }
     .main-slide { flex-shrink: 0; width: 100%; height: 100%; }
-    .main-slide img { width: 100%; height: 100%; object-fit: cover; display: block; }
+    .main-slide img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; -webkit-user-drag: none; user-select: none; }
     .main-nav-btn {
       position: absolute; top: 50%; transform: translateY(-50%);
-      width: 44px; height: 44px; border-radius: 50%;
-      background: rgba(255,255,255,0.92); border: none; cursor: pointer;
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(255,255,255,0.75); border: none; cursor: pointer;
       display: flex; align-items: center; justify-content: center;
-      box-shadow: 0 4px 16px rgba(0,0,0,0.2);
-      transition: background 0.2s ease, opacity 0.2s ease;
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+      opacity: 0; transition: opacity 0.2s ease, background 0.2s ease;
       z-index: 2;
     }
+    #main-carousel-wrap:hover .main-nav-btn { opacity: 1; }
     .main-nav-btn:hover { background: #fff; }
-    .main-nav-btn.prev { left: 14px; }
-    .main-nav-btn.next { right: 14px; }
+    .main-nav-btn.prev { left: 10px; }
+    .main-nav-btn.next { right: 10px; }
+    @media (hover: none) {
+      .main-nav-btn { display: none; }
+    }
     #main-counter {
       position: absolute; bottom: 14px; right: 14px;
       background: rgba(0,0,0,0.6); color: #fff;
@@ -656,13 +661,24 @@
         if (img && !img.complete) { img.loading = 'lazy'; }
       });
 
-      // Touch swipe on main carousel
-      let startX = 0;
+      // Touch swipe on main carousel — axis-locked
+      let startX = 0, startY = 0, axisLock = null;
       const wrap = document.getElementById('main-carousel-wrap');
-      wrap?.addEventListener('touchstart', e => { startX = e.touches[0].clientX; }, { passive: true });
+      wrap?.addEventListener('touchstart', e => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        axisLock = null;
+      }, { passive: true });
+      wrap?.addEventListener('touchmove', e => {
+        if (axisLock) return;
+        const dx = Math.abs(e.touches[0].clientX - startX);
+        const dy = Math.abs(e.touches[0].clientY - startY);
+        if (dx > 8 || dy > 8) axisLock = dx > dy ? 'x' : 'y';
+      }, { passive: true });
       wrap?.addEventListener('touchend', e => {
+        if (axisLock !== 'x') return;
         const dx = e.changedTouches[0].clientX - startX;
-        if (Math.abs(dx) > 40) goTo(current + (dx < 0 ? 1 : -1));
+        if (Math.abs(dx) > 50) goTo(current + (dx < 0 ? 1 : -1));
       });
 
       // Keyboard arrows
