@@ -712,6 +712,29 @@
       document.getElementById('fs-prev').addEventListener('click', () => fsGoTo(fsCurrent - 1));
       document.getElementById('fs-next').addEventListener('click', () => fsGoTo(fsCurrent + 1));
       overlay.addEventListener('click', e => { if (e.target === overlay) closeFullscreen(); });
+
+      // Touch swipe in fullscreen — axis-locked
+      let fsStartX = 0, fsStartY = 0, fsAxis = null;
+      overlay.addEventListener('touchstart', e => {
+        fsStartX = e.touches[0].clientX;
+        fsStartY = e.touches[0].clientY;
+        fsAxis = null;
+      }, { passive: true });
+      overlay.addEventListener('touchmove', e => {
+        if (fsAxis) return;
+        const dx = Math.abs(e.touches[0].clientX - fsStartX);
+        const dy = Math.abs(e.touches[0].clientY - fsStartY);
+        if (dx > 8 || dy > 8) fsAxis = dx > dy ? 'x' : 'y';
+      }, { passive: true });
+      overlay.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - fsStartX;
+        const dy = e.changedTouches[0].clientY - fsStartY;
+        if (fsAxis === 'x' && Math.abs(dx) > 50) {
+          fsGoTo(fsCurrent + (dx < 0 ? 1 : -1));
+        } else if (fsAxis === 'y' && Math.abs(dy) > 80) {
+          closeFullscreen();
+        }
+      });
       document.addEventListener('keydown', e => {
         if (!overlay.classList.contains('open')) return;
         if (e.key === 'Escape') closeFullscreen();
