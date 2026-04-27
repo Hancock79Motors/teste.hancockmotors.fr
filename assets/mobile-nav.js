@@ -10,6 +10,12 @@
   if (!menu || !openBtn) return;
   var closeBtn = document.getElementById('menu-close');
 
+  /* Move menu out of any ancestor that creates a fixed-positioning containing block
+     (e.g. <header> with backdrop-filter). Reparent to <body> so inset-0 fills viewport. */
+  if (menu.parentElement !== document.body) {
+    document.body.appendChild(menu);
+  }
+
   /* Inject styles once per page */
   if (!document.getElementById('mobile-nav-styles')) {
     var s = document.createElement('style');
