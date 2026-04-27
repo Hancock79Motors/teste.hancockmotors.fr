@@ -186,12 +186,12 @@
       height: 100%; 
     }
     
+    #steps-sticky-wrapper {
+      position: sticky;
+      top: 0;
+      height: 100vh;
+    }
     @media (min-width: 768px) {
-      #steps-sticky-wrapper {
-        position: sticky;
-        top: 0;
-        height: 100vh;
-      }
       #steps-area {
         min-height: 600px;
       }
@@ -714,7 +714,7 @@
        LES ÉTAPES (scroll-driven, par pack)
   ====================================================== -->
   <section id="how-it-works" class="relative bg-dark text-white">
-    <div id="steps-sticky-wrapper" class="flex flex-col md:overflow-hidden">
+    <div id="steps-sticky-wrapper" class="flex flex-col overflow-hidden">
 
       <!-- Header -->
       <div class="text-center px-6 pt-20 pb-4 flex-shrink-0">
@@ -1482,7 +1482,6 @@
       }
 
       function onDesktopScroll() {
-        if (window.innerWidth < 768) return;
         const top = section.getBoundingClientRect().top;
         const scrolled = -top;
         const scrollable = section.offsetHeight - window.innerHeight;
@@ -1495,10 +1494,6 @@
       }
 
       function scrollToStepObj(idx) {
-        if (window.innerWidth < 768) {
-           updateCarousel(idx);
-           return;
-        }
         const scrollable = section.offsetHeight - window.innerHeight;
         const targetPercent = (idx + 0.5) / numSteps;
         const targetScrollY = section.offsetTop + (scrollable * targetPercent);
@@ -1515,11 +1510,7 @@
         if (introEl) introEl.textContent = packData.desc;
         numSteps = steps.length;
 
-        if (window.innerWidth >= 768) {
-          section.style.height = (numSteps * 70) + 'vh';
-        } else {
-          section.style.height = 'auto';
-        }
+        section.style.height = (numSteps * 70) + 'vh';
 
         // Dots
         dotsCnt.innerHTML = steps.map((_, i) =>
@@ -1594,21 +1585,15 @@
         if (target !== current) scrollToStepObj(target);
       }, { passive: true });
 
-      // Déclenchement naturel au défilement Windows (Desktop)
+      // Déclenchement naturel au défilement (Mobile + Desktop)
       window.addEventListener('scroll', () => {
-        if (window.innerWidth >= 768 && !jumpLock) {
-          onDesktopScroll();
-        }
+        if (!jumpLock) onDesktopScroll();
       }, { passive: true });
 
       // Redimensionnement
       window.addEventListener('resize', () => {
-        if (window.innerWidth >= 768) {
-          section.style.height = (numSteps * 70) + 'vh';
-        } else {
-          section.style.height = 'auto';
-        }
-        if (window.innerWidth >= 768) onDesktopScroll();
+        section.style.height = (numSteps * 70) + 'vh';
+        onDesktopScroll();
       });
 
       // Pack toggle buttons
