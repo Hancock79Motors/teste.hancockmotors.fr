@@ -1397,15 +1397,8 @@
         });
       }
 
-      // Stock cards stagger
-      const stockGrid = document.getElementById('stock-grid');
-      if (stockGrid) {
-        gsap.from(stockGrid.children, {
-          opacity: 0, y: 36,
-          duration: 0.6, stagger: 0.1, ease: 'power2.out',
-          scrollTrigger: { trigger: stockGrid, start: 'top 85%', once: true }
-        });
-      }
+      // Stock cards: pas de stagger — incompatible avec le scroll horizontal mobile
+      // (les cartes hors viewport restaient bloquées en opacité partielle).
 
       // Contact cards stagger
       document.querySelectorAll('#contact .grid').forEach(grid => {

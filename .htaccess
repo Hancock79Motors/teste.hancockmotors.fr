@@ -14,3 +14,27 @@ RewriteCond %{REQUEST_FILENAME} !-d
 RewriteCond %{REQUEST_FILENAME} !-f
 RewriteCond %{REQUEST_FILENAME}.html -f
 RewriteRule ^(.+?)/?$ $1.html [L]
+
+# ─── Cache headers ────────────────────────────────────────────────
+<IfModule mod_headers.c>
+  # HTML + cars-data.js : pas de cache (sinon hard-refresh requis pour voir les MAJ)
+  <FilesMatch "\.(html|htm)$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
+  # Images / fonts : cache long
+  <FilesMatch "\.(jpe?g|png|webp|avif|gif|svg|ico|woff2?|ttf|otf)$">
+    Header set Cache-Control "public, max-age=2592000"
+  </FilesMatch>
+  # JS / CSS : cache court
+  <FilesMatch "\.(js|css)$">
+    Header set Cache-Control "public, max-age=3600, must-revalidate"
+  </FilesMatch>
+  # cars-data.js : override — pas de cache (toujours frais)
+  <FilesMatch "^cars-data\.js$">
+    Header set Cache-Control "no-cache, no-store, must-revalidate"
+    Header set Pragma "no-cache"
+    Header set Expires "0"
+  </FilesMatch>
+</IfModule>
