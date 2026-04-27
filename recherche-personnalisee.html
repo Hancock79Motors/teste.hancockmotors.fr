@@ -272,6 +272,24 @@
     .pack-card.selected .font-bold.text-white { color: #E52427; }
     .couleur-pill.selected { border-color: #405FF2; background: #405FF21A; color: #fff; }
 
+    /* ── Étapes accomplies — bascule rouge → vert ────────── */
+    .steps-slide.passed > div {
+      border-color: rgba(34, 197, 94, 0.40) !important;
+      box-shadow: 0 16px 40px -8px rgba(34, 197, 94, 0.25) !important;
+    }
+    .steps-slide.passed [class*="border-primary"] {
+      border-color: rgba(34, 197, 94, 0.30) !important;
+    }
+    .steps-slide.passed [class*="bg-primary"] {
+      background-color: rgba(34, 197, 94, 0.15) !important;
+    }
+    .steps-slide.passed .bg-primary.animate-pulse {
+      background-color: #22C55E !important;
+    }
+    .steps-slide.passed .text-primary {
+      color: #22C55E !important;
+    }
+
     /* ── Success ─────────────────────────────────────────── */
     #form-success { display: none; }
     #form-success.show { display: flex; }
@@ -1538,12 +1556,17 @@
           s.style.opacity = op;
           s.style.zIndex = zi;
           s.style.filter = `blur(${blur}px)`;
+          s.classList.toggle('passed', i < idx);
         });
 
         const dots = dotsCnt.querySelectorAll('.step-dot');
         dots.forEach((d, i) => {
-          d.style.background = i === idx ? '#E52427' : 'rgba(255,255,255,0.15)';
-          d.style.width      = i === idx ? '24px' : '8px';
+          d.style.background = i < idx
+            ? '#22C55E'
+            : i === idx
+              ? '#E52427'
+              : 'rgba(255,255,255,0.15)';
+          d.style.width = i === idx ? '24px' : '8px';
         });
         if (btnPrev) btnPrev.disabled = idx === 0;
         if (btnNext) btnNext.disabled = idx === numSteps - 1;
