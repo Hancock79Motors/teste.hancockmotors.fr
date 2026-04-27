@@ -159,9 +159,9 @@
     .rp-slide { display: none; position: absolute; inset: 0; }
     .rp-slide.active { display: block; }
 
-    /* ── 3D Carousel (Mobile & Desktop) ───────────────────── */
-    #how-it-works { padding-bottom: 0; }
-    
+    /* ── 3D Carousel — swipe horizontal uniquement ──────── */
+    #how-it-works { padding-top: 4rem; padding-bottom: 4rem; }
+
     #steps-area {
       position: relative;
       perspective: 1600px;
@@ -172,9 +172,9 @@
       min-height: 520px;
       overflow: hidden;
       touch-action: pan-y;
-      padding: 2rem 0;
+      padding: 1rem 0;
     }
-    
+
     .steps-slide {
       position: absolute;
       width: 88%;
@@ -183,19 +183,27 @@
       will-change: transform, opacity, filter;
       z-index: 1;
     }
-    .steps-slide > div {
-      height: 100%; 
+    .steps-slide > div { height: 100%; }
+
+    #steps-sticky-wrapper { display: flex; flex-direction: column; }
+
+    .steps-hint {
+      display: inline-flex;
+      align-items: center;
+      gap: 0.5rem;
+      color: rgba(255,255,255,0.45);
+      font-size: 0.75rem;
+      letter-spacing: 0.05em;
+      margin-top: 0.75rem;
     }
-    
-    #steps-sticky-wrapper {
-      position: sticky;
-      top: 0;
-      height: 100vh;
+    .steps-hint .arr { animation: hintArrow 1.6s ease-in-out infinite; display: inline-block; }
+    @keyframes hintArrow {
+      0%, 100% { transform: translateX(0); opacity: 0.6; }
+      50%      { transform: translateX(4px); opacity: 1; }
     }
+
     @media (min-width: 768px) {
-      #steps-area {
-        min-height: 600px;
-      }
+      #steps-area { min-height: 600px; }
     }
     /* ── Pack toggle ─────────────────────────────────────── */
     .pack-tab {
@@ -751,6 +759,15 @@
 
         <!-- Progress dots -->
         <div class="flex justify-center items-center gap-2 mt-5" id="step-progress"></div>
+
+        <!-- Swipe hint -->
+        <div class="flex justify-center">
+          <span class="steps-hint" id="steps-swipe-hint" aria-hidden="true">
+            <span class="arr">←</span>
+            <span>Glissez pour voir les étapes</span>
+            <span class="arr">→</span>
+          </span>
+        </div>
       </div>
 
       <!-- Steps cards area (populated by JS) -->
@@ -1452,7 +1469,8 @@
       const hint     = document.getElementById('steps-scroll-hint');
       const btnPrev  = document.getElementById('steps-prev');
       const btnNext  = document.getElementById('steps-next');
-      let jumpLock = false;
+      let current   = 0;
+      let numSteps  = 0;
 
       function updateCarousel(idx) {
         current = idx;
@@ -1498,26 +1516,8 @@
         if (btnNext) btnNext.disabled = idx === numSteps - 1;
       }
 
-      function onDesktopScroll() {
-        const top = section.getBoundingClientRect().top;
-        const scrolled = -top;
-        const scrollable = section.offsetHeight - window.innerHeight;
-        
-        if (scrollable <= 0) return;
-        const progress = Math.max(0, Math.min(1, scrolled / scrollable));
-        const idx = Math.min(numSteps - 1, Math.floor(progress * numSteps));
-        
-        if (idx !== current) updateCarousel(idx);
-      }
-
       function scrollToStepObj(idx) {
-        const scrollable = section.offsetHeight - window.innerHeight;
-        const targetPercent = (idx + 0.5) / numSteps;
-        const targetScrollY = section.offsetTop + (scrollable * targetPercent);
-        jumpLock = true;
-        window.scrollTo({ top: targetScrollY, behavior: 'instant' });
         updateCarousel(idx);
-        setTimeout(() => { jumpLock = false; }, 50);
       }
 
       function renderSteps(pack) {
@@ -1526,8 +1526,6 @@
         const introEl = document.getElementById('pack-intro');
         if (introEl) introEl.textContent = packData.desc;
         numSteps = steps.length;
-
-        section.style.height = (numSteps * 70) + 'vh';
 
         // Dots
         dotsCnt.innerHTML = steps.map((_, i) =>
@@ -1602,16 +1600,8 @@
         if (target !== current) scrollToStepObj(target);
       }, { passive: true });
 
-      // Déclenchement naturel au défilement (Mobile + Desktop)
-      window.addEventListener('scroll', () => {
-        if (!jumpLock) onDesktopScroll();
-      }, { passive: true });
-
-      // Redimensionnement
-      window.addEventListener('resize', () => {
-        section.style.height = (numSteps * 70) + 'vh';
-        onDesktopScroll();
-      });
+      // Redimensionnement — re-applique le carousel (responsive offsets)
+      window.addEventListener('resize', () => { updateCarousel(current); });
 
       // Pack toggle buttons
       document.querySelectorAll('.pack-tab').forEach(btn => {
@@ -1765,6 +1755,8 @@
       e.preventDefault();
 
       const pack     = (document.querySelector('input[name="pack"]:checked') || {}).value || '';
+      const packLabels = { 'gestion': 'Pack Mandat', 'cle-en-main': 'Pack Clé en Main' };
+      const packLabel = packLabels[pack] || pack;
       const marque   = document.getElementById('f-marque').value;
       const modele   = document.getElementById('f-modele').value;
       const budget   = document.getElementById('f-budget').value;
@@ -1783,7 +1775,7 @@
       const options  = document.getElementById('f-options').value;
 
       const msg = [
-        'Formule : ' + pack,
+        'Formule : ' + packLabel,
         'Marque : ' + marque,
         'Modèle : ' + modele,
         'Budget : ' + budget + ' €',
@@ -1815,17 +1807,20 @@
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
-          pack, marque, modele, budget,
+          pack, pack_label: packLabel, marque, modele, budget,
           nom, prenom, ville, cp, email, tel,
           carburant, boite, annee, km, puissance, couleur, options
         })
       }).catch(() => {});
 
-      // Affichage confirmation — inchangé
+      // Affichage confirmation
       document.getElementById('form-progress').style.display = 'none';
       document.getElementById('rp-main-form').style.display = 'none';
       const s = document.getElementById('form-success');
       s.style.display = 'flex';
+      requestAnimationFrame(() => {
+        s.scrollIntoView({ behavior: 'smooth', block: 'center' });
+      });
     });
 
     // ── Reviews mobile slider dots ────────────────────────
