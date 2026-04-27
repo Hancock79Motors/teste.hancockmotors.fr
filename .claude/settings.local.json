@@ -19,7 +19,21 @@
       "Bash(python3 -)",
       "Bash(sed -i '' 's|https://hancockmotors\\\\.fr/wp-content/uploads/2023/10/logo-blanc\\\\.png|assets/logo-blanc.png|g' index.html vehicules.html vehicule.html nettoyage.html vehicules-vendus.html vendez-votre-voiture.html recherche-personnalisee.html)",
       "Bash(sed -i '' 's|Screenshots/logo blanc\\\\.png|assets/logo-blanc.png|g' index.html)",
-      "Bash(open \"/Users/tobyhancock/Desktop/Claude test Site/index.html\")"
+      "Bash(open \"/Users/tobyhancock/Desktop/Claude test Site/index.html\")",
+      "Bash(open -a Safari \"/Users/tobyhancock/Desktop/Claude test Site/recherche-personnalisee.html\")",
+      "Bash(open -a Safari \"/Users/tobyhancock/Desktop/Claude test Site/site/index.html\")",
+      "Bash(ls \"/Users/tobyhancock/Desktop/Claude test Site/site/\"*.html)",
+      "Bash(open \"/Users/tobyhancock/Desktop/Claude test Site/detailing.html\")",
+      "Bash(open \"/Users/tobyhancock/Desktop/Claude test Site/site/index.html\")",
+      "Bash(open \"/Users/tobyhancock/Desktop/Claude test Site/recherche-personnalisee.html\")",
+      "Bash(grep -rn \"Découvrir\\\\|decouvrir\\\\|Decouvrir\" \"/Users/tobyhancock/Desktop/Claude test Site/\"*.html)",
+      "Bash(grep -rn \"Voir les Véhicules\\\\|Explorer les Véh\" \"/Users/tobyhancock/Desktop/Claude test Site/\"*.html)",
+      "Bash(curl -fsSL https://bun.sh/install)",
+      "Bash(bash)",
+      "Bash(open -a Safari \"/Users/tobyhancock/Desktop/Claude test Site/index.html\")",
+      "mcp__plugin_claude-mem_mcp-search__smart_outline",
+      "Bash(python3 *)",
+      "Bash(git add *)"
     ],
     "additionalDirectories": [
       "/Users/tobyhancock/.claude/agents"
