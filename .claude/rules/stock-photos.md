@@ -83,3 +83,8 @@ ford-mustang-gt-fastback-1968-noir-interieur-2.jpg (siège conducteur)
 - [ ] Fichiers renommés selon la convention SEO **dans l'ordre canonique**
 - [ ] Tableau `photos:` dans `cars-data.js` trié dans le même ordre
 - [ ] Première entrée du tableau = trois quarts avant
+- [ ] **Nouvelle annonce insérée en HAUT du tableau `CARS`** (juste après `const CARS = [`) — les véhicules les plus récents apparaissent en premier sur le listing
+
+## Ordre des annonces dans `cars-data.js`
+
+Les annonces sont triées **du plus récent au plus ancien** : toute nouvelle entrée doit être insérée en première position du tableau `CARS`, pas en fin de fichier. La page `vehicules.html` itère le tableau dans l'ordre — la première entrée est affichée en premier.
