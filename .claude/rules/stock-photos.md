@@ -88,3 +88,12 @@ ford-mustang-gt-fastback-1968-noir-interieur-2.jpg (siège conducteur)
 ## Ordre des annonces dans `cars-data.js`
 
 Les annonces sont triées **du plus récent au plus ancien** : toute nouvelle entrée doit être insérée en première position du tableau `CARS`, pas en fin de fichier. La page `vehicules.html` itère le tableau dans l'ordre — la première entrée est affichée en premier.
+
+## Affichage des specs sur les annonces
+
+**Année** et **Kilométrage** doivent toujours apparaître comme champs visibles sur **toutes les annonces**, au même titre que Carburant et Boîte :
+
+- Sur **`vehicules.html`** (cartes listing) : Année + Kilométrage sont les deux premiers pills d'info (déjà en place via icônes calendrier + compteur).
+- Sur **`vehicule.html`** (fiche détail) : Année et Kilométrage doivent être les deux premières lignes du tableau de specs (`Année`, `Kilométrage`, puis `Carburant`, `Boîte`, `Puissance`, `Cylindrée`…).
+
+Si une nouvelle page d'annonce ou un nouveau composant affiche les specs d'un véhicule, **inclure systématiquement Année et Kilométrage** dans le bloc de specs principal.
