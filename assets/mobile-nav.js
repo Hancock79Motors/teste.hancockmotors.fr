@@ -41,13 +41,21 @@
       '  mask-image: radial-gradient(ellipse 80% 60% at 50% 50%, black 30%, transparent 80%);',
       '}',
       '#mobile-menu.is-open { opacity: 1 !important; pointer-events: auto !important; }',
-      '#mobile-menu .mob-link, #mobile-menu .mob-footer {',
+      '#mobile-menu .mob-link, #mobile-menu .mob-sublink, #mobile-menu .mob-footer {',
       '  opacity: 0;',
       '  transform: translateY(18px);',
       '  transition: opacity .5s cubic-bezier(.25,.8,.25,1), transform .5s cubic-bezier(.25,.8,.25,1), color .2s ease;',
       '}',
-      '#mobile-menu.is-open .mob-link, #mobile-menu.is-open .mob-footer {',
+      '#mobile-menu.is-open .mob-link, #mobile-menu.is-open .mob-sublink, #mobile-menu.is-open .mob-footer {',
       '  opacity: 1 !important; transform: translateY(0) !important;',
+      '}',
+      '#mobile-menu .mob-sublink { position: relative; padding: .4rem 0 .4rem 2.75rem; transition: opacity .5s cubic-bezier(.25,.8,.25,1), transform .5s cubic-bezier(.25,.8,.25,1), color .2s ease; }',
+      '#mobile-menu .mob-sublink span:last-child { font-size: .85rem !important; color: rgba(255,255,255,0.6) !important; font-weight: 500 !important; letter-spacing: .01em; }',
+      '#mobile-menu .mob-sublink:active span:last-child { color: #E52427 !important; }',
+      '#mobile-menu .mob-sublink:active { transform: translateX(4px) !important; }',
+      '@media (hover: hover) {',
+      '  #mobile-menu .mob-sublink:hover span:last-child { color: #ffffff !important; }',
+      '  #mobile-menu .mob-sublink:hover { transform: translateX(4px) !important; }',
       '}',
       '#mobile-menu .mob-link { position: relative; padding-top: .65rem !important; padding-bottom: .65rem !important; }',
       '#mobile-menu .mob-link span:first-child { font-size: .65rem !important; }',
@@ -76,20 +84,21 @@
 
   /* Wipe any conflicting inline styles left from older versions */
   ['opacity', 'pointerEvents', 'background', 'transition'].forEach(function (k) { menu.style[k] = ''; });
-  var allItems = menu.querySelectorAll('.mob-link, .mob-footer');
+  var allItems = menu.querySelectorAll('.mob-link, .mob-sublink, .mob-footer');
   allItems.forEach(function (el) {
     el.style.opacity = '';
     el.style.transform = '';
     el.style.transition = '';
   });
 
-  /* Apply staggered transition-delays directly to elements (more reliable than nth-of-type) */
-  var links   = menu.querySelectorAll('.mob-link');
-  var footers = menu.querySelectorAll('.mob-footer');
-  links.forEach(function (el, i) {
-    el.style.transitionDelay = (0.08 + i * 0.06) + 's';
+  /* Apply staggered transition-delays in DOM order so sub-links fall in line with their parent */
+  var navItems = menu.querySelectorAll('.mob-link, .mob-sublink');
+  var footers  = menu.querySelectorAll('.mob-footer');
+  var links    = menu.querySelectorAll('.mob-link');
+  navItems.forEach(function (el, i) {
+    el.style.transitionDelay = (0.08 + i * 0.05) + 's';
   });
-  var base = 0.08 + links.length * 0.06;
+  var base = 0.08 + navItems.length * 0.05;
   footers.forEach(function (el, i) {
     el.style.transitionDelay = (base + i * 0.06) + 's';
   });
@@ -107,7 +116,7 @@
 
   openBtn.addEventListener('click', openMenu);
   if (closeBtn) closeBtn.addEventListener('click', closeMenu);
-  links.forEach(function (el) { el.addEventListener('click', closeMenu); });
+  menu.querySelectorAll('.mob-link, .mob-sublink').forEach(function (el) { el.addEventListener('click', closeMenu); });
   document.addEventListener('keydown', function (e) {
     if (e.key === 'Escape' && menu.classList.contains('is-open')) closeMenu();
   });
