@@ -320,9 +320,34 @@
   </section>
 
 
+  <!-- ── TRUST STRIP ─────────────────────────────────────────── -->
+  <section class="bg-surface border-y border-white/10 py-8">
+    <div class="max-w-6xl mx-auto px-6 grid grid-cols-2 md:grid-cols-4 gap-6 text-center">
+      <div>
+        <div class="text-3xl font-bold text-primary">2020</div>
+        <div class="text-xs text-white/50 mt-1 tracking-wide uppercase">Fondé en Deux-Sèvres</div>
+      </div>
+      <div>
+        <div class="text-3xl font-bold text-primary" id="trust-count">—</div>
+        <div class="text-xs text-white/50 mt-1 tracking-wide uppercase">Véhicules livrés</div>
+      </div>
+      <div>
+        <div class="text-3xl font-bold text-primary">100%</div>
+        <div class="text-xs text-white/50 mt-1 tracking-wide uppercase">Sous mandat écrit</div>
+      </div>
+      <div>
+        <div class="text-3xl font-bold text-primary">48h</div>
+        <div class="text-xs text-white/50 mt-1 tracking-wide uppercase">Première réponse</div>
+      </div>
+    </div>
+  </section>
+
+
   <!-- ── SOLD CARS GRID ─────────────────────────────────────── -->
   <main class="py-12 px-6 min-h-[50vh]">
     <div class="max-w-7xl mx-auto">
+
+      <div id="brand-filters" class="mb-8 flex flex-wrap gap-2 justify-center"></div>
 
       <div id="sold-grid" class="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 xl:grid-cols-4 gap-4"></div>
 
@@ -470,7 +495,7 @@
            </div>`;
 
       return `
-        <div class="car-card reveal bg-surface rounded-2xl overflow-hidden border border-white/10">
+        <div class="car-card reveal bg-surface rounded-2xl overflow-hidden border border-white/10" data-marque="${(car.marque || '').toLowerCase()}">
 
           <!-- Carousel with VENDU overlay -->
           <div class="car-carousel" data-car-id="${car.id}">
@@ -545,10 +570,13 @@
       const grid = document.getElementById('sold-grid');
       const empty = document.getElementById('empty-state');
       const heroCount = document.getElementById('sold-count-hero');
+      const trustCount = document.getElementById('trust-count');
+      const filtersBox = document.getElementById('brand-filters');
 
       const sold = CARS.filter(c => c.statut === 'Vendu');
 
       heroCount.textContent = `${sold.length} véhicule${sold.length !== 1 ? 's' : ''} vendu${sold.length !== 1 ? 's' : ''}`;
+      if (trustCount) trustCount.textContent = `+${sold.length}`;
 
       if (!sold.length) {
         empty.classList.add('show');
@@ -557,6 +585,38 @@
 
       grid.innerHTML = sold.map((car, i) => buildSoldCard(car, i)).join('');
       grid.querySelectorAll('.car-carousel').forEach(initCarousel);
+
+      // ── Brand filter chips ──────────────────────────────────
+      const counts = sold.reduce((acc, c) => {
+        const m = (c.marque || '').trim();
+        if (!m) return acc;
+        acc[m] = (acc[m] || 0) + 1;
+        return acc;
+      }, {});
+      const brands = Object.entries(counts).sort((a, b) => b[1] - a[1]);
+
+      const chipBase = 'text-xs font-semibold px-4 py-2 rounded-full border transition-colors duration-150 cursor-pointer';
+      const chipOff = 'bg-white/5 text-white/60 border-white/10 hover:bg-white/10 hover:text-white';
+      const chipOn = 'bg-primary text-white border-primary';
+
+      const allChip = `<button type="button" data-filter="all" class="brand-chip ${chipBase} ${chipOn}">Tous (${sold.length})</button>`;
+      const brandChips = brands.map(([name, n]) =>
+        `<button type="button" data-filter="${name.toLowerCase()}" class="brand-chip ${chipBase} ${chipOff}">${name} (${n})</button>`
+      ).join('');
+      filtersBox.innerHTML = allChip + brandChips;
+
+      filtersBox.addEventListener('click', (e) => {
+        const btn = e.target.closest('.brand-chip');
+        if (!btn) return;
+        const filter = btn.dataset.filter;
+        filtersBox.querySelectorAll('.brand-chip').forEach(c => {
+          c.className = `brand-chip ${chipBase} ${chipOff}`;
+        });
+        btn.className = `brand-chip ${chipBase} ${chipOn}`;
+        grid.querySelectorAll('.car-card').forEach(card => {
+          card.style.display = (filter === 'all' || card.dataset.marque === filter) ? '' : 'none';
+        });
+      });
 
       const observer = new IntersectionObserver((entries) => {
         entries.forEach((entry, i) => {
