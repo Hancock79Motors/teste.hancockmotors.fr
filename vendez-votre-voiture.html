@@ -37,6 +37,7 @@
     "@context": "https://schema.org",
     "@type": "Service",
     "name": "Achat et dépôt-vente de véhicules",
+    "slogan": "Achat direct et dépôt-vente automobile en Deux-Sèvres",
     "provider": {
       "@type": "AutoDealer",
       "name": "Hancock Motors",
@@ -50,7 +51,59 @@
     },
     "offers": [
       { "@type": "Offer", "name": "Achat direct", "description": "Hancock Motors rachète votre véhicule immédiatement, démarches incluses." },
-      { "@type": "Offer", "name": "Dépôt-vente", "description": "Nous vendons votre voiture à votre place, exposée et préparée par nos soins." }
+      { "@type": "Offer", "name": "Dépôt-vente automobile", "description": "Nous vendons votre voiture à votre place, exposée et préparée par nos soins. Mandat écrit, démarches incluses, zone Deux-Sèvres et Nouvelle-Aquitaine." }
+    ]
+  }
+  </script>
+
+  <!-- Schema.org : BreadcrumbList -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "BreadcrumbList",
+    "itemListElement": [
+      {"@type": "ListItem", "position": 1, "name": "Accueil", "item": "https://www.hancockmotors.fr"},
+      {"@type": "ListItem", "position": 2, "name": "Vendre ou déposer votre voiture", "item": "https://www.hancockmotors.fr/vendez-votre-voiture"}
+    ]
+  }
+  </script>
+
+  <!-- Schema.org : FAQPage (dépôt-vente) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "FAQPage",
+    "mainEntity": [
+      {
+        "@type": "Question",
+        "name": "Comment fonctionne le dépôt-vente automobile chez Hancock Motors ?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Vous nous confiez votre véhicule. Nous l'inspectons, le préparons (nettoyage, photos, mise en avant), gérons les visites, la négociation et toute la partie administrative. Vous recevez le solde après vente, hors commission convenue d'avance dans le mandat écrit."}
+      },
+      {
+        "@type": "Question",
+        "name": "Quelle est la différence entre achat direct et dépôt-vente ?",
+        "acceptedAnswer": {"@type": "Answer", "text": "L'achat direct : Hancock Motors rachète votre voiture immédiatement, paiement comptant, vous repartez sans souci. Le dépôt-vente : nous vendons votre voiture à votre place, vous touchez généralement davantage mais devez patienter le temps de trouver l'acheteur."}
+      },
+      {
+        "@type": "Question",
+        "name": "Combien de temps faut-il pour vendre une voiture en dépôt-vente ?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Quelques jours à plusieurs semaines selon le modèle, le prix et la saison. Notre exposition à Scillé (79) et notre réseau d'acheteurs qualifiés en Nouvelle-Aquitaine permettent de raccourcir significativement le délai par rapport à une vente entre particuliers."}
+      },
+      {
+        "@type": "Question",
+        "name": "Quels véhicules acceptez-vous en dépôt-vente ?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Voitures d'occasion en bon état : citadines, familiales, premium ou sportives. Une inspection préalable est systématique avant la mise en dépôt-vente, pour garantir un prix juste et une vente fluide."}
+      },
+      {
+        "@type": "Question",
+        "name": "Faut-il signer un contrat pour le dépôt-vente ?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Oui, un mandat écrit est obligatoire et nous le rédigeons systématiquement. Il précise le prix de vente cible, la durée du dépôt, la commission et les conditions de retrait."}
+      },
+      {
+        "@type": "Question",
+        "name": "Hancock Motors couvre quelle zone pour le dépôt-vente ?",
+        "acceptedAnswer": {"@type": "Answer", "text": "Basés à Scillé (79), nous accueillons des véhicules de toute la Nouvelle-Aquitaine : Niort, Parthenay, Bressuire, Deux-Sèvres, Vienne, Vendée, Charente-Maritime."}
+      }
     ]
   }
   </script>
@@ -308,12 +361,12 @@
 
     <div class="relative z-10 max-w-7xl mx-auto px-6 py-28 md:py-36">
       <div class="max-w-xl fade-up">
-        <p class="text-xs font-semibold tracking-[0.3em] uppercase text-primary mb-5">Hancock Motors · Reprise</p>
+        <p class="text-xs font-semibold tracking-[0.3em] uppercase text-primary mb-5">Hancock Motors · Achat &amp; Dépôt-vente</p>
         <h1 class="text-4xl md:text-6xl font-bold leading-[1.07] text-white mb-6">
-          Vendez Votre<br />Voiture.
+          Vendre ou déposer<br />sa voiture en <span class="text-primary">Deux-Sèvres</span>.
         </h1>
-        <p class="text-base md:text-lg text-white/65 max-w-md mb-10 leading-relaxed">
-          Estimation rapide, réponse sous 24h et un accompagnement sur mesure. Choisissez la formule qui vous convient.
+        <p class="text-base md:text-lg text-white/65 max-w-xl mb-10 leading-relaxed">
+          Achat direct ou <strong class="text-white/85 font-semibold">dépôt-vente automobile</strong> : Hancock Motors estime, valorise et vend votre véhicule à votre place depuis Scillé (79). Niort, Parthenay, Bressuire, toute la Nouvelle-Aquitaine.
         </p>
         <a href="#formulaire"
            class="inline-flex items-center justify-center bg-white hover:bg-white/90 text-dark font-semibold px-8 py-4 rounded-lg text-sm tracking-wide transition-colors duration-200">
@@ -332,7 +385,7 @@
 
       <div class="text-center mb-14">
         <p class="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-4">Nos Formules</p>
-        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Choisissez votre formule</h2>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Achat direct ou dépôt-vente : choisissez votre formule</h2>
         <p class="text-white/50 text-sm max-w-md mx-auto leading-relaxed">
           Deux approches adaptées à votre situation. Vous pourrez sélectionner votre préférence directement dans le formulaire.
         </p>
@@ -349,7 +402,7 @@
           </div>
           <div>
             <span class="inline-block text-xs font-semibold text-primary bg-primary/10 border border-primary/20 px-3 py-1 rounded-full mb-3">Achat Direct</span>
-            <h3 class="text-xl font-bold text-white mb-2">Nous rachetons votre véhicule</h3>
+            <h3 class="text-xl font-bold text-white mb-2">Achat direct de votre voiture</h3>
             <p class="text-white/55 text-sm leading-relaxed">
               Hancock Motors vous propose un prix ferme et rachète immédiatement votre véhicule. Paiement rapide, zéro démarche de votre côté.
             </p>
@@ -391,7 +444,7 @@
           </div>
           <div>
             <span class="inline-block text-xs font-semibold text-primary bg-primary/20 border border-primary/30 px-3 py-1 rounded-full mb-3">Dépôt Vente</span>
-            <h3 class="text-xl font-bold text-white mb-2">Nous vendons pour vous</h3>
+            <h3 class="text-xl font-bold text-white mb-2">Dépôt-vente automobile</h3>
             <p class="text-white/55 text-sm leading-relaxed">
               Confiez-nous votre véhicule. Nous le valorisons, le présentons à nos acheteurs qualifiés et gérons toute la vente à votre place.
             </p>
@@ -427,6 +480,49 @@
       </div>
     </div>
   </section>
+
+  <!-- ======================================================
+       POURQUOI HANCOCK MOTORS POUR LE DÉPÔT-VENTE
+  ====================================================== -->
+  <section class="py-16 px-6 bg-dark">
+    <div class="max-w-5xl mx-auto">
+      <div class="text-center mb-12">
+        <p class="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-4">Pourquoi nous</p>
+        <h2 class="text-2xl md:text-3xl font-bold text-white mb-3">Pourquoi confier votre dépôt-vente à Hancock Motors ?</h2>
+        <p class="text-white/55 text-sm max-w-xl mx-auto">Inspection rigoureuse, mise en valeur professionnelle, mandat écrit. Trois piliers pour vendre vite et bien votre véhicule en Deux-Sèvres et Nouvelle-Aquitaine.</p>
+      </div>
+      <div class="grid grid-cols-1 md:grid-cols-3 gap-6">
+        <div class="bg-surface border border-white/5 rounded-2xl p-6">
+          <div class="w-10 h-10 rounded-xl bg-primary/15 flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>
+          </div>
+          <h3 class="text-white font-bold text-base mb-2">Inspection avant dépôt</h3>
+          <p class="text-white/55 text-sm leading-relaxed">Chaque véhicule confié est vérifié pour fixer un prix juste — historique, kilométrage, état mécanique et carrosserie.</p>
+        </div>
+        <div class="bg-surface border border-white/5 rounded-2xl p-6">
+          <div class="w-10 h-10 rounded-xl bg-primary/15 flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 9a2 2 0 012-2h.93a2 2 0 001.664-.89l.812-1.22A2 2 0 0110.07 4h3.86a2 2 0 011.664.89l.812 1.22A2 2 0 0018.07 7H19a2 2 0 012 2v9a2 2 0 01-2 2H5a2 2 0 01-2-2V9z"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 13a3 3 0 11-6 0 3 3 0 016 0z"/></svg>
+          </div>
+          <h3 class="text-white font-bold text-base mb-2">Préparation &amp; photos pro</h3>
+          <p class="text-white/55 text-sm leading-relaxed">Detailing, mise en scène, photos studio dans notre atelier de Scillé. Votre annonce sort du lot face à la concurrence Leboncoin.</p>
+        </div>
+        <div class="bg-surface border border-white/5 rounded-2xl p-6">
+          <div class="w-10 h-10 rounded-xl bg-primary/15 flex items-center justify-center mb-4">
+            <svg class="w-5 h-5 text-primary" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/></svg>
+          </div>
+          <h3 class="text-white font-bold text-base mb-2">Mandat écrit, démarches incluses</h3>
+          <p class="text-white/55 text-sm leading-relaxed">Vous signez un mandat clair (prix cible, commission, durée). On gère visites, négociation, paperasse — vous attendez le solde.</p>
+        </div>
+      </div>
+      <div class="text-center mt-10">
+        <p class="text-white/55 text-sm">
+          Plus de 60 véhicules déjà vendus à Hancock Motors —
+          <a href="vehicules-vendus.html" class="text-primary hover:underline font-semibold">voir notre portefeuille</a>
+        </p>
+      </div>
+    </div>
+  </section>
+
 
 
   <!-- ======================================================
@@ -688,6 +784,64 @@
       </div>
     </div>
   </section>
+
+  <!-- ======================================================
+       FAQ — Dépôt-vente automobile
+  ====================================================== -->
+  <section class="py-20 px-6 bg-surface border-t border-white/5">
+    <div class="max-w-3xl mx-auto">
+      <div class="text-center mb-12">
+        <p class="text-xs font-semibold tracking-[0.2em] uppercase text-primary mb-4">FAQ</p>
+        <h2 class="text-3xl md:text-4xl font-bold text-white mb-4">Tout savoir sur le dépôt-vente automobile</h2>
+        <p class="text-white/55 text-sm max-w-xl mx-auto">Les réponses aux questions les plus fréquentes sur le dépôt-vente, l'achat direct et notre fonctionnement à Scillé (79).</p>
+      </div>
+      <div class="space-y-3">
+        <details class="group bg-dark border border-white/5 rounded-xl overflow-hidden">
+          <summary class="cursor-pointer list-none flex items-center justify-between gap-4 p-5 hover:bg-white/[0.02] transition-colors">
+            <h3 class="text-white font-semibold text-sm md:text-base pr-2">Comment fonctionne le dépôt-vente automobile chez Hancock Motors ?</h3>
+            <svg class="w-5 h-5 text-primary flex-shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-5 pb-5 text-white/65 text-sm leading-relaxed">Vous nous confiez votre véhicule. Nous l'inspectons, le préparons (nettoyage, photos, mise en avant), gérons les visites, la négociation et toute la partie administrative. Vous recevez le solde après vente, hors commission convenue d'avance dans le mandat écrit.</div>
+        </details>
+        <details class="group bg-dark border border-white/5 rounded-xl overflow-hidden">
+          <summary class="cursor-pointer list-none flex items-center justify-between gap-4 p-5 hover:bg-white/[0.02] transition-colors">
+            <h3 class="text-white font-semibold text-sm md:text-base pr-2">Quelle est la différence entre achat direct et dépôt-vente ?</h3>
+            <svg class="w-5 h-5 text-primary flex-shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-5 pb-5 text-white/65 text-sm leading-relaxed"><strong class="text-white">Achat direct</strong> : Hancock Motors rachète votre voiture immédiatement, paiement comptant, vous repartez sans souci. <strong class="text-white">Dépôt-vente</strong> : nous vendons votre voiture à votre place, vous touchez généralement davantage mais devez patienter le temps de trouver l'acheteur.</div>
+        </details>
+        <details class="group bg-dark border border-white/5 rounded-xl overflow-hidden">
+          <summary class="cursor-pointer list-none flex items-center justify-between gap-4 p-5 hover:bg-white/[0.02] transition-colors">
+            <h3 class="text-white font-semibold text-sm md:text-base pr-2">Combien de temps faut-il pour vendre une voiture en dépôt-vente ?</h3>
+            <svg class="w-5 h-5 text-primary flex-shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-5 pb-5 text-white/65 text-sm leading-relaxed">Quelques jours à plusieurs semaines selon le modèle, le prix et la saison. Notre exposition à Scillé (79) et notre réseau d'acheteurs qualifiés en Nouvelle-Aquitaine permettent de raccourcir significativement le délai par rapport à une vente entre particuliers.</div>
+        </details>
+        <details class="group bg-dark border border-white/5 rounded-xl overflow-hidden">
+          <summary class="cursor-pointer list-none flex items-center justify-between gap-4 p-5 hover:bg-white/[0.02] transition-colors">
+            <h3 class="text-white font-semibold text-sm md:text-base pr-2">Quels véhicules acceptez-vous en dépôt-vente ?</h3>
+            <svg class="w-5 h-5 text-primary flex-shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-5 pb-5 text-white/65 text-sm leading-relaxed">Voitures d'occasion en bon état : citadines, familiales, premium ou sportives. Une inspection préalable est systématique avant la mise en dépôt-vente, pour garantir un prix juste et une vente fluide.</div>
+        </details>
+        <details class="group bg-dark border border-white/5 rounded-xl overflow-hidden">
+          <summary class="cursor-pointer list-none flex items-center justify-between gap-4 p-5 hover:bg-white/[0.02] transition-colors">
+            <h3 class="text-white font-semibold text-sm md:text-base pr-2">Faut-il signer un contrat pour le dépôt-vente ?</h3>
+            <svg class="w-5 h-5 text-primary flex-shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-5 pb-5 text-white/65 text-sm leading-relaxed">Oui, un mandat écrit est obligatoire et nous le rédigeons systématiquement. Il précise le prix de vente cible, la durée du dépôt, la commission et les conditions de retrait.</div>
+        </details>
+        <details class="group bg-dark border border-white/5 rounded-xl overflow-hidden">
+          <summary class="cursor-pointer list-none flex items-center justify-between gap-4 p-5 hover:bg-white/[0.02] transition-colors">
+            <h3 class="text-white font-semibold text-sm md:text-base pr-2">Hancock Motors couvre quelle zone pour le dépôt-vente ?</h3>
+            <svg class="w-5 h-5 text-primary flex-shrink-0 transition-transform group-open:rotate-180" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"/></svg>
+          </summary>
+          <div class="px-5 pb-5 text-white/65 text-sm leading-relaxed">Basés à Scillé (79), nous accueillons des véhicules de toute la Nouvelle-Aquitaine : Niort, Parthenay, Bressuire, Deux-Sèvres, Vienne, Vendée, Charente-Maritime.</div>
+        </details>
+      </div>
+    </div>
+  </section>
+
 
 
   <!-- ======================================================
