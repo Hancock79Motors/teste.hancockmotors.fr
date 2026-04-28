@@ -12,7 +12,48 @@
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Vendez Votre Voiture — Hancock Motors</title>
+  <title>Vendez ou déposez votre voiture — Achat direct & Dépôt-vente | Hancock Motors</title>
+  <meta name="description" content="Achat direct ou dépôt-vente de votre véhicule en Deux-Sèvres. Estimation sous 24h, accompagnement sur mesure depuis Scillé (79) — Niort, Parthenay, Bressuire, Nouvelle-Aquitaine." />
+  <link rel="canonical" href="https://www.hancockmotors.fr/vendez-votre-voiture" />
+
+  <!-- Open Graph -->
+  <meta property="og:type" content="website" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:site_name" content="Hancock Motors" />
+  <meta property="og:title" content="Vendez ou déposez votre voiture — Hancock Motors" />
+  <meta property="og:description" content="Achat direct ou dépôt-vente. Estimation sous 24h en Deux-Sèvres et Nouvelle-Aquitaine." />
+  <meta property="og:url" content="https://www.hancockmotors.fr/vendez-votre-voiture" />
+  <meta property="og:image" content="https://hancockmotors.fr/wp-content/uploads/2024/12/1-5-copy-3-scaled.jpg" />
+
+  <!-- Twitter -->
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Vendez ou déposez votre voiture — Hancock Motors" />
+  <meta name="twitter:description" content="Achat direct ou dépôt-vente. Estimation sous 24h en Deux-Sèvres." />
+  <meta name="twitter:image" content="https://hancockmotors.fr/wp-content/uploads/2024/12/1-5-copy-3-scaled.jpg" />
+
+  <!-- Schema.org : Service (achat direct + dépôt-vente) -->
+  <script type="application/ld+json">
+  {
+    "@context": "https://schema.org",
+    "@type": "Service",
+    "name": "Achat et dépôt-vente de véhicules",
+    "provider": {
+      "@type": "AutoDealer",
+      "name": "Hancock Motors",
+      "url": "https://www.hancockmotors.fr",
+      "areaServed": ["Scillé", "Niort", "Parthenay", "Bressuire", "Deux-Sèvres", "Nouvelle-Aquitaine"]
+    },
+    "serviceType": ["Achat direct de véhicules d'occasion", "Dépôt-vente automobile"],
+    "areaServed": {
+      "@type": "AdministrativeArea",
+      "name": "Nouvelle-Aquitaine"
+    },
+    "offers": [
+      { "@type": "Offer", "name": "Achat direct", "description": "Hancock Motors rachète votre véhicule immédiatement, démarches incluses." },
+      { "@type": "Offer", "name": "Dépôt-vente", "description": "Nous vendons votre voiture à votre place, exposée et préparée par nos soins." }
+    ]
+  }
+  </script>
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <script>
@@ -74,7 +115,7 @@
     .mode-btn.selected {
       background: #E52427;
       color: #fff;
-      box-shadow: 0 4px 14px rgba(64,95,242,0.35);
+      box-shadow: 0 4px 14px rgba(229,36,39,0.35);
     }
 
     /* Form fields */
@@ -107,7 +148,7 @@
       transition: all 0.3s ease;
     }
     .step-dot.done { background: #E52427; color: #fff; }
-    .step-dot.current { background: #E52427; color: #fff; box-shadow: 0 0 0 4px rgba(64,95,242,0.2); }
+    .step-dot.current { background: #E52427; color: #fff; box-shadow: 0 0 0 4px rgba(229,36,39,0.2); }
     .step-dot.pending { background: rgba(255,255,255,0.08); color: rgba(255,255,255,0.3); }
     .step-line { flex: 1; height: 1px; background: rgba(255,255,255,0.1); }
     .step-line.done { background: #E52427; }
