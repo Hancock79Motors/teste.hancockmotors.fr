@@ -1873,6 +1873,35 @@
         })
       }).catch(() => {});
 
+      // 3. Hancock Motors Agent — recherche IA mobile.de + AutoScout24 (silencieux)
+      const _fullName = (prenom + ' ' + nom).trim();
+      const _agentPayload = {
+        nom: _fullName,
+        email: email,
+        telephone: tel,
+        marque_modele: (marque + ' ' + modele).trim(),
+        budget_max: parseInt(budget, 10)
+      };
+      if (annee) _agentPayload.annee_min = parseInt(annee, 10);
+      if (km)    _agentPayload.km_max    = parseInt(km, 10);
+      if (carburant) _agentPayload.carburant = carburant;
+      if (boite)     _agentPayload.transmission = boite;
+      const _commentParts = [];
+      if (puissance) _commentParts.push('Puissance min : ' + puissance + ' ch');
+      if (couleur)   _commentParts.push('Couleur : ' + couleur);
+      if (options)   _commentParts.push('Options : ' + options);
+      if (ville || cp) _commentParts.push('Localisation client : ' + [ville, cp].filter(Boolean).join(' '));
+      _commentParts.push('Pack choisi : ' + packLabel);
+      _agentPayload.commentaire = _commentParts.join(' | ');
+      fetch('https://hancockmotors.fr/agent/webhook.php', {
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json',
+          'X-Webhook-Secret': '895e7d6bfdae76a4692eda2ebc4e1670a6638962e8cd47dc58d4809a9981e6ca'
+        },
+        body: JSON.stringify(_agentPayload)
+      }).catch(() => {});
+
       // Affichage confirmation
       document.getElementById('form-progress').style.display = 'none';
       document.getElementById('rp-main-form').style.display = 'none';
