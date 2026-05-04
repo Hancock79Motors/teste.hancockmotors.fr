@@ -12,7 +12,18 @@
   </script>
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
-  <title>Véhicule — Hancock Motors</title>
+  <title>Fiche véhicule — Hancock Motors</title>
+  <meta name="description" content="Fiche véhicule Hancock Motors — Scillé (79), Deux-Sèvres, Nouvelle-Aquitaine." />
+  <!-- Open Graph (mis à jour dynamiquement au chargement) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Hancock Motors" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:title" content="Fiche véhicule — Hancock Motors" />
+  <meta property="og:description" content="Fiche véhicule Hancock Motors — Scillé (79)." />
+  <meta property="og:image" content="https://www.hancockmotors.fr/assets/logo-blanc.png" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Fiche véhicule — Hancock Motors" />
+  <meta name="twitter:description" content="Fiche véhicule Hancock Motors — Scillé (79)." />
   <script src="https://cdn.tailwindcss.com"></script>
   <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
   <script>
@@ -421,7 +432,19 @@
     if (!car) {
       document.getElementById('not-found').classList.remove('hidden');
     } else {
-      document.title = `${car.titre} — Hancock Motors`;
+      const pageTitle = `${car.titre} — Hancock Motors`;
+      const shortDesc = (car.description || '').replace(/\s+/g, ' ').trim().slice(0, 155);
+      const heroPhoto = (car.photos && car.photos[0]) ? new URL(car.photos[0].replace(/ /g, '%20'), location.href).href : '';
+      document.title = pageTitle;
+      const setMeta = (sel, content) => { const el = document.querySelector(sel); if (el && content) el.setAttribute('content', content); };
+      setMeta('meta[name="description"]', shortDesc);
+      setMeta('meta[property="og:title"]', pageTitle);
+      setMeta('meta[property="og:description"]', shortDesc);
+      setMeta('meta[property="og:url"]', location.href);
+      if (heroPhoto) setMeta('meta[property="og:image"]', heroPhoto);
+      setMeta('meta[name="twitter:title"]', pageTitle);
+      setMeta('meta[name="twitter:description"]', shortDesc);
+      if (heroPhoto) setMeta('meta[name="twitter:image"]', heroPhoto);
       renderPage(car);
     }
 
