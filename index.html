@@ -994,14 +994,20 @@
             <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
               <div>
                 <label for="ct-nom" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-1.5">Prénom & Nom</label>
-                <input type="text" id="ct-nom" placeholder="Jean Dupont"
+                <input type="text" id="ct-nom" placeholder="Jean Dupont" autocomplete="name"
                        class="w-full border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors bg-white/5" required />
               </div>
               <div>
-                <label for="ct-email" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-1.5">Email</label>
-                <input type="email" id="ct-email" placeholder="jean@example.com"
+                <label for="ct-tel" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-1.5">Téléphone</label>
+                <input type="tel" id="ct-tel" placeholder="+33 6 00 00 00 00" autocomplete="tel"
                        class="w-full border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors bg-white/5" required />
               </div>
+            </div>
+
+            <div>
+              <label for="ct-email" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-1.5">Email</label>
+              <input type="email" id="ct-email" placeholder="jean@example.com" autocomplete="email"
+                     class="w-full border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors bg-white/5" required />
             </div>
 
             <div>
@@ -1173,11 +1179,9 @@
             <p class="text-xs text-white/50 mt-1">Nous vous rappelons rapidement.</p>
           </div>
           <div>
-            <label for="m-email" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-1.5">
-              Email <span class="font-normal text-white/40 lowercase normal-case">(facultatif)</span>
-            </label>
+            <label for="m-email" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-1.5">Email</label>
             <input type="email" id="m-email" placeholder="jean@example.com"
-                   class="w-full border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors bg-white/5" />
+                   class="w-full border border-white/15 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors bg-white/5" required />
           </div>
           <button type="submit"
                   class="w-full bg-primary hover:bg-primary-hover text-white font-semibold py-3.5 rounded-xl text-sm tracking-wide transition-colors duration-200">
@@ -1222,7 +1226,7 @@
                        : 'https://hancockmotors.fr/wp-content/uploads/2024/12/sq5-scaled.jpg';
         const kmStr    = car.km ? Number(car.km).toLocaleString('fr-FR') + ' km' : '—';
         const badge    = car.statut === 'Réservé' ? 'bg-yellow-500' : 'bg-primary';
-        const detailUrl = 'vehicule.html?id=' + car.id;
+        const detailUrl = 'vehicule-' + car.id + '.html';
         const imgFilter = car.id === 'mercedes-cla-edition1-220d' ? 'brightness(1.5) contrast(1.05)' : '';
         const card = document.createElement('div');
         card.className = 'bg-surface border border-white/10 rounded-2xl overflow-hidden hover:shadow-2xl transition-all duration-300 flex-shrink-0 w-[78%] max-w-sm snap-start lg:w-auto lg:max-w-none lg:flex-shrink';
@@ -1354,8 +1358,8 @@
       e.preventDefault();
       const nom = document.getElementById('m-nom').value.trim();
       const tel = document.getElementById('m-tel').value.trim();
-      if (!nom || !tel) return;
-      const email = document.getElementById('m-email').value;
+      const email = document.getElementById('m-email').value.trim();
+      if (!nom || !tel || !email) return;
       const msg = [
         'Véhicule : ' + modalTitle.textContent,
         'Nom : ' + nom,
@@ -1377,11 +1381,13 @@
     document.getElementById('contact-form').addEventListener('submit', (e) => {
       e.preventDefault();
       const nom    = document.getElementById('ct-nom').value.trim();
+      const tel    = document.getElementById('ct-tel').value.trim();
       const email  = document.getElementById('ct-email').value.trim();
       const besoin = document.getElementById('ct-besoin').value;
-      if (!nom || !email || !besoin) return;
+      if (!nom || !tel || !email || !besoin) return;
       const msg = [
         'Nom : ' + nom,
+        'Téléphone : ' + tel,
         'Email : ' + email,
         'Besoin : ' + besoin,
         'Message : ' + document.getElementById('ct-message').value,
