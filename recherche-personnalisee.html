@@ -1814,6 +1814,39 @@
     document.getElementById('rp-main-form').addEventListener('submit', (e) => {
       e.preventDefault();
 
+      // ── Garde dure : coordonnées obligatoires ───────────────
+      const required = [
+        { id: 'f-nom',    label: 'Nom' },
+        { id: 'f-prenom', label: 'Prénom' },
+        { id: 'f-ville',  label: 'Ville' },
+        { id: 'f-cp',     label: 'Code postal' },
+        { id: 'f-email',  label: 'Email' },
+        { id: 'f-tel',    label: 'Téléphone' },
+      ];
+      for (const f of required) {
+        const el = document.getElementById(f.id);
+        if (!el.value.trim()) {
+          activateStep(2);
+          el.focus();
+          alert(`Merci de renseigner votre ${f.label} pour qu'on puisse vous recontacter.`);
+          return;
+        }
+      }
+      const emailEl = document.getElementById('f-email');
+      const emailOk = /^[^\s@]+@[^\s@]+\.[^\s@]{2,}$/.test(emailEl.value.trim());
+      if (!emailOk) {
+        activateStep(2); emailEl.focus();
+        alert('L\'adresse email saisie n\'est pas valide.');
+        return;
+      }
+      const telEl = document.getElementById('f-tel');
+      const telDigits = telEl.value.replace(/\D/g, '');
+      if (telDigits.length < 9) {
+        activateStep(2); telEl.focus();
+        alert('Le numéro de téléphone semble incomplet.');
+        return;
+      }
+
       const pack     = (document.querySelector('input[name="pack"]:checked') || {}).value || '';
       const packLabels = { 'gestion': 'Pack Mandat', 'cle-en-main': 'Pack Clé en Main' };
       const packLabel = packLabels[pack] || pack;
