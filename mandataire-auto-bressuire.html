@@ -354,5 +354,21 @@
     <span class="hidden sm:inline">WhatsApp</span>
   </a>
 
+<script>
+(function() {
+  document.addEventListener("click", function(e) {
+    var link = e.target.closest(
+      "a[href*=\"wa.me\"], a[href*=\"whatsapp.com\"], a[href*=\"api.whatsapp.com\"]"
+    );
+    if (!link) return;
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: "whatsapp_click",
+      link_url: link.href,
+      page_path: window.location.pathname
+    });
+  });
+})();
+</script>
 </body>
 </html>
