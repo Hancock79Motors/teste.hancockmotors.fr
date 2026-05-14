@@ -1065,6 +1065,17 @@
             <p class="text-white/40 text-sm mb-7">Pour qu'on puisse vous recontacter sous 48h. Tous les champs sont obligatoires.</p>
 
             <div class="space-y-5">
+              <div>
+                <label for="f-civilite" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-2">
+                  Civilité <span class="text-red-400">*</span>
+                </label>
+                <select id="f-civilite" name="civilite"
+                        class="w-full border border-white/15 rounded-xl px-4 py-3 text-sm text-white focus:border-primary transition-colors bg-white/5" required>
+                  <option value="" disabled selected>Sélectionnez…</option>
+                  <option value="Monsieur">Monsieur</option>
+                  <option value="Madame">Madame</option>
+                </select>
+              </div>
               <div class="grid grid-cols-1 sm:grid-cols-2 gap-5">
                 <div>
                   <label for="f-nom" class="block text-xs font-semibold text-white/40 uppercase tracking-wide mb-2">
@@ -1828,6 +1839,7 @@
 
       // ── Garde dure : coordonnées obligatoires ───────────────
       const required = [
+        { id: 'f-civilite', label: 'Civilité' },
         { id: 'f-nom',    label: 'Nom' },
         { id: 'f-prenom', label: 'Prénom' },
         { id: 'f-ville',  label: 'Ville' },
@@ -1865,6 +1877,7 @@
       const marque   = document.getElementById('f-marque').value;
       const modele   = document.getElementById('f-modele').value;
       const budget   = document.getElementById('f-budget').value;
+      const civilite = document.getElementById('f-civilite').value;
       const nom      = document.getElementById('f-nom').value;
       const prenom   = document.getElementById('f-prenom').value;
       const ville    = document.getElementById('f-ville').value;
@@ -1884,6 +1897,7 @@
         'Marque : ' + marque,
         'Modèle : ' + modele,
         'Budget : ' + budget + ' €',
+        'Civilité : ' + civilite,
         'Nom : ' + nom,
         'Prénom : ' + prenom,
         'Ville : ' + ville,
@@ -1922,6 +1936,7 @@
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          civilite: civilite || '',
           prenom: prenom || '',
           nom: nom || '',
           telephone: telE164,
