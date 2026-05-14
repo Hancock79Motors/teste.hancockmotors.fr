@@ -315,7 +315,6 @@
       }
     }
   </style>
-  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
 </head>
 <body class="bg-dark text-white">
   <!-- Google Tag Manager (noscript) -->
@@ -1222,11 +1221,12 @@
                       class="px-6 py-4 rounded-xl text-sm font-semibold text-white border border-white/15 hover:bg-white/10 transition-colors flex-shrink-0">
                 ← Retour
               </button>
-              <button type="submit"
-                      class="flex-1 bg-primary hover:bg-primary-hover text-white font-semibold py-4 rounded-xl text-sm tracking-wide transition-colors duration-200">
+              <button type="submit" id="rp-submit-btn"
+                      class="flex-1 bg-primary hover:bg-primary-hover text-white font-semibold py-4 rounded-xl text-sm tracking-wide transition-colors duration-200 disabled:opacity-60 disabled:cursor-not-allowed">
                 Envoyer ma demande de recherche
               </button>
             </div>
+            <p id="rp-form-error" class="hidden text-sm text-red-400 mt-3 text-center"></p>
             <p class="text-center text-xs text-white/40 mt-4">
               🔒 Vos données sont confidentielles · Réponse sous 48h · Aucun engagement
             </p>
@@ -1900,14 +1900,58 @@
         '\nPage : ' + window.location.href
       ].join('\n');
 
-      // 1. EmailJS — inchangé
-      emailjs.send('service_o41pfif', 'template_n3z29ws', {
-        subject: 'Nouvelle demande — Recherche Personnalisée',
-        message: msg,
-        reply_to: email
-      }, 'J4kN91J3N0qwBdAVA').catch(() => {});
+      // Normalisation téléphone → E.164 français
+      const telDigitsAll = tel.replace(/\D/g, '');
+      let telE164;
+      if (telDigitsAll.startsWith('33')) telE164 = '+' + telDigitsAll;
+      else if (telDigitsAll.startsWith('0')) telE164 = '+33' + telDigitsAll.slice(1);
+      else telE164 = '+33' + telDigitsAll;
 
-      // 2. Make — déclenche la recherche Apify
+      const budgetNum = parseInt(budget, 10) || 0;
+
+      const submitBtn = document.getElementById('rp-submit-btn');
+      const errorEl   = document.getElementById('rp-form-error');
+      const originalBtnText = submitBtn.textContent;
+      submitBtn.disabled = true;
+      submitBtn.textContent = 'Envoi en cours…';
+      errorEl.classList.add('hidden');
+      errorEl.textContent = '';
+
+      // 1. n8n — lead-mandat (SMS Twilio + Notion CRM + email notif)
+      fetch('https://hancockmotors.app.n8n.cloud/webhook/lead-mandat', {
+        method: 'POST',
+        headers: { 'Content-Type': 'application/json' },
+        body: JSON.stringify({
+          prenom: prenom || '',
+          nom: nom || '',
+          telephone: telE164,
+          email: email || '',
+          marque: marque || '',
+          modele: modele || '',
+          budget: budgetNum,
+          message: msg
+        })
+      })
+      .then(res => {
+        if (!res.ok) throw new Error('HTTP ' + res.status);
+        // Affichage confirmation
+        document.getElementById('form-progress').style.display = 'none';
+        document.getElementById('rp-main-form').style.display = 'none';
+        const s = document.getElementById('form-success');
+        s.style.display = 'flex';
+        requestAnimationFrame(() => {
+          s.scrollIntoView({ behavior: 'smooth', block: 'center' });
+        });
+      })
+      .catch(err => {
+        console.error('[lead-mandat] webhook error:', err);
+        submitBtn.disabled = false;
+        submitBtn.textContent = originalBtnText;
+        errorEl.textContent = "Une erreur s'est produite lors de l'envoi. Veuillez réessayer ou nous contacter directement par WhatsApp au 06 29 32 42 99.";
+        errorEl.classList.remove('hidden');
+      });
+
+      // 2. Make — déclenche la recherche Apify (fire-and-forget)
       fetch('https://hook.eu1.make.com/1qqcpa38k4xnmh6xu71b2imwv7ghxjm1', {
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
@@ -1946,15 +1990,6 @@
         },
         body: JSON.stringify(_agentPayload)
       }).catch(() => {});
-
-      // Affichage confirmation
-      document.getElementById('form-progress').style.display = 'none';
-      document.getElementById('rp-main-form').style.display = 'none';
-      const s = document.getElementById('form-success');
-      s.style.display = 'flex';
-      requestAnimationFrame(() => {
-        s.scrollIntoView({ behavior: 'smooth', block: 'center' });
-      });
     });
 
     // ── Reviews mobile slider dots ────────────────────────
