@@ -1877,6 +1877,28 @@
       const marque   = document.getElementById('f-marque').value;
       const modele   = document.getElementById('f-modele').value;
       const budget   = document.getElementById('f-budget').value;
+      // Détection automatique source lead (UTM > referrer > Direct)
+      const source = (function () {
+        const params = new URLSearchParams(window.location.search);
+        if (params.get('utm_source')) {
+          const utm = params.get('utm_source').toLowerCase();
+          if (utm.includes('google')) return 'Google Ads';
+          if (utm.includes('facebook') || utm.includes('meta')) return 'Meta Ads';
+          if (utm.includes('leboncoin')) return 'Leboncoin';
+          return params.get('utm_source');
+        }
+        const ref = (document.referrer || '').toLowerCase();
+        if (!ref) return 'Direct';
+        if (ref.includes('google.')) return 'Google Organic';
+        if (ref.includes('facebook.') || ref.includes('fb.')) return 'Facebook';
+        if (ref.includes('instagram.')) return 'Instagram';
+        if (ref.includes('leboncoin.')) return 'Leboncoin';
+        if (ref.includes('mobile.de')) return 'Mobile.de';
+        if (ref.includes('hancockmotors.fr')) return 'Site - navigation interne';
+        try { return new URL(document.referrer).hostname; }
+        catch (e) { return 'Direct'; }
+      })();
+
       const civilite = document.getElementById('f-civilite').value;
       const nom      = document.getElementById('f-nom').value;
       const prenom   = document.getElementById('f-prenom').value;
@@ -1937,6 +1959,7 @@
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
           civilite: civilite || '',
+          source: source,
           prenom: prenom || '',
           nom: nom || '',
           telephone: telE164,
