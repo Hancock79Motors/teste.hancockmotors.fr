@@ -983,6 +983,12 @@
 
         <form id="rp-main-form" novalidate>
 
+          <!-- Anti-spam honeypot — invisible aux humains, rempli par les bots. Ne pas styler visible, ne pas retirer. -->
+          <div aria-hidden="true" style="position:absolute;left:-9999px;top:-9999px;height:0;width:0;overflow:hidden;" tabindex="-1">
+            <label for="hm-hp-site">Ne pas remplir ce champ</label>
+            <input type="text" id="hm-hp-site" name="hm_hp_site" tabindex="-1" autocomplete="off" />
+          </div>
+
           <!-- ── STEP 1 : Véhicule ─────────────────────── -->
           <div class="form-step active" id="fs-1">
             <h3 class="font-bold text-white text-lg mb-1">Quel véhicule recherchez-vous ?</h3>
@@ -1834,8 +1840,18 @@
       });
     });
 
+    // Jeton partagé client → n8n. À recopier à l'identique dans le nœud IF n8n.
+    // N'est pas un secret cryptographique : filtre les bots qui spamment l'URL nue.
+    const HM_RP_TOKEN = 'HMRP-9f3a7c21b8e4-lead-ok';
+
     document.getElementById('rp-main-form').addEventListener('submit', (e) => {
       e.preventDefault();
+
+      // ── Anti-spam : honeypot rempli = bot → on abandonne en silence ──
+      const hpEl = document.getElementById('hm-hp-site');
+      if (hpEl && hpEl.value.trim() !== '') {
+        return;
+      }
 
       // ── Garde dure : coordonnées obligatoires ───────────────
       const required = [
@@ -1958,6 +1974,7 @@
         method: 'POST',
         headers: { 'Content-Type': 'application/json' },
         body: JSON.stringify({
+          form_token: HM_RP_TOKEN,
           civilite: civilite || '',
           source: source,
           prenom: prenom || '',
