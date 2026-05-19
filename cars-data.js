@@ -466,7 +466,7 @@ const CARS = [
     marque: 'Mercedes',
     modele: 'CLA Édition 1 2.0 220D AMG Line',
     titre: 'Mercedes CLA Édition 1 2.0 220D 190ch AMG Line',
-    prix: '30 990 €',
+    prix: '29 990 €',
     annee: 2019,
     km: 127000,
     carburant: 'Diesel',
