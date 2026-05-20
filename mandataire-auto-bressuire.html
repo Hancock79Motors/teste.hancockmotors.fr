@@ -367,6 +367,9 @@
       link_url: link.href,
       page_path: window.location.pathname
     });
+    if (typeof gtag === 'function') {
+      gtag('event', 'whatsapp_click', { event_timeout: 2000 });
+    }
   });
 })();
 </script>
