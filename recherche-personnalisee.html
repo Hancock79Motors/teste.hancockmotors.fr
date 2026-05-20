@@ -8,6 +8,27 @@
   "https://www.googletagmanager.com/gtm.js?id="+i+dl;f.parentNode.insertBefore(j,f);
   })(window,document,"script","dataLayer","GTM-K2KFWSQV");</script>
   <!-- End Google Tag Manager -->
+
+  <!-- Google Ads — event snippet helper (form_submit_mandat conversion) -->
+  <script>
+    // Helper Google Ads : envoie l'événement de conversion et navigue
+    // après confirmation. Pour le formulaire mandat (pas de navigation),
+    // on appelle directement gtag('event', 'form_submit_mandat', ...)
+    // dans le handler de soumission — voir bloc <script> en bas de page.
+    function gtagSendEvent(url) {
+      var callback = function () {
+        if (typeof url === 'string') {
+          window.location = url;
+        }
+      };
+      gtag('event', 'form_submit_mandat', {
+        'event_callback': callback,
+        'event_timeout': 2000,
+      });
+      return false;
+    }
+  </script>
+
   <meta charset="UTF-8" />
   <meta name="viewport" content="width=device-width, initial-scale=1.0" />
   <title>Mandat de Recherche Auto — Import Allemagne & Europe | Hancock Motors</title>
@@ -1997,6 +2018,11 @@
         requestAnimationFrame(() => {
           s.scrollIntoView({ behavior: 'smooth', block: 'center' });
         });
+        // Google Ads — conversion form_submit_mandat (declenchee uniquement
+        // sur soumission n8n reussie ; pas de navigation donc pas de callback URL)
+        if (typeof gtag === 'function') {
+          gtag('event', 'form_submit_mandat', { event_timeout: 2000 });
+        }
       })
       .catch(err => {
         console.error('[lead-mandat] webhook error:', err);
