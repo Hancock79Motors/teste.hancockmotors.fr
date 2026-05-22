@@ -1436,13 +1436,13 @@
 
   // ── Brand-tuned props ──────────────────────────────────
   var opts = {
-    speed: 1.1, scale: 1.5, brightness: 1.1,
-    color1: '#bb8a8a',   // muted rose highlight
-    color2: '#ed1d1d',   // Hancock Motors red
-    noiseFrequency: 3, noiseAmplitude: 1.5,
-    bandHeight: 0.5, bandSpread: 1.8, octaveDecay: 0.12,
-    layerOffset: 0.55, colorSpeed: 1.0,
-    enableMouseInteraction: true, mouseInfluence: 0.25
+    speed: 0.7, scale: 1.5, brightness: 0.42,
+    color1: '#6e4040',   // deep muted red — avoids the white blow-out
+    color2: '#b81d1d',   // Hancock Motors red, slightly deeper
+    noiseFrequency: 3, noiseAmplitude: 1.3,
+    bandHeight: 0.4, bandSpread: 1.15, octaveDecay: 0.12,
+    layerOffset: 0.55, colorSpeed: 0.8,
+    enableMouseInteraction: true, mouseInfluence: 0.2
   };
 
   function hexToVec3(hex) {
