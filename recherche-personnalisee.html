@@ -478,6 +478,7 @@
         </div>
       </div>
     </div>
+    <div id="progress-bar" style="position:absolute;bottom:0;left:0;height:2px;width:0%;background:#FF0000;transition:width 0.15s linear;pointer-events:none;"></div>
   </header>
 
 
@@ -1438,6 +1439,11 @@
     window.addEventListener('scroll', () => {
       document.getElementById('header').style.background =
         window.scrollY > 60 ? 'rgba(5,11,32,0.98)' : 'rgba(5,11,32,0.92)';
+      const _pb = document.getElementById('progress-bar');
+      if (_pb) {
+        const _max = document.body.scrollHeight - window.innerHeight;
+        _pb.style.width = (_max > 0 ? (window.scrollY / _max) * 100 : 0) + '%';
+      }
     });
 
     // ── Hero carousel (5 slides) ──────────────────────────
