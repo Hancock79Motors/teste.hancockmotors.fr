@@ -514,6 +514,16 @@
              alt="Mercedes GLA gris mat — trois quarts avant | Hancock Motors Scillé"
              class="w-full h-full object-cover" loading="lazy" />
       </div>
+      <div class="rp-slide">
+        <img src="Photos voiture/vehicule vendue/renault-captur-1-3-1.jpg"
+             alt="Renault Captur — trois quarts avant | Hancock Motors Scillé"
+             class="w-full h-full object-cover" loading="lazy" />
+      </div>
+      <div class="rp-slide">
+        <img src="Photos voiture/vehicule vendue/audi-a1-s-line-vert-1.jpg"
+             alt="Audi A1 S line verte — trois quarts avant | Hancock Motors Scillé"
+             class="w-full h-full object-cover" loading="lazy" />
+      </div>
     </div>
 
     <!-- Gradient bas -->
@@ -532,6 +542,8 @@
       <button class="rp-dot h-1.5 w-1.5 rounded-full bg-white transition-all duration-300" style="opacity:0.4;" data-i="2" aria-label="Photo 3"></button>
       <button class="rp-dot h-1.5 w-1.5 rounded-full bg-white transition-all duration-300" style="opacity:0.4;" data-i="3" aria-label="Photo 4"></button>
       <button class="rp-dot h-1.5 w-1.5 rounded-full bg-white transition-all duration-300" style="opacity:0.4;" data-i="4" aria-label="Photo 5"></button>
+      <button class="rp-dot h-1.5 w-1.5 rounded-full bg-white transition-all duration-300" style="opacity:0.4;" data-i="5" aria-label="Photo 6"></button>
+      <button class="rp-dot h-1.5 w-1.5 rounded-full bg-white transition-all duration-300" style="opacity:0.4;" data-i="6" aria-label="Photo 7"></button>
     </div>
   </div>
 
@@ -570,7 +582,7 @@
           <span class="text-[10px] md:text-xs text-white/50 leading-tight">Première réponse</span>
         </div>
         <div class="flex flex-col items-start gap-1 p-3 bg-white/[0.03] border border-white/10 rounded-xl">
-          <span class="text-xl md:text-2xl font-black text-white leading-none">−15<span class="text-primary">%</span></span>
+          <span class="text-xl md:text-2xl font-black text-white leading-none"><span class="text-xs md:text-sm align-middle font-bold">jusqu'à </span>−20<span class="text-primary">%</span></span>
           <span class="text-[10px] md:text-xs text-white/50 leading-tight">vs marché français</span>
         </div>
         <div class="flex flex-col items-start gap-1 p-3 bg-white/[0.03] border border-white/10 rounded-xl">
@@ -2164,6 +2176,39 @@
   </script>
   <script src="assets/shifting-nav.js"></script>
   <script src="assets/mobile-nav.js"></script>
+
+  <!-- Bouton flottant — Lancer ma recherche -->
+  <a href="#formulaire"
+     id="cta-float"
+     aria-label="Lancer ma recherche personnalisée"
+     class="fixed bottom-5 left-5 md:bottom-6 md:left-6 z-50 inline-flex items-center gap-2 bg-primary hover:bg-primary-hover text-white font-semibold text-sm md:text-base px-4 py-3 md:px-5 md:py-3.5 rounded-full shadow-2xl shadow-primary/30 transition-all duration-300 hover:scale-105">
+    <svg class="w-5 h-5 flex-shrink-0" fill="none" stroke="currentColor" stroke-width="2.5" viewBox="0 0 24 24" aria-hidden="true">
+      <path stroke-linecap="round" stroke-linejoin="round" d="M21 21l-6-6m2-5a7 7 0 11-14 0 7 7 0 0114 0z"/>
+    </svg>
+    <span>Lancer ma recherche</span>
+  </a>
+  <script>
+  (function () {
+    var btn = document.getElementById('cta-float');
+    var form = document.getElementById('formulaire');
+    if (!btn || !form) return;
+    btn.addEventListener('click', function (e) {
+      e.preventDefault();
+      form.scrollIntoView({ behavior: 'smooth', block: 'start' });
+    });
+    // Masque le bouton quand le formulaire est deja visible
+    if ('IntersectionObserver' in window) {
+      new IntersectionObserver(function (entries) {
+        entries.forEach(function (en) {
+          const hide = en.isIntersecting;
+          btn.style.opacity = hide ? '0' : '1';
+          btn.style.pointerEvents = hide ? 'none' : 'auto';
+          btn.style.transform = hide ? 'translateY(1rem)' : 'translateY(0)';
+        });
+      }, { threshold: 0.2 }).observe(form);
+    }
+  })();
+  </script>
 
   <!-- Bouton flottant WhatsApp -->
   <a href="https://wa.me/33629324299?text=Bonjour%20Hancock%20Motors%2C%20je%20souhaite%20une%20recherche%20personnalis%C3%A9e."
