@@ -927,6 +927,32 @@ const CARS = [
   // ── VÉHICULES VENDUS ─────────────────────────────────────────────────────────
 
   {
+    id: 'bmw-x6-m-black-fire',
+    statut: 'Vendu',
+    marque: 'BMW', modele: "X6 M Black Fire F86",
+    titre: "BMW X6 M Black Fire 575ch — Édition limitée",
+    prix: 'Vendu', annee: 2017, km: 0,
+    carburant: 'Essence', boite: 'Automatique M Steptronic 8',
+    puissance: '575 ch', cylindree: '4.4L V8 BiTurbo',
+    couleur_ext: 'Noir Sapphire', couleur_int: '',
+    portes: 5, places: 5, description: '', specs_extra: {}, equipements: [],
+    photos: ['Photos%20voiture/vehicule%20vendue/bmw-x6-m-black-fire-noir-1.jpg'],
+  },
+
+  {
+    id: 'mazda-mx-5-bleu',
+    statut: 'Vendu',
+    marque: 'Mazda', modele: "MX-5 NC",
+    titre: "Mazda MX-5 — Roadster",
+    prix: 'Vendu', annee: 2008, km: 0,
+    carburant: 'Essence', boite: 'Manuelle',
+    puissance: '', cylindree: '',
+    couleur_ext: 'Bleu', couleur_int: '',
+    portes: 2, places: 2, description: '', specs_extra: {}, equipements: [],
+    photos: ['Photos%20voiture/vehicule%20vendue/mazda-mx-5-bleu-1.jpg'],
+  },
+
+  {
     id: 'porsche-boxster-981-gts',
     statut: 'Vendu',
     marque: 'Porsche', modele: "Boxster GTS 981",

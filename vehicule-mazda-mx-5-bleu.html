@@ -1,0 +1,892 @@
+<!DOCTYPE html>
+<html lang="fr">
+<head>
+  <!-- Google Tag Manager -->
+  <script>(function(w,d,s,l,i){w[l]=w[l]||[];w[l].push({"gtm.start":
+  new Date().getTime(),event:"gtm.js"});var f=d.getElementsByTagName(s)[0],
+  j=d.createElement(s),dl=l!="dataLayer"?"&l="+l:"";j.async=true;j.src=
+  "https://www.googletagmanager.com/gtm.js?id="+i+dl;f.parentNode.insertBefore(j,f);
+  })(window,document,"script","dataLayer","GTM-K2KFWSQV");</script>
+  <!-- End Google Tag Manager -->
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Mazda MX-5 — Roadster — Hancock Motors</title>
+  <meta name="description" content="" />
+  <!-- Open Graph (mis à jour dynamiquement au chargement) -->
+  <meta property="og:type" content="website" />
+  <meta property="og:site_name" content="Hancock Motors" />
+  <meta property="og:locale" content="fr_FR" />
+  <meta property="og:title" content="Mazda MX-5 — Roadster — Hancock Motors" />
+  <meta property="og:description" content="" />
+  <meta property="og:image" content="https://www.hancockmotors.fr/Photos%20voiture/vehicule%20vendue/mazda-mx-5-bleu-1.jpg" />
+  <meta name="twitter:card" content="summary_large_image" />
+  <meta name="twitter:title" content="Mazda MX-5 — Roadster — Hancock Motors" />
+  <meta name="twitter:description" content="" />
+  <meta property="og:url" content="https://www.hancockmotors.fr/vehicule-mazda-mx-5-bleu.html" />
+  <meta name="twitter:image" content="https://www.hancockmotors.fr/Photos%20voiture/vehicule%20vendue/mazda-mx-5-bleu-1.jpg" />
+  <link rel="canonical" href="https://www.hancockmotors.fr/vehicule-mazda-mx-5-bleu.html" />
+  <script src="https://cdn.tailwindcss.com"></script>
+  <link href="https://fonts.googleapis.com/css2?family=DM+Sans:wght@300;400;500;600;700;800&display=swap" rel="stylesheet" />
+  <script>
+    tailwind.config = {
+      theme: {
+        extend: {
+          fontFamily: { sans: ['DM Sans', 'sans-serif'] },
+          colors: { primary: '#E52427', 'primary-hover': '#F03336', dark: '#050B20', surface: '#0D1530' }
+        }
+      }
+    }
+  </script>
+  <style>
+    * { font-family: 'DM Sans', sans-serif; }
+
+    .nav-link { position: relative; }
+    .nav-link::after {
+      content: ''; position: absolute; left: 0; bottom: -2px;
+      width: 0; height: 1px; background: rgba(255,255,255,0.6);
+      transition: width 0.3s ease;
+    }
+    .nav-link:hover::after { width: 100%; }
+
+    .dropdown-menu {
+      opacity: 0; pointer-events: none;
+      transform: translateY(6px);
+      transition: opacity 0.2s ease, transform 0.2s ease;
+    }
+    .dropdown-menu.open { opacity: 1; pointer-events: auto; transform: translateY(0); }
+
+    /* ── Main carousel ─────────────────────────────────────── */
+    #main-carousel-wrap { position: relative; background: #111; border-radius: 16px; overflow: hidden; aspect-ratio: 4/3; touch-action: pan-y; }
+    #main-track { display: flex; height: 100%; transition: transform 0.35s cubic-bezier(0.25,0.8,0.25,1); will-change: transform; }
+    .main-slide { flex-shrink: 0; width: 100%; height: 100%; }
+    .main-slide img { width: 100%; height: 100%; object-fit: cover; display: block; pointer-events: none; -webkit-user-drag: none; user-select: none; }
+    .main-nav-btn {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      width: 36px; height: 36px; border-radius: 50%;
+      background: rgba(255,255,255,0.75); border: none; cursor: pointer;
+      display: flex; align-items: center; justify-content: center;
+      backdrop-filter: blur(6px); -webkit-backdrop-filter: blur(6px);
+      box-shadow: 0 2px 10px rgba(0,0,0,0.15);
+      opacity: 0; transition: opacity 0.2s ease, background 0.2s ease;
+      z-index: 2;
+    }
+    #main-carousel-wrap:hover .main-nav-btn { opacity: 1; }
+    .main-nav-btn:hover { background: #fff; }
+    .main-nav-btn.prev { left: 10px; }
+    .main-nav-btn.next { right: 10px; }
+    @media (hover: none) {
+      .main-nav-btn { display: none; }
+    }
+    #main-counter {
+      position: absolute; bottom: 14px; right: 14px;
+      background: rgba(0,0,0,0.6); color: #fff;
+      font-size: 12px; font-weight: 600;
+      padding: 4px 10px; border-radius: 20px;
+      pointer-events: none;
+    }
+    /* Fullscreen btn */
+    #fullscreen-btn {
+      position: absolute; bottom: 14px; left: 14px;
+      background: rgba(0,0,0,0.6); color: #fff; border: none; cursor: pointer;
+      padding: 6px 10px; border-radius: 8px; font-size: 12px; font-weight: 600;
+      display: flex; align-items: center; gap-5: 5px; transition: background 0.2s;
+    }
+    #fullscreen-btn:hover { background: rgba(0,0,0,0.8); }
+
+    /* ── Thumbnail strip ──────────────────────────────────── */
+    #thumb-strip { display: flex; gap: 8px; overflow-x: auto; padding: 10px 0 4px; scrollbar-width: none; }
+    #thumb-strip::-webkit-scrollbar { display: none; }
+    .thumb {
+      flex-shrink: 0; width: 72px; height: 54px;
+      border-radius: 8px; overflow: hidden; cursor: pointer;
+      border: 2px solid transparent; transition: border-color 0.2s ease;
+    }
+    .thumb.active { border-color: #E52427; }
+    .thumb img { width: 100%; height: 100%; object-fit: cover; display: block; }
+
+    /* ── Fullscreen overlay ───────────────────────────────── */
+    #fullscreen-overlay {
+      display: none; position: fixed; inset: 0; z-index: 1000;
+      background: rgba(0,0,0,0.95); align-items: center; justify-content: center;
+    }
+    #fullscreen-overlay.open { display: flex; }
+    #fs-img { max-width: 92vw; max-height: 90vh; object-fit: contain; border-radius: 8px; }
+    #fs-close {
+      position: absolute; top: 20px; right: 20px;
+      background: rgba(255,255,255,0.1); border: none; cursor: pointer;
+      width: 40px; height: 40px; border-radius: 50%; color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      font-size: 20px; transition: background 0.2s;
+    }
+    #fs-close:hover { background: rgba(255,255,255,0.2); }
+    #fs-prev, #fs-next {
+      position: absolute; top: 50%; transform: translateY(-50%);
+      background: rgba(255,255,255,0.1); border: none; cursor: pointer;
+      width: 48px; height: 48px; border-radius: 50%; color: #fff;
+      display: flex; align-items: center; justify-content: center;
+      transition: background 0.2s;
+    }
+    #fs-prev:hover, #fs-next:hover { background: rgba(255,255,255,0.2); }
+    #fs-prev { left: 20px; }
+    #fs-next { right: 20px; }
+
+    /* ── Contact modal ────────────────────────────────────── */
+    #contact-modal {
+      display: none; position: fixed; inset: 0; z-index: 999;
+      background: rgba(5,11,32,0.7); backdrop-filter: blur(4px);
+      -webkit-backdrop-filter: blur(4px);
+      align-items: center; justify-content: center; padding: 1rem;
+    }
+    #contact-modal.open { display: flex; }
+    #modal-box {
+      background: #0D1530; border-radius: 20px;
+      width: 100%; max-width: 480px;
+      padding: 2rem; position: relative;
+      animation: slideUp 0.25s ease both;
+    }
+    @keyframes slideUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+
+    /* Status badge */
+    .badge-disponible { background: #22c55e; color: #fff; }
+    .badge-reserve    { background: #f97316; color: #fff; }
+    .badge-vendu      { background: #6b7280; color: #fff; }
+
+    @keyframes fadeUp {
+      from { opacity: 0; transform: translateY(20px); }
+      to   { opacity: 1; transform: translateY(0); }
+    }
+  </style>
+  <script src="https://cdn.jsdelivr.net/npm/@emailjs/browser@4/dist/email.min.js"></script>
+</head>
+<body class="bg-dark text-white">
+  <!-- Google Tag Manager (noscript) -->
+  <noscript><iframe src="https://www.googletagmanager.com/ns.html?id=GTM-K2KFWSQV"
+  height="0" width="0" style="display:none;visibility:hidden"></iframe></noscript>
+  <!-- End Google Tag Manager (noscript) -->
+
+  <!-- ── HEADER ─────────────────────────────────────────────── -->
+  <header class="fixed top-0 left-0 right-0 z-50"
+          style="background: rgba(5,11,32,0.95); backdrop-filter: blur(12px); -webkit-backdrop-filter: blur(12px);">
+    <div class="max-w-7xl mx-auto px-6 flex items-center justify-between h-20">
+      <a href="index.html" class="flex-shrink-0">
+        <img src="assets/logo-blanc.png"
+             alt="Hancock Motors" class="h-10 w-auto" />
+      </a>
+      <nav class="relative hidden lg:flex items-center gap-1" id="shift-nav-group">
+        <a id="shift-tab-1" data-shift-tab="1"
+                class="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium tracking-wide text-primary transition-colors duration-200" href="vehicules.html">
+          Véhicules
+          <svg data-chevron class="w-3 h-3 text-primary/60 transition-transform duration-200 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </a>
+        <a href="recherche-personnalisee.html" class="nav-link text-white/70 hover:text-white text-sm font-medium tracking-wide px-3 py-1.5 rounded-full transition-colors">Recherche Personnalisée</a>
+        <a id="shift-tab-2" data-shift-tab="2"
+                class="flex items-center gap-1.5 rounded-full px-3 py-1.5 text-sm font-medium tracking-wide text-white/70 hover:text-white transition-colors duration-200" href="detailing.html">
+          Detailing
+          <svg data-chevron class="w-3 h-3 text-white/40 transition-transform duration-200 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M19 9l-7 7-7-7"/>
+          </svg>
+        </a>
+        <a href="vendez-votre-voiture.html" class="nav-link text-white/70 hover:text-white text-sm font-medium tracking-wide px-3 py-1.5 rounded-full transition-colors">Vendez Votre Voiture</a>
+        <a href="index.html#contact" class="nav-link text-white/70 hover:text-white text-sm font-medium tracking-wide px-3 py-1.5 rounded-full transition-colors">Contact</a>
+        <div id="shift-overlay" class="absolute left-0 top-[calc(100%+20px)] w-72 rounded-xl border border-white/10 bg-surface shadow-2xl p-4 z-50" style="opacity:0; transform:translateY(8px); pointer-events:none; transition:opacity .2s ease, transform .2s ease;">
+          <div class="absolute -top-5 left-0 right-0 h-5"></div>
+          <span id="shift-nub" class="absolute top-0 h-4 w-4 -translate-x-1/2 -translate-y-1/2 rotate-45 border border-white/10 bg-surface" style="left:80px; transition:left .22s ease;"></span>
+          <div data-content="1" hidden>
+            <p class="text-xs font-semibold tracking-[0.15em] uppercase text-white/25 mb-3 px-1">Véhicules</p>
+            <a href="vehicules.html" class="flex items-center gap-2.5 px-3 py-2.5 text-sm text-white/65 hover:text-white hover:bg-white/5 rounded-lg transition-colors"><svg class="w-3.5 h-3.5 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"/></svg>Tous les véhicules</a>
+            <a href="vehicules-vendus.html" class="flex items-center gap-2.5 px-3 py-2.5 text-sm text-white/40 hover:text-white hover:bg-white/5 rounded-lg transition-colors"><svg class="w-3.5 h-3.5 text-white/25 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"/></svg>Véhicules Vendus</a>
+          </div>
+          <div data-content="2" hidden>
+            <p class="text-xs font-semibold tracking-[0.15em] uppercase text-white/25 mb-3 px-1">Le Hub Studio</p>
+            <a href="nettoyage.html" class="flex items-center gap-2.5 px-3 py-2.5 text-sm text-white/40 hover:text-white hover:bg-white/5 rounded-lg transition-colors"><svg class="w-3.5 h-3.5 text-white/25 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M20.24 12.24a6 6 0 00-8.49-8.49L5 10.5V19h8.5z"/></svg>Nettoyage & Soins</a>
+            <a href="detailing.html#excellence" class="flex items-center gap-2.5 px-3 py-2.5 text-sm text-white/40 hover:text-white hover:bg-white/5 rounded-lg transition-colors"><svg class="w-3.5 h-3.5 text-white/25 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><circle cx="12" cy="12" r="9" stroke-width="2"/><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 12l2.5 2.5L16 9"/></svg>Polissage & Céramique</a>
+            <a href="detailing.html#sellerie" class="flex items-center gap-2.5 px-3 py-2.5 text-sm text-white/40 hover:text-white hover:bg-white/5 rounded-lg transition-colors"><svg class="w-3.5 h-3.5 text-white/25 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m5.618-4.016A11.955 11.955 0 0112 2.944a11.955 11.955 0 01-8.618 3.04A12.02 12.02 0 003 9c0 5.591 3.824 10.29 9 11.622 5.176-1.332 9-6.03 9-11.622 0-1.042-.133-2.052-.382-3.016z"/></svg>Restauration Sellerie</a>
+          </div>
+        </div>
+      </nav>
+      <a href="recherche-personnalisee.html"
+         class="hidden lg:inline-flex items-center bg-white hover:bg-white/90 text-dark text-sm font-semibold px-6 py-3 rounded-lg transition-colors duration-200">
+        Recherche Personnalisée
+      </a>
+      <button id="menu-btn" class="lg:hidden text-white">
+        <svg class="w-7 h-7" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 12h16M4 18h16"/>
+        </svg>
+      </button>
+    </div>
+    <!-- Mobile menu fullscreen overlay -->
+    <div id="mobile-menu" class="fixed inset-0 z-[60] flex flex-col lg:hidden"
+         style="background:#050B20; opacity:0; pointer-events:none;"
+         aria-hidden="true">
+      <div class="flex items-center justify-between px-6 py-5 flex-shrink-0">
+        <a href="index.html"><img src="assets/logo-blanc.png" alt="Hancock Motors" class="h-8 w-auto"/></a>
+        <button id="menu-close" class="text-white/70 hover:text-white transition-colors" aria-label="Fermer le menu">
+          <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/></svg>
+        </button>
+      </div>
+      <div class="h-px bg-white/10 mx-6 flex-shrink-0"></div>
+      <nav class="flex-1 flex flex-col justify-center px-8 overflow-y-auto">
+        <a href="vehicules.html" class="mob-link flex items-baseline gap-5 py-4 border-b border-white/5">
+          <span class="text-primary text-xs font-bold w-6 flex-shrink-0 tabular-nums">01</span>
+          <span class="text-white text-4xl font-extrabold tracking-tight leading-none">Véhicules</span>
+        </a>
+        <a href="vehicules-vendus.html" class="mob-sublink flex items-center gap-2 border-b border-white/5">
+          <span class="text-primary/60 text-xs flex-shrink-0">→</span>
+          <span>Véhicules vendus</span>
+        </a>
+        <a href="recherche-personnalisee.html" class="mob-link flex items-baseline gap-5 py-4 border-b border-white/5">
+          <span class="text-primary text-xs font-bold w-6 flex-shrink-0 tabular-nums">02</span>
+          <span class="text-white text-4xl font-extrabold tracking-tight leading-none">Recherche Personnalisée</span>
+        </a>
+        <a href="detailing.html" class="mob-link flex items-baseline gap-5 py-4 border-b border-white/5">
+          <span class="text-primary text-xs font-bold w-6 flex-shrink-0 tabular-nums">03</span>
+          <span class="text-white text-4xl font-extrabold tracking-tight leading-none">Detailing</span>
+        </a>
+        <a href="nettoyage.html" class="mob-sublink flex items-center gap-2 border-b border-white/5">
+          <span class="text-primary/60 text-xs flex-shrink-0">→</span>
+          <span>Nettoyage &amp; Soins</span>
+        </a>
+        <a href="detailing.html#excellence" class="mob-sublink flex items-center gap-2 border-b border-white/5">
+          <span class="text-primary/60 text-xs flex-shrink-0">→</span>
+          <span>Polissage &amp; Céramique</span>
+        </a>
+        <a href="detailing.html#sellerie" class="mob-sublink flex items-center gap-2 border-b border-white/5">
+          <span class="text-primary/60 text-xs flex-shrink-0">→</span>
+          <span>Restauration Sellerie</span>
+        </a>
+        <a href="vendez-votre-voiture.html" class="mob-link flex items-baseline gap-5 py-4 border-b border-white/5">
+          <span class="text-primary text-xs font-bold w-6 flex-shrink-0 tabular-nums">04</span>
+          <span class="text-white text-4xl font-extrabold tracking-tight leading-none">Vendez Votre Voiture</span>
+        </a>
+        <a href="index.html#contact" class="mob-link flex items-baseline gap-5 py-4">
+          <span class="text-primary text-xs font-bold w-6 flex-shrink-0 tabular-nums">05</span>
+          <span class="text-white text-4xl font-extrabold tracking-tight leading-none">Contact</span>
+        </a>
+      </nav>
+      <div class="px-8 pb-10 flex-shrink-0">
+        <div class="h-px bg-white/10 mb-8"></div>
+        <a href="vehicules.html" class="mob-footer block w-full text-center bg-primary hover:bg-primary-hover text-white font-bold text-sm py-4 rounded-xl mb-6 transition-colors duration-200">Voir les Véhicules →</a>
+        <div class="mob-footer flex items-center justify-between">
+          <a href="tel:+33629324299" class="text-white/50 text-sm font-medium hover:text-white transition-colors">+33 6 29 32 42 99</a>
+          <div class="flex items-center gap-5">
+            <a href="https://www.instagram.com/hancockmotors" class="text-white/40 hover:text-white transition-colors" aria-label="Instagram">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M12 2.163c3.204 0 3.584.012 4.85.07 3.252.148 4.771 1.691 4.919 4.919.058 1.265.069 1.645.069 4.849 0 3.205-.012 3.584-.069 4.849-.149 3.225-1.664 4.771-4.919 4.919-1.266.058-1.644.07-4.85.07-3.204 0-3.584-.012-4.849-.07-3.26-.149-4.771-1.699-4.919-4.92-.058-1.265-.07-1.644-.07-4.849 0-3.204.013-3.583.07-4.849.149-3.227 1.664-4.771 4.919-4.919 1.266-.057 1.645-.069 4.849-.069zm0-2.163c-3.259 0-3.667.014-4.947.072-4.358.2-6.78 2.618-6.98 6.98-.059 1.281-.073 1.689-.073 4.948 0 3.259.014 3.668.072 4.948.2 4.358 2.618 6.78 6.98 6.98 1.281.058 1.689.072 4.948.072 3.259 0 3.668-.014 4.948-.072 4.354-.2 6.782-2.618 6.979-6.98.059-1.28.073-1.689.073-4.948 0-3.259-.014-3.667-.072-4.947-.196-4.354-2.617-6.78-6.979-6.98-1.281-.059-1.69-.073-4.949-.073zm0 5.838c-3.403 0-6.162 2.759-6.162 6.162s2.759 6.163 6.162 6.163 6.162-2.759 6.162-6.163c0-3.403-2.759-6.162-6.162-6.162zm0 10.162c-2.209 0-4-1.79-4-4 0-2.209 1.791-4 4-4s4 1.791 4 4c0 2.21-1.791 4-4 4zm6.406-11.845c-.796 0-1.441.645-1.441 1.44s.645 1.44 1.441 1.44c.795 0 1.439-.645 1.439-1.44s-.644-1.44-1.439-1.44z"/></svg>
+            </a>
+            <a href="https://www.facebook.com/hancockmotors" class="text-white/40 hover:text-white transition-colors" aria-label="Facebook">
+              <svg class="w-5 h-5" fill="currentColor" viewBox="0 0 24 24"><path d="M24 12.073c0-6.627-5.373-12-12-12s-12 5.373-12 12c0 5.99 4.388 10.954 10.125 11.854v-8.385H7.078v-3.47h3.047V9.43c0-3.007 1.792-4.669 4.533-4.669 1.312 0 2.686.235 2.686.235v2.953H15.83c-1.491 0-1.956.925-1.956 1.874v2.25h3.328l-.532 3.47h-2.796v8.385C19.612 23.027 24 18.062 24 12.073z"/></svg>
+            </a>
+          </div>
+        </div>
+      </div>
+    </div>
+  </header>
+
+
+  <!-- ── PAGE CONTENT (populated by JS) ─────────────────────── -->
+  <div id="page-content" class="pt-20"></div>
+
+  <!-- ── 404 (hidden by default) ───────────────────────────── -->
+  <div id="not-found" class="hidden pt-40 pb-24 text-center px-6">
+    <p class="text-5xl mb-6">🚗</p>
+    <h1 class="text-2xl font-bold text-white mb-3">Véhicule introuvable</h1>
+    <p class="text-white/40 mb-8">Ce véhicule n'existe pas ou a été retiré de notre inventaire.</p>
+    <a href="vehicules.html" class="inline-flex items-center gap-2 bg-surface border border-white/10 text-white font-semibold px-8 py-4 rounded-xl hover:bg-white/5 hover:border-white/20 transition-colors">
+      ← Retour à l'inventaire
+    </a>
+  </div>
+
+
+  <!-- ── FULLSCREEN OVERLAY ─────────────────────────────────── -->
+  <div id="fullscreen-overlay">
+    <button id="fs-close" aria-label="Fermer">×</button>
+    <button id="fs-prev" aria-label="Précédent">
+      <svg width="20" height="20" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24">
+        <path d="M15 19l-7-7 7-7"/>
+      </svg>
+    </button>
+    <img id="fs-img" src="" alt="" />
+    <button id="fs-next" aria-label="Suivant">
+      <svg width="20" height="20" fill="none" stroke="white" stroke-width="2.5" viewBox="0 0 24 24">
+        <path d="M9 5l7 7-7 7"/>
+      </svg>
+    </button>
+  </div>
+
+
+  <!-- ── CONTACT MODAL ─────────────────────────────────────── -->
+  <div id="contact-modal">
+    <div id="modal-box">
+      <button id="modal-close"
+              class="absolute top-4 right-4 w-8 h-8 rounded-full bg-white/10 hover:bg-white/20 flex items-center justify-center text-white/50 transition-colors">
+        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+          <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"/>
+        </svg>
+      </button>
+
+      <p class="text-xs font-semibold tracking-[0.15em] uppercase text-primary mb-1">Je suis intéressé(e)</p>
+      <h3 id="modal-title" class="text-lg font-bold text-white mb-1"></h3>
+      <p class="text-white/40 text-sm mb-6">Laissez-nous vos coordonnées, nous vous recontactons sous 24h.</p>
+
+      <div id="modal-form-wrap">
+        <form id="modal-form" class="space-y-4" novalidate>
+          <div class="grid grid-cols-2 gap-4">
+            <div>
+              <label class="block text-xs font-semibold text-white/50 uppercase tracking-wide mb-1.5">Prénom *</label>
+              <input type="text" id="m-prenom" placeholder="Jean" required
+                     class="w-full border border-white/10 bg-white/5 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors" />
+            </div>
+            <div>
+              <label class="block text-xs font-semibold text-white/50 uppercase tracking-wide mb-1.5">Nom *</label>
+              <input type="text" id="m-nom" placeholder="Dupont" required
+                     class="w-full border border-white/10 bg-white/5 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors" />
+            </div>
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-white/50 uppercase tracking-wide mb-1.5">Téléphone *</label>
+            <input type="tel" id="m-tel" placeholder="+33 6 00 00 00 00" required
+                   class="w-full border border-white/10 bg-white/5 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-white/50 uppercase tracking-wide mb-1.5">Email *</label>
+            <input type="email" id="m-email" placeholder="jean.dupont@example.com" required
+                   class="w-full border border-white/10 bg-white/5 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors" />
+          </div>
+          <div>
+            <label class="block text-xs font-semibold text-white/50 uppercase tracking-wide mb-1.5">Message</label>
+            <textarea id="m-message" rows="3" placeholder="Questions, disponibilité, visite…"
+                      class="w-full border border-white/10 bg-white/5 rounded-xl px-4 py-3 text-sm text-white placeholder-white/30 focus:outline-none focus:border-primary transition-colors resize-none"></textarea>
+          </div>
+          <p id="modal-error" class="text-red-400 text-xs hidden"></p>
+          <button type="submit"
+                  class="w-full bg-primary hover:bg-primary-hover text-white font-semibold py-4 rounded-xl text-sm tracking-wide transition-colors duration-200">
+            Envoyer ma demande
+          </button>
+        </form>
+      </div>
+
+      <div id="modal-success" class="hidden text-center py-6">
+        <div class="w-14 h-14 rounded-full bg-green-500/10 flex items-center justify-center mx-auto mb-4">
+          <svg class="w-7 h-7 text-green-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+          </svg>
+        </div>
+        <h4 class="font-bold text-white text-lg mb-2">Demande envoyée !</h4>
+        <p class="text-white/40 text-sm">Nous vous recontactons dans les 24 heures.</p>
+      </div>
+    </div>
+  </div>
+
+
+  <!-- ── FOOTER ─────────────────────────────────────────────── -->
+  <footer class="bg-dark text-white pt-16 pb-8 px-6">
+    <div class="max-w-7xl mx-auto">
+      <div class="grid grid-cols-1 md:grid-cols-4 gap-10 pb-12 border-b border-white/10">
+        <div class="md:col-span-1">
+          <img src="assets/logo-blanc.png"
+               alt="Hancock Motors" class="h-10 w-auto mb-5" />
+          <p class="text-white/40 text-sm leading-relaxed">
+            Spécialiste en véhicules de prestige et services de detailing haut de gamme, basé en France.
+          </p>
+        </div>
+        <div>
+          <h4 class="text-xs font-semibold tracking-[0.15em] uppercase text-white/30 mb-5">Véhicules</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="vehicules.html" class="text-white/50 hover:text-white transition-colors">Véhicules Disponibles</a></li>
+            <li><a href="vehicules.html?statut=vendu" class="text-white/50 hover:text-white transition-colors">Véhicules Vendus</a></li>
+            <li><a href="recherche-personnalisee.html" class="text-white/50 hover:text-white transition-colors">Recherche Personnalisée</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-xs font-semibold tracking-[0.15em] uppercase text-white/30 mb-5">Services</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="index.html#nettoyage" class="text-white/50 hover:text-white transition-colors">Nettoyage</a></li>
+            <li><a href="index.html#polissage" class="text-white/50 hover:text-white transition-colors">Polissage / Lustrage</a></li>
+            <li><a href="index.html#ceramique" class="text-white/50 hover:text-white transition-colors">Protection Céramique</a></li>
+          </ul>
+        </div>
+        <div>
+          <h4 class="text-xs font-semibold tracking-[0.15em] uppercase text-white/30 mb-5">Contact</h4>
+          <ul class="space-y-3 text-sm">
+            <li><a href="index.html#contact" class="text-white/50 hover:text-white transition-colors">Nous Contacter</a></li>
+            <li><a href="recherche-personnalisee.html" class="text-white/50 hover:text-white transition-colors">Recherche sur mesure</a></li>
+          </ul>
+        </div>
+      </div>
+      <div class="pt-8 flex flex-col md:flex-row items-center justify-between gap-4 text-xs text-white/25">
+        <span>© Hancock Motors 2026. Tous droits réservés.</span>
+        <div class="flex gap-6">
+          <a href="#" class="hover:text-white/50 transition-colors">Mentions légales</a>
+          <a href="#" class="hover:text-white/50 transition-colors">Politique de confidentialité</a>
+        </div>
+      </div>
+    </div>
+  </footer>
+
+
+  <script>window.__CAR_ID__ = "mazda-mx-5-bleu";</script>
+  <script src="cars-data.js"></script>
+  <script>
+    // ── Load car from URL param ───────────────────────────────
+    const id = window.__CAR_ID__ || new URLSearchParams(window.location.search).get('id');
+    const car = CARS.find(c => c.id === id);
+
+    if (!car) {
+      document.getElementById('not-found').classList.remove('hidden');
+    } else {
+      const pageTitle = `${car.titre} — Hancock Motors`;
+      const shortDesc = (car.description || '').replace(/\s+/g, ' ').trim().slice(0, 155);
+      const heroPhoto = (car.photos && car.photos[0]) ? new URL(car.photos[0].replace(/ /g, '%20'), location.href).href : '';
+      document.title = pageTitle;
+      const setMeta = (sel, content) => { const el = document.querySelector(sel); if (el && content) el.setAttribute('content', content); };
+      setMeta('meta[name="description"]', shortDesc);
+      setMeta('meta[property="og:title"]', pageTitle);
+      setMeta('meta[property="og:description"]', shortDesc);
+      setMeta('meta[property="og:url"]', location.href);
+      if (heroPhoto) setMeta('meta[property="og:image"]', heroPhoto);
+      setMeta('meta[name="twitter:title"]', pageTitle);
+      setMeta('meta[name="twitter:description"]', shortDesc);
+      if (heroPhoto) setMeta('meta[name="twitter:image"]', heroPhoto);
+      renderPage(car);
+    }
+
+    function fmtKm(n) { return n.toLocaleString('fr-FR') + ' km'; }
+
+    function badgeClass(s) {
+      return { 'Disponible': 'badge-disponible', 'Réservé': 'badge-reserve', 'Vendu': 'badge-vendu' }[s] || 'badge-disponible';
+    }
+
+    // ── Render full page ──────────────────────────────────────
+    function renderPage(car) {
+      const photos = car.photos.filter(p => p && p.trim()).map(p => p.replace(/ /g, '%20'));
+      const hasPhotos = photos.length > 0;
+      const multiPhoto = photos.length > 1;
+
+      // Build main carousel slides
+      const slidesHTML = hasPhotos
+        ? photos.map((url, i) => `
+            <div class="main-slide">
+              <img src="${i === 0 ? url : ''}" data-src="${url}" alt="${car.titre} — photo ${i+1}" />
+            </div>`).join('')
+        : `<div class="main-slide" style="display:flex;align-items:center;justify-content:center;background:#1a1a2e;">
+             <svg width="80" height="80" fill="none" stroke="rgba(255,255,255,0.2)" viewBox="0 0 24 24">
+               <path stroke-width="1" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+             </svg>
+           </div>`;
+
+      // Build thumbnail strip
+      const thumbsHTML = multiPhoto
+        ? photos.map((url, i) => `
+            <div class="thumb ${i === 0 ? 'active' : ''}" data-idx="${i}">
+              <img src="${url}" alt="Photo ${i+1}" loading="lazy" />
+            </div>`).join('')
+        : '';
+
+      // Spec rows helper
+      function specRow(label, value) {
+        if (!value && value !== 0) return '';
+        return `<div class="flex justify-between py-3 border-b border-white/10 text-sm">
+          <span class="text-white/40">${label}</span>
+          <span class="font-semibold text-white text-right">${value}</span>
+        </div>`;
+      }
+
+      // Equipment tags
+      const equipHTML = (car.equipements || []).map(e =>
+        `<span class="inline-flex items-center gap-1.5 bg-primary/8 text-primary text-xs font-semibold px-3 py-1.5 rounded-full">
+           <svg class="w-3 h-3" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+           </svg>
+           ${e}
+         </span>`
+      ).join('');
+
+      // Extra specs from specs_extra
+      const extraSpecsHTML = Object.entries(car.specs_extra || {}).map(([k, v]) => specRow(k, v)).join('');
+
+      document.getElementById('page-content').innerHTML = `
+        <div style="animation: fadeUp 0.5s ease both;">
+
+          <!-- Breadcrumb + back -->
+          <div class="bg-surface border-b border-white/10">
+            <div class="max-w-7xl mx-auto px-6 py-4 flex items-center gap-2 text-sm text-white/40">
+              <a href="index.html" class="hover:text-primary transition-colors">Accueil</a>
+              <span>/</span>
+              <a href="vehicules.html" class="hover:text-primary transition-colors">Véhicules</a>
+              <span>/</span>
+              <span class="text-white font-medium truncate">${car.titre}</span>
+            </div>
+          </div>
+
+          <!-- Main layout -->
+          <div class="max-w-7xl mx-auto px-6 py-10">
+            <div class="grid grid-cols-1 lg:grid-cols-2 gap-10 items-start">
+
+              <!-- LEFT: carousel -->
+              <div class="lg:sticky lg:top-28">
+                <div id="main-carousel-wrap">
+                  <div id="main-track">${slidesHTML}</div>
+                  ${multiPhoto ? `
+                    <button class="main-nav-btn prev" id="main-prev" aria-label="Précédent">
+                      <svg width="18" height="18" fill="none" stroke="#050B20" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path d="M15 19l-7-7 7-7"/>
+                      </svg>
+                    </button>
+                    <button class="main-nav-btn next" id="main-next" aria-label="Suivant">
+                      <svg width="18" height="18" fill="none" stroke="#050B20" stroke-width="2.5" viewBox="0 0 24 24">
+                        <path d="M9 5l7 7-7 7"/>
+                      </svg>
+                    </button>
+                    <div id="main-counter">1 / ${photos.length}</div>` : ''}
+                  ${hasPhotos ? `
+                    <button id="fullscreen-btn" aria-label="Plein écran">
+                      <svg width="14" height="14" fill="none" stroke="white" stroke-width="2" viewBox="0 0 24 24">
+                        <path d="M8 3H5a2 2 0 00-2 2v3m18 0V5a2 2 0 00-2-2h-3m0 18h3a2 2 0 002-2v-3M3 16v3a2 2 0 002 2h3"/>
+                      </svg>
+                      &nbsp;Plein écran
+                    </button>` : ''}
+                </div>
+
+                ${multiPhoto ? `<div id="thumb-strip">${thumbsHTML}</div>` : ''}
+              </div>
+
+              <!-- RIGHT: info -->
+              <div>
+                <!-- Status + title -->
+                <div class="flex items-center gap-3 mb-4">
+                  <span class="text-xs font-bold px-3 py-1 rounded-full ${badgeClass(car.statut)}">${car.statut}</span>
+                  <span class="text-sm text-gray-400">${car.annee} · ${fmtKm(car.km)}</span>
+                </div>
+                <h1 class="text-2xl md:text-3xl font-bold text-white leading-tight mb-2">${car.titre}</h1>
+                <p class="text-3xl font-bold text-primary mb-8">${car.prix}</p>
+
+                <!-- Key specs — compact rows -->
+                <div class="bg-surface rounded-xl border border-white/10 divide-y divide-white/5 mb-5">
+                  ${[
+                    ['Année', car.annee],
+                    ['Kilométrage', car.km != null ? fmtKm(car.km) : null],
+                    ['Carburant', car.carburant],
+                    ['Boîte', car.boite],
+                    ['Puissance', car.puissance],
+                    ['Cylindrée', car.cylindree],
+                    ['Couleur ext.', car.couleur_ext],
+                    ['Intérieur', car.couleur_int],
+                    ['Portes', car.portes ? car.portes + ' portes' : null],
+                  ].filter(([, v]) => v).map(([label, value]) => `
+                    <div class="flex items-center justify-between px-4 py-2.5">
+                      <span class="text-xs text-white/40 font-medium">${label}</span>
+                      <span class="text-xs font-semibold text-white">${value}</span>
+                    </div>`).join('')}
+                </div>
+
+                <!-- Équipements -->
+                <!-- CTA buttons -->
+                <div class="flex flex-col sm:flex-row gap-3 mb-8">
+                  <button id="open-contact"
+                          class="flex-1 bg-primary hover:bg-primary-hover text-white font-semibold py-4 rounded-xl text-sm tracking-wide transition-colors duration-200">
+                    Je suis intéressé(e)
+                  </button>
+                  <a href="tel:+33629324299"
+                     class="flex-1 border border-white/20 text-white font-semibold py-4 rounded-xl text-sm tracking-wide hover:bg-white/5 hover:border-white/30 transition-colors text-center">
+                    Appeler
+                  </a>
+                </div>
+
+                <!-- Reassurance -->
+                <div class="bg-surface rounded-xl p-4 flex flex-col gap-2 text-sm text-white/50">
+                  <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    Garantie 12 mois ou extensible jusqu'à 48 mois
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    Financement possible
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    Reprise ou rachat de votre véhicule possible
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-green-500 flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                    </svg>
+                    Livraison à domicile possible : France métropolitaine ou RDV gare de Niort
+                  </div>
+                  <div class="flex items-center gap-2">
+                    <svg class="w-4 h-4 text-primary flex-shrink-0" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                      <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                    </svg>
+                    Véhicule visible uniquement sur rendez-vous
+                  </div>
+                </div>
+              </div>
+            </div>
+
+
+            <!-- ── Description + équipements ──────────────────── -->
+            <div class="grid grid-cols-1 lg:grid-cols-3 gap-10 mt-14">
+
+              <div class="lg:col-span-2 flex flex-col gap-10">
+
+                ${car.description ? `
+                <div>
+                  <h2 class="text-xl font-bold text-white mb-4">Description</h2>
+                  <div class="bg-surface rounded-2xl border border-white/5 p-6 text-sm text-white/65 leading-relaxed">
+                    ${car.description}
+                  </div>
+                </div>` : ''}
+
+                ${car.equipements && car.equipements.length ? `
+                <div>
+                  <h2 class="text-xl font-bold text-white mb-4">Équipements &amp; options</h2>
+                  <div class="bg-surface rounded-2xl border border-white/5 p-6">
+                    <ul class="grid grid-cols-1 sm:grid-cols-2 gap-x-6 gap-y-2.5">
+                      ${[...car.equipements].sort((a, b) => a.localeCompare(b, 'fr')).map(e => `
+                        <li class="flex items-start gap-2.5 text-sm text-white/70">
+                          <svg class="w-4 h-4 text-primary flex-shrink-0 mt-0.5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M5 13l4 4L19 7"/>
+                          </svg>
+                          ${e}
+                        </li>`).join('')}
+                    </ul>
+                  </div>
+                </div>` : ''}
+
+              </div>
+
+              <!-- Sidebar: contact CTA -->
+              <div>
+                <div class="bg-dark rounded-2xl p-6 text-center lg:sticky lg:top-28">
+                  <p class="text-white/60 text-sm mb-1">Intéressé par ce véhicule ?</p>
+                  <p class="text-white font-bold text-xl mb-4">${car.prix}</p>
+                  <button class="open-contact-btn w-full bg-white hover:bg-white/90 text-dark font-semibold py-3.5 rounded-xl text-sm tracking-wide transition-colors">
+                    Contacter Hancock Motors
+                  </button>
+                </div>
+              </div>
+            </div>
+
+          </div>
+        </div>`;
+
+      // ── Init carousel controls ────────────────────────────
+      const track = document.getElementById('main-track');
+      const counter = document.getElementById('main-counter');
+      const thumbs = document.querySelectorAll('.thumb');
+      const slides = document.querySelectorAll('.main-slide');
+      let current = 0;
+      const total = photos.length;
+
+      function goTo(n) {
+        current = (n + total) % total;
+        track.style.transform = `translateX(-${current * 100}%)`;
+        if (counter) counter.textContent = `${current + 1} / ${total}`;
+        thumbs.forEach((t, i) => t.classList.toggle('active', i === current));
+        // Scroll active thumb into view
+        if (thumbs[current]) thumbs[current].scrollIntoView({ behavior: 'smooth', block: 'nearest', inline: 'center' });
+        // Lazy load
+        const img = slides[current]?.querySelector('img[data-src]');
+        if (img && img.dataset.src && img.src !== img.dataset.src) img.src = img.dataset.src;
+      }
+
+      document.getElementById('main-prev')?.addEventListener('click', () => goTo(current - 1));
+      document.getElementById('main-next')?.addEventListener('click', () => goTo(current + 1));
+
+      thumbs.forEach(t => {
+        t.addEventListener('click', () => goTo(parseInt(t.dataset.idx)));
+        // Lazy load thumb images
+        const img = t.querySelector('img');
+        if (img && !img.complete) { img.loading = 'lazy'; }
+      });
+
+      // Touch swipe on main carousel — axis-locked
+      let startX = 0, startY = 0, axisLock = null;
+      const wrap = document.getElementById('main-carousel-wrap');
+      wrap?.addEventListener('touchstart', e => {
+        startX = e.touches[0].clientX;
+        startY = e.touches[0].clientY;
+        axisLock = null;
+      }, { passive: true });
+      wrap?.addEventListener('touchmove', e => {
+        if (axisLock) return;
+        const dx = Math.abs(e.touches[0].clientX - startX);
+        const dy = Math.abs(e.touches[0].clientY - startY);
+        if (dx > 8 || dy > 8) axisLock = dx > dy ? 'x' : 'y';
+      }, { passive: true });
+      wrap?.addEventListener('touchend', e => {
+        if (axisLock !== 'x') return;
+        const dx = e.changedTouches[0].clientX - startX;
+        if (Math.abs(dx) > 50) goTo(current + (dx < 0 ? 1 : -1));
+      });
+
+      // Keyboard arrows
+      document.addEventListener('keydown', e => {
+        if (e.key === 'ArrowLeft') goTo(current - 1);
+        if (e.key === 'ArrowRight') goTo(current + 1);
+      });
+
+      // ── Fullscreen ──────────────────────────────────────────
+      const overlay = document.getElementById('fullscreen-overlay');
+      const fsImg = document.getElementById('fs-img');
+      let fsCurrent = 0;
+
+      function openFullscreen(idx) {
+        fsCurrent = idx;
+        fsImg.src = photos[fsCurrent];
+        overlay.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeFullscreen() {
+        overlay.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+      function fsGoTo(n) {
+        fsCurrent = (n + total) % total;
+        fsImg.src = photos[fsCurrent];
+      }
+
+      document.getElementById('fullscreen-btn')?.addEventListener('click', () => openFullscreen(current));
+      document.getElementById('fs-close').addEventListener('click', closeFullscreen);
+      document.getElementById('fs-prev').addEventListener('click', () => fsGoTo(fsCurrent - 1));
+      document.getElementById('fs-next').addEventListener('click', () => fsGoTo(fsCurrent + 1));
+      overlay.addEventListener('click', e => { if (e.target === overlay) closeFullscreen(); });
+
+      // Touch swipe in fullscreen — axis-locked
+      let fsStartX = 0, fsStartY = 0, fsAxis = null;
+      overlay.addEventListener('touchstart', e => {
+        fsStartX = e.touches[0].clientX;
+        fsStartY = e.touches[0].clientY;
+        fsAxis = null;
+      }, { passive: true });
+      overlay.addEventListener('touchmove', e => {
+        if (fsAxis) return;
+        const dx = Math.abs(e.touches[0].clientX - fsStartX);
+        const dy = Math.abs(e.touches[0].clientY - fsStartY);
+        if (dx > 8 || dy > 8) fsAxis = dx > dy ? 'x' : 'y';
+      }, { passive: true });
+      overlay.addEventListener('touchend', e => {
+        const dx = e.changedTouches[0].clientX - fsStartX;
+        const dy = e.changedTouches[0].clientY - fsStartY;
+        if (fsAxis === 'x' && Math.abs(dx) > 50) {
+          fsGoTo(fsCurrent + (dx < 0 ? 1 : -1));
+        } else if (fsAxis === 'y' && Math.abs(dy) > 80) {
+          closeFullscreen();
+        }
+      });
+      document.addEventListener('keydown', e => {
+        if (!overlay.classList.contains('open')) return;
+        if (e.key === 'Escape') closeFullscreen();
+        if (e.key === 'ArrowLeft') fsGoTo(fsCurrent - 1);
+        if (e.key === 'ArrowRight') fsGoTo(fsCurrent + 1);
+      });
+
+      // ── Contact modal ──────────────────────────────────────
+      const modal = document.getElementById('contact-modal');
+      document.getElementById('modal-title').textContent = car.titre;
+
+      function openModal() {
+        modal.classList.add('open');
+        document.body.style.overflow = 'hidden';
+      }
+      function closeModal() {
+        modal.classList.remove('open');
+        document.body.style.overflow = '';
+      }
+
+      document.getElementById('open-contact').addEventListener('click', openModal);
+      document.querySelectorAll('.open-contact-btn').forEach(b => b.addEventListener('click', openModal));
+      document.getElementById('modal-close').addEventListener('click', closeModal);
+      modal.addEventListener('click', e => { if (e.target === modal) closeModal(); });
+
+      document.getElementById('modal-form').addEventListener('submit', e => {
+        e.preventDefault();
+        const errorEl = document.getElementById('modal-error');
+        const prenom = document.getElementById('m-prenom').value.trim();
+        const nom    = document.getElementById('m-nom').value.trim();
+        const tel    = document.getElementById('m-tel').value.trim();
+        const email  = document.getElementById('m-email').value.trim();
+
+        if (!prenom || !nom) { errorEl.textContent = 'Veuillez saisir votre prénom et nom.'; errorEl.classList.remove('hidden'); return; }
+        if (!tel) { errorEl.textContent = 'Veuillez saisir votre numéro de téléphone.'; errorEl.classList.remove('hidden'); return; }
+        if (!email || !/^[^\s@]+@[^\s@]+\.[^\s@]+$/.test(email)) { errorEl.textContent = 'Adresse email invalide.'; errorEl.classList.remove('hidden'); return; }
+
+        errorEl.classList.add('hidden');
+        const msg = [
+          'Prénom : ' + prenom,
+          'Nom : ' + nom,
+          'Téléphone : ' + tel,
+          'Email : ' + email,
+          'Message : ' + document.getElementById('m-message').value,
+          '\nPage : ' + window.location.href
+        ].join('\n');
+        emailjs.send('service_o41pfif', 'template_n3z29ws', {
+          subject: 'Demande de contact — Fiche véhicule',
+          message: msg,
+          reply_to: email
+        }, 'J4kN91J3N0qwBdAVA').catch(() => {});
+        document.getElementById('modal-form-wrap').classList.add('hidden');
+        document.getElementById('modal-success').classList.remove('hidden');
+      });
+    }
+
+  </script>
+  <script src="assets/shifting-nav.js"></script>
+  <script src="assets/mobile-nav.js"></script>
+
+  <!-- Bouton flottant WhatsApp -->
+  <a href="https://wa.me/33629324299?text=Bonjour%20Hancock%20Motors%2C%20je%20suis%20int%C3%A9ress%C3%A9%20par%20un%20v%C3%A9hicule%20de%20votre%20stock."
+     target="_blank"
+     rel="noopener"
+     id="whatsapp-float" data-reveal="scroll" style="opacity:0;pointer-events:none;transition:opacity .3s ease;"
+     aria-label="Nous contacter sur WhatsApp"
+     class="fixed bottom-5 right-5 md:bottom-6 md:right-6 z-50 inline-flex items-center gap-2 bg-[#25D366] hover:bg-[#1ebe5d] text-white font-semibold text-sm md:text-base px-4 py-3 md:px-5 md:py-3.5 rounded-full shadow-2xl shadow-[#25D366]/30 transition-all duration-200 hover:scale-105">
+    <svg class="w-6 h-6" fill="currentColor" viewBox="0 0 24 24" aria-hidden="true">
+      <path d="M17.472 14.382c-.297-.149-1.758-.867-2.03-.967-.273-.099-.471-.148-.67.15-.197.297-.767.966-.94 1.164-.173.199-.347.223-.644.075-.297-.15-1.255-.463-2.39-1.475-.883-.788-1.48-1.761-1.653-2.059-.173-.297-.018-.458.13-.606.134-.133.298-.347.446-.52.149-.174.198-.298.298-.497.099-.198.05-.371-.025-.52-.075-.149-.669-1.612-.916-2.207-.242-.579-.487-.5-.669-.51-.173-.008-.371-.01-.57-.01-.198 0-.52.074-.792.372-.272.297-1.04 1.016-1.04 2.479 0 1.462 1.065 2.875 1.213 3.074.149.198 2.096 3.2 5.077 4.487.709.306 1.262.489 1.694.625.712.227 1.36.195 1.871.118.571-.085 1.758-.719 2.006-1.413.248-.694.248-1.289.173-1.413-.074-.124-.272-.198-.57-.347m-5.421 7.403h-.004a9.87 9.87 0 01-5.031-1.378l-.361-.214-3.741.982.998-3.648-.235-.374a9.86 9.86 0 01-1.51-5.26c.001-5.45 4.436-9.884 9.888-9.884 2.64 0 5.122 1.03 6.988 2.898a9.825 9.825 0 012.893 6.994c-.003 5.45-4.437 9.884-9.885 9.884m8.413-18.297A11.815 11.815 0 0012.05 0C5.495 0 .16 5.335.157 11.892c0 2.096.547 4.142 1.588 5.945L.057 24l6.305-1.654a11.882 11.882 0 005.683 1.448h.005c6.554 0 11.89-5.335 11.893-11.893a11.821 11.821 0 00-3.48-8.413Z"/>
+    </svg>
+    <span class="hidden sm:inline">WhatsApp</span>
+  </a>
+
+<script>
+(function() {
+  document.addEventListener("click", function(e) {
+    var link = e.target.closest(
+      "a[href*=\"wa.me\"], a[href*=\"whatsapp.com\"], a[href*=\"api.whatsapp.com\"]"
+    );
+    if (!link) return;
+    window.dataLayer = window.dataLayer || [];
+    window.dataLayer.push({
+      event: "whatsapp_click",
+      link_url: link.href,
+      page_path: window.location.pathname
+    });
+    if (typeof gtag === 'function') {
+      gtag('event', 'whatsapp_click', { event_timeout: 2000 });
+    }
+  });
+})();
+</script>
+<script>
+(function(){
+  var wa=document.getElementById('whatsapp-float');
+  if(!wa)return;
+  function u(){
+    var s=window.scrollY>400;
+    wa.style.opacity=s?'1':'0';
+    wa.style.pointerEvents=s?'auto':'none';
+  }
+  u();
+  window.addEventListener('scroll',u,{passive:true});
+})();
+</script>
+</body>
+</html>
