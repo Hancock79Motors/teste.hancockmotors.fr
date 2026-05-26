@@ -1,5 +1,16 @@
 Options -Indexes
+
+# ─── Force le site statique en page d'accueil ─────────────────────
+# Sans ça, Apache d'o2switch peut servir le WordPress (index.php) a
+# la place de notre index.html sur /. Garder index.html en premier.
+DirectoryIndex index.html index.htm
+
 RewriteEngine On
+
+# Bloque l'acces aux fichiers de l'ancien WordPress qui co-existent
+# dans /public_html/ (sinon WP peut intercepter certaines requetes).
+RewriteCond %{REQUEST_URI} ^/(wp-admin|wp-login\.php|wp-includes|wp-content/(plugins|themes)) [NC]
+RewriteRule ^ - [F,L]
 
 # Redirect /index and /index.html to root /
 RewriteCond %{THE_REQUEST} \s/+index(\.html)?\s [NC]
