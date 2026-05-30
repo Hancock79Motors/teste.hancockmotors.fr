@@ -82,6 +82,9 @@ const CARS = [
       'Rétroviseurs extérieurs convexes (gauche et droit)',
       'Éclairage de marchepied sur portes de cabine et porte coulissante',
       'Rail de store et adaptateur de tente',
+      'Attelage / boule d\'attelage',
+      'Store / auvent latéral intégré',
+      'Aide au stationnement (radars)',
       // CONFORT
       'Climatisation automatique Air Care Climatronic 3 zones (filtre anti-allergène, chauffage d\'appoint, ciel de pavillon climatisé)',
       'Chauffage stationnaire à air programmable avec télécommande et réchauffeur additionnel',
