@@ -45,7 +45,21 @@
       "Bash(awk NR>=710 && NR<=760 *)",
       "Bash(node -e \"$\\(cat cars-data.js\\); console.log\\('OK', CARS.length, 'cars'\\); console.log\\('Last:', CARS[CARS.length-1].id, '—', CARS[CARS.length-1].titre, '—', CARS[CARS.length-1].prix\\);\")",
       "Bash(lsof -ti:8000)",
-      "Bash(xargs kill *)"
+      "Bash(xargs kill *)",
+      "Bash(open *)",
+      "Bash(awk '/\\\\/\\\\/ ── VÉHICULES VENDUS/,/^\\\\]/ {print NR\": \"$0}' \"/Users/tobyhancock/Desktop/Hancock Motors Claude/cars-data.js\")",
+      "Bash(node --check cars-data.js)",
+      "Bash(node -e \"const c=require\\('fs'\\).readFileSync\\('cars-data.js','utf8'\\); const CARS=new Function\\(c+';return CARS;'\\)\\(\\); const v=CARS.filter\\(x=>x.statut==='Vendu'\\); console.log\\('total:',CARS.length,'| vendus:',v.length\\); console.log\\('first 5 vendus:', v.slice\\(0,5\\).map\\(x=>x.id\\)\\);\")",
+      "Bash(awk '$1>1')",
+      "Bash(curl -s https://raw.githubusercontent.com/affaan-m/everything-claude-code/main/README.md)",
+      "Bash(node scripts/generate-vehicle-pages.js)",
+      "Bash(gh pr create --title 'feat\\(seo\\): pages véhicule statiques pour previews sociaux' --body ' *)",
+      "Bash(curl -sI \"https://www.hancockmotors.fr/vehicule-porsche-928-s4.html\")",
+      "Bash(curl -s \"https://www.hancockmotors.fr/vehicule-porsche-928-s4.html\")",
+      "Bash(curl -sIL \"https://www.hancockmotors.fr/vehicule-porsche-928-s4\")",
+      "Bash(curl -sL \"https://www.hancockmotors.fr/vehicule-porsche-928-s4\")",
+      "Bash(curl -sIL \"https://www.hancockmotors.fr/Photos%20voiture/Porsche%20928%20S4/porsche-928-s4-blanc-1.jpg\")",
+      "Bash(node -e ' *)"
     ],
     "additionalDirectories": [
       "/Users/tobyhancock/.claude/agents"

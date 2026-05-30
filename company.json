@@ -1,0 +1,97 @@
+{
+  "name": "HANCOCK MOTORS",
+  "legal_form": "EURL",
+  "_legal_form_note": "SARL a associe unique selon Kbis = EURL fiscalement",
+  "capital": 5000,
+  "address": "Lieu-Dit La Folie, 79240 Scille",
+  "city": "Scille",
+  "siren": "901863175",
+  "siret": "TODO_NIC_5_chiffres",
+  "_siret_note": "Completer avec le NIC (5 chiffres) de l'etablissement principal. Visible sur tout document URSSAF/impots ou via annuaire-entreprises.data.gouv.fr",
+  "rcs": "RCS Niort",
+  "rcs_number": "901 863 175 R.C.S. Niort",
+  "registration_date": "2021-07-29",
+  "naf": "4511Z",
+  "_naf_note": "Commerce de voitures et de vehicules automobiles legers (a verifier sur Avis Sirene)",
+  "vat_number": "FR62901863175",
+  "_vat_number_note": "Calcule depuis SIREN (cle 62). A verifier sur https://ec.europa.eu/taxation_customs/vies/",
+  "activity": "Negoce de vehicules neufs et d'occasion. Nettoyage, polissage, lustrage, pose de cire, pose de films de protection sur tous types de vehicules terrestres, sans activite mecanique.",
+  "gerant": {
+    "title": "Gerant",
+    "first_name": "Toby",
+    "middle_name": "George",
+    "last_name": "HANCOCK",
+    "civility": "M.",
+    "birth_date": "2000-09-26",
+    "birth_place": "Stafford (ROYAUME-UNI)",
+    "nationality": "Britannique",
+    "address": "Lieu-Dit La Folie, 79240 Scille"
+  },
+  "fiscal_year": {
+    "start": "2026-01-01",
+    "end": "2026-12-31",
+    "is_first_year": false,
+    "closing_date": "31/12"
+  },
+  "tax": {
+    "regime_tva": "reel_normal_mensuel",
+    "_regime_tva_note": "Hypothese: declaration mensuelle CA3 (cf. organisation par mois des dossiers TVA). A confirmer.",
+    "regime_is": "reel_normal",
+    "_regime_is_note": "A confirmer selon CA. Seuils 2026 : reel simplifie si CA HT < 840 000 EUR (negoce).",
+    "tva_rate_default": 0.20,
+    "tva_sur_marge": true,
+    "_tva_sur_marge_note": "Negoce vehicules d'occasion : regime de la marge (CGI art. 297 A) applique par defaut. TVA 20% standard si le vehicule a ete achete avec TVA recuperable (ex: pro a pro avec TVA, intracommunautaire HT)."
+  },
+  "banks": [
+    {
+      "id": "bank-1",
+      "name": "TODO_a_completer",
+      "account": "5121",
+      "fec_account": "51211"
+    }
+  ],
+  "qonto": {
+    "enabled": false,
+    "_comment": "A activer si compte Qonto pro. Definir QONTO_ID et QONTO_API_SECRET."
+  },
+  "stripe_accounts": [],
+  "invoicing": {
+    "prefix": "F",
+    "separator": "-",
+    "year_format": "YYYY",
+    "next_numbers": {
+      "2025": 1,
+      "2026": 1
+    },
+    "avoir_prefix": "AV",
+    "_comment": "TODO: synchroniser next_numbers avec la sequence reelle de tes factures emises"
+  },
+  "einvoicing": {
+    "pa": "",
+    "pa_name": "",
+    "peppol_id": "",
+    "reception_ready": false,
+    "emission_ready": false,
+    "ereporting_ready": false,
+    "_comment": "Obligation de reception au 01/09/2026. Choisir une PA gratuite (ex: Qonto, Pennylane, Indy)."
+  },
+  "payment": {
+    "default_terms": "net_0",
+    "default_terms_label": "Paiement comptant a la livraison",
+    "methods": ["virement", "especes_max_1000"],
+    "bank_details": {
+      "iban": "TODO_a_completer",
+      "bic": "TODO_a_completer"
+    },
+    "late_penalty_rate": "3x_legal",
+    "late_penalty_label": "3 fois le taux d'interet legal",
+    "escompte": "none",
+    "escompte_label": "Pas d'escompte pour paiement anticipe",
+    "recovery_fee": 40
+  },
+  "_metadata": {
+    "created_by": "skill comptable - setup initial",
+    "created_at": "2026-05-20",
+    "source": "Extrait Kbis du 30/01/2026 (verification code RHhuK8QRye)"
+  }
+}
